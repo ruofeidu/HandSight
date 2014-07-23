@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>0F5EA507-D5FC-4BD4-8769-F48C4EE45F79</string>
+	<key>IDESourceControlProjectName</key>
+	<string>HandSight</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>2814FF62-5ACD-444D-95C5-6295C54739F8</key>
+		<string>https://itasca.umiacs.umd.edu/svn/handsight</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>HandSight.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>2814FF62-5ACD-444D-95C5-6295C54739F8</key>
+		<string>../../../..</string>
+		<key>EEF27266-22C1-4DB1-B95C-5D19A68BE03D</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://itasca.umiacs.umd.edu/svn/handsight/src/HandSight/HandSight.xcodeproj</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>EEF27266-22C1-4DB1-B95C-5D19A68BE03D</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>2814FF62-5ACD-444D-95C5-6295C54739F8</string>
+			<key>IDESourceControlWCCName</key>
+			<string>HandSight</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>EEF27266-22C1-4DB1-B95C-5D19A68BE03D</string>
+			<key>IDESourceControlWCCName</key>
+			<string>HandSight</string>
+		</dict>
+	</array>
+</dict>
+</plist>

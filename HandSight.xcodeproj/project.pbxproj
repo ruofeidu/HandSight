@@ -1,0 +1,837 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		642DCEAC19702DC80021A307 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 642DCEAB19702DC80021A307 /* Accelerate.framework */; };
+		642DCEAE19702DCE0021A307 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 642DCEAD19702DCE0021A307 /* CoreMedia.framework */; };
+		642DCEB019702DD30021A307 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 642DCEAF19702DD30021A307 /* MediaPlayer.framework */; };
+		642DCEB219702DD90021A307 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 642DCEB119702DD90021A307 /* MessageUI.framework */; };
+		642DCEB419702DE10021A307 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 642DCEB319702DE10021A307 /* CoreBluetooth.framework */; };
+		642DCEB619702DE70021A307 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 642DCEB519702DE70021A307 /* QuartzCore.framework */; };
+		642DCEB819702E100021A307 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 642DCEB719702E100021A307 /* AVFoundation.framework */; };
+		642DCEBA19702E160021A307 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 642DCEB919702E160021A307 /* AudioToolbox.framework */; };
+		642DCEBC19702E1C0021A307 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 642DCEBB19702E1C0021A307 /* OpenAL.framework */; };
+		642DCEC619702EBB0021A307 /* SoundManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 642DCEC519702EBB0021A307 /* SoundManager.m */; };
+		642DCEC919702ECA0021A307 /* HSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 642DCEC819702ECA0021A307 /* HSTextView.m */; };
+		642DCECD197030D50021A307 /* TextController.m in Sources */ = {isa = PBXBuildFile; fileRef = 642DCECC197030D50021A307 /* TextController.m */; };
+		642DCED0197030E70021A307 /* MenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 642DCECF197030E70021A307 /* MenuController.m */; };
+		642DCED31970321F0021A307 /* HSLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 642DCED21970321F0021A307 /* HSLog.m */; };
+		642DCED61970322E0021A307 /* HSStat.m in Sources */ = {isa = PBXBuildFile; fileRef = 642DCED51970322E0021A307 /* HSStat.m */; };
+		642DCED91970323F0021A307 /* HSState.m in Sources */ = {isa = PBXBuildFile; fileRef = 642DCED81970323F0021A307 /* HSState.m */; };
+		642DCEDC197032520021A307 /* HSFeedback.m in Sources */ = {isa = PBXBuildFile; fileRef = 642DCEDB197032520021A307 /* HSFeedback.m */; };
+		642DCEDF197034AA0021A307 /* HSDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = 642DCEDE197034AA0021A307 /* HSDebug.m */; };
+		64565F16196DCCAB00B509B8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64565F15196DCCAB00B509B8 /* Foundation.framework */; };
+		64565F18196DCCAB00B509B8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64565F17196DCCAB00B509B8 /* CoreGraphics.framework */; };
+		64565F1A196DCCAB00B509B8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64565F19196DCCAB00B509B8 /* UIKit.framework */; };
+		64565F20196DCCAB00B509B8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 64565F1E196DCCAB00B509B8 /* InfoPlist.strings */; };
+		64565F22196DCCAB00B509B8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 64565F21196DCCAB00B509B8 /* main.m */; };
+		64565F26196DCCAB00B509B8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 64565F25196DCCAB00B509B8 /* AppDelegate.m */; };
+		64565F29196DCCAB00B509B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64565F27196DCCAB00B509B8 /* Main.storyboard */; };
+		64565F2C196DCCAB00B509B8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 64565F2B196DCCAB00B509B8 /* ViewController.m */; };
+		64565F2E196DCCAB00B509B8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64565F2D196DCCAB00B509B8 /* Images.xcassets */; };
+		64565F35196DCCAC00B509B8 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64565F34196DCCAC00B509B8 /* XCTest.framework */; };
+		64565F36196DCCAC00B509B8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64565F15196DCCAB00B509B8 /* Foundation.framework */; };
+		64565F37196DCCAC00B509B8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64565F19196DCCAB00B509B8 /* UIKit.framework */; };
+		64565F3F196DCCAC00B509B8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 64565F3D196DCCAC00B509B8 /* InfoPlist.strings */; };
+		64565F41196DCCAC00B509B8 /* HandSightTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 64565F40196DCCAC00B509B8 /* HandSightTests.m */; };
+		646869031979818800C2E50D /* HSUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 646869021979818800C2E50D /* HSUtils.m */; };
+		646869061979AA6F00C2E50D /* HSString.m in Sources */ = {isa = PBXBuildFile; fileRef = 646869051979AA6F00C2E50D /* HSString.m */; };
+		6468690E1979B6AE00C2E50D /* EOP_AirDong.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 646869091979B6AE00C2E50D /* EOP_AirDong.mp3 */; };
+		6468690F1979B6AE00C2E50D /* EOP_Dang.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6468690A1979B6AE00C2E50D /* EOP_Dang.mp3 */; };
+		646869101979B6AE00C2E50D /* OOL_Constant.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6468690B1979B6AE00C2E50D /* OOL_Constant.wav */; };
+		646869111979B6AE00C2E50D /* OOL_Rain.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6468690C1979B6AE00C2E50D /* OOL_Rain.mp3 */; };
+		646869121979B6AE00C2E50D /* OOL_Sea.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6468690D1979B6AE00C2E50D /* OOL_Sea.mp3 */; };
+		646869171979B75200C2E50D /* LB_DingDong.wav in Resources */ = {isa = PBXBuildFile; fileRef = 646869151979B75200C2E50D /* LB_DingDong.wav */; };
+		646869181979B75200C2E50D /* LE_DongDing.wav in Resources */ = {isa = PBXBuildFile; fileRef = 646869161979B75200C2E50D /* LE_DongDing.wav */; };
+		6468691B197DFF6F00C2E50D /* HSFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 6468691A197DFF6F00C2E50D /* HSFile.m */; };
+		6468691E197EAD7500C2E50D /* HSMagView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6468691D197EAD7500C2E50D /* HSMagView.m */; };
+		64686921197EB9AA00C2E50D /* HSCommonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 64686920197EB9AA00C2E50D /* HSCommonView.m */; };
+		64CAC092197725FC00A6E3F1 /* HSBluetooth.m in Sources */ = {isa = PBXBuildFile; fileRef = 64CAC091197725FC00A6E3F1 /* HSBluetooth.m */; };
+		64CAC0971977264700A6E3F1 /* BLE.m in Sources */ = {isa = PBXBuildFile; fileRef = 64CAC0951977264700A6E3F1 /* BLE.m */; };
+		64CAC09A1977268100A6E3F1 /* HSSpeech.m in Sources */ = {isa = PBXBuildFile; fileRef = 64CAC0991977268100A6E3F1 /* HSSpeech.m */; };
+		64CAC09D197726D000A6E3F1 /* HSAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = 64CAC09C197726D000A6E3F1 /* HSAudio.m */; };
+		64CAC0A019772BC000A6E3F1 /* NSMutableArray+QueueAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 64CAC09F19772BC000A6E3F1 /* NSMutableArray+QueueAdditions.m */; };
+		64CAC0A31977575400A6E3F1 /* CommonController.m in Sources */ = {isa = PBXBuildFile; fileRef = 64CAC0A21977575400A6E3F1 /* CommonController.m */; };
+		64CAC0A7197870A000A6E3F1 /* MagController.m in Sources */ = {isa = PBXBuildFile; fileRef = 64CAC0A6197870A000A6E3F1 /* MagController.m */; };
+		BC6F209E16474B4DB630AB89 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 83E54E18DB6F441A81A205B6 /* libPods.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		64565F38196DCCAC00B509B8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 64565F0A196DCCAB00B509B8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 64565F11196DCCAB00B509B8;
+			remoteInfo = HandSight;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		642DCEAB19702DC80021A307 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		642DCEAD19702DCE0021A307 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		642DCEAF19702DD30021A307 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		642DCEB119702DD90021A307 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		642DCEB319702DE10021A307 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		642DCEB519702DE70021A307 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		642DCEB719702E100021A307 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		642DCEB919702E160021A307 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		642DCEBB19702E1C0021A307 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
+		642DCEC419702EBB0021A307 /* SoundManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundManager.h; sourceTree = "<group>"; };
+		642DCEC519702EBB0021A307 /* SoundManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundManager.m; sourceTree = "<group>"; };
+		642DCEC719702ECA0021A307 /* HSTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSTextView.h; sourceTree = "<group>"; };
+		642DCEC819702ECA0021A307 /* HSTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSTextView.m; sourceTree = "<group>"; };
+		642DCECB197030D50021A307 /* TextController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextController.h; sourceTree = "<group>"; };
+		642DCECC197030D50021A307 /* TextController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextController.m; sourceTree = "<group>"; };
+		642DCECE197030E70021A307 /* MenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuController.h; sourceTree = "<group>"; };
+		642DCECF197030E70021A307 /* MenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuController.m; sourceTree = "<group>"; };
+		642DCED11970321F0021A307 /* HSLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSLog.h; sourceTree = "<group>"; };
+		642DCED21970321F0021A307 /* HSLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSLog.m; sourceTree = "<group>"; };
+		642DCED41970322E0021A307 /* HSStat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSStat.h; sourceTree = "<group>"; };
+		642DCED51970322E0021A307 /* HSStat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSStat.m; sourceTree = "<group>"; };
+		642DCED71970323F0021A307 /* HSState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSState.h; sourceTree = "<group>"; };
+		642DCED81970323F0021A307 /* HSState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSState.m; sourceTree = "<group>"; };
+		642DCEDA197032520021A307 /* HSFeedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSFeedback.h; path = HandSight/HSFeedback.h; sourceTree = "<group>"; };
+		642DCEDB197032520021A307 /* HSFeedback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HSFeedback.m; path = HandSight/HSFeedback.m; sourceTree = "<group>"; };
+		642DCEDD197034AA0021A307 /* HSDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSDebug.h; sourceTree = "<group>"; };
+		642DCEDE197034AA0021A307 /* HSDebug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSDebug.m; sourceTree = "<group>"; };
+		64565F12196DCCAB00B509B8 /* HandSight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HandSight.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		64565F15196DCCAB00B509B8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		64565F17196DCCAB00B509B8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		64565F19196DCCAB00B509B8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		64565F1D196DCCAB00B509B8 /* HandSight-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HandSight-Info.plist"; sourceTree = "<group>"; };
+		64565F1F196DCCAB00B509B8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		64565F21196DCCAB00B509B8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		64565F23196DCCAB00B509B8 /* HandSight-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HandSight-Prefix.pch"; sourceTree = "<group>"; };
+		64565F24196DCCAB00B509B8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		64565F25196DCCAB00B509B8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		64565F28196DCCAB00B509B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		64565F2A196DCCAB00B509B8 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		64565F2B196DCCAB00B509B8 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		64565F2D196DCCAB00B509B8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		64565F33196DCCAC00B509B8 /* HandSightTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HandSightTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		64565F34196DCCAC00B509B8 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		64565F3C196DCCAC00B509B8 /* HandSightTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HandSightTests-Info.plist"; sourceTree = "<group>"; };
+		64565F3E196DCCAC00B509B8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		64565F40196DCCAC00B509B8 /* HandSightTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HandSightTests.m; sourceTree = "<group>"; };
+		646869011979818800C2E50D /* HSUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSUtils.h; sourceTree = "<group>"; };
+		646869021979818800C2E50D /* HSUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSUtils.m; sourceTree = "<group>"; };
+		646869041979AA6F00C2E50D /* HSString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSString.h; sourceTree = "<group>"; };
+		646869051979AA6F00C2E50D /* HSString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSString.m; sourceTree = "<group>"; };
+		646869091979B6AE00C2E50D /* EOP_AirDong.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = EOP_AirDong.mp3; path = Resource/Audio/EOP_AirDong.mp3; sourceTree = SOURCE_ROOT; };
+		6468690A1979B6AE00C2E50D /* EOP_Dang.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = EOP_Dang.mp3; path = Resource/Audio/EOP_Dang.mp3; sourceTree = SOURCE_ROOT; };
+		6468690B1979B6AE00C2E50D /* OOL_Constant.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = OOL_Constant.wav; path = Resource/Audio/OOL_Constant.wav; sourceTree = SOURCE_ROOT; };
+		6468690C1979B6AE00C2E50D /* OOL_Rain.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = OOL_Rain.mp3; path = Resource/Audio/OOL_Rain.mp3; sourceTree = SOURCE_ROOT; };
+		6468690D1979B6AE00C2E50D /* OOL_Sea.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = OOL_Sea.mp3; path = Resource/Audio/OOL_Sea.mp3; sourceTree = SOURCE_ROOT; };
+		646869151979B75200C2E50D /* LB_DingDong.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = LB_DingDong.wav; path = Resource/Audio/LB_DingDong.wav; sourceTree = SOURCE_ROOT; };
+		646869161979B75200C2E50D /* LE_DongDing.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = LE_DongDing.wav; path = Resource/Audio/LE_DongDing.wav; sourceTree = SOURCE_ROOT; };
+		64686919197DFF6F00C2E50D /* HSFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSFile.h; sourceTree = "<group>"; };
+		6468691A197DFF6F00C2E50D /* HSFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSFile.m; sourceTree = "<group>"; };
+		6468691C197EAD7500C2E50D /* HSMagView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSMagView.h; sourceTree = "<group>"; };
+		6468691D197EAD7500C2E50D /* HSMagView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSMagView.m; sourceTree = "<group>"; };
+		6468691F197EB9AA00C2E50D /* HSCommonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSCommonView.h; sourceTree = "<group>"; };
+		64686920197EB9AA00C2E50D /* HSCommonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSCommonView.m; sourceTree = "<group>"; };
+		64CAC090197725FC00A6E3F1 /* HSBluetooth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSBluetooth.h; path = HandSight/HSBluetooth.h; sourceTree = "<group>"; };
+		64CAC091197725FC00A6E3F1 /* HSBluetooth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HSBluetooth.m; path = HandSight/HSBluetooth.m; sourceTree = "<group>"; };
+		64CAC0941977264700A6E3F1 /* BLE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLE.h; sourceTree = "<group>"; };
+		64CAC0951977264700A6E3F1 /* BLE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLE.m; sourceTree = "<group>"; };
+		64CAC0961977264700A6E3F1 /* BLEDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLEDefines.h; sourceTree = "<group>"; };
+		64CAC0981977268100A6E3F1 /* HSSpeech.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSSpeech.h; sourceTree = "<group>"; };
+		64CAC0991977268100A6E3F1 /* HSSpeech.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSSpeech.m; sourceTree = "<group>"; };
+		64CAC09B197726D000A6E3F1 /* HSAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSAudio.h; sourceTree = "<group>"; };
+		64CAC09C197726D000A6E3F1 /* HSAudio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSAudio.m; sourceTree = "<group>"; };
+		64CAC09E19772BC000A6E3F1 /* NSMutableArray+QueueAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+QueueAdditions.h"; sourceTree = "<group>"; };
+		64CAC09F19772BC000A6E3F1 /* NSMutableArray+QueueAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+QueueAdditions.m"; sourceTree = "<group>"; };
+		64CAC0A11977575400A6E3F1 /* CommonController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonController.h; sourceTree = "<group>"; };
+		64CAC0A21977575400A6E3F1 /* CommonController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonController.m; sourceTree = "<group>"; };
+		64CAC0A5197870A000A6E3F1 /* MagController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagController.h; sourceTree = "<group>"; };
+		64CAC0A6197870A000A6E3F1 /* MagController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagController.m; sourceTree = "<group>"; };
+		64CAC0A919788A2800A6E3F1 /* DesignPattern.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DesignPattern.h; sourceTree = "<group>"; };
+		83E54E18DB6F441A81A205B6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B8F659B6DDA9441A89F8EC94 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		64565F0F196DCCAB00B509B8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				642DCEBC19702E1C0021A307 /* OpenAL.framework in Frameworks */,
+				642DCEBA19702E160021A307 /* AudioToolbox.framework in Frameworks */,
+				642DCEB819702E100021A307 /* AVFoundation.framework in Frameworks */,
+				642DCEAE19702DCE0021A307 /* CoreMedia.framework in Frameworks */,
+				642DCEB619702DE70021A307 /* QuartzCore.framework in Frameworks */,
+				642DCEB419702DE10021A307 /* CoreBluetooth.framework in Frameworks */,
+				642DCEB219702DD90021A307 /* MessageUI.framework in Frameworks */,
+				642DCEB019702DD30021A307 /* MediaPlayer.framework in Frameworks */,
+				642DCEAC19702DC80021A307 /* Accelerate.framework in Frameworks */,
+				64565F18196DCCAB00B509B8 /* CoreGraphics.framework in Frameworks */,
+				64565F1A196DCCAB00B509B8 /* UIKit.framework in Frameworks */,
+				64565F16196DCCAB00B509B8 /* Foundation.framework in Frameworks */,
+				BC6F209E16474B4DB630AB89 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		64565F30196DCCAC00B509B8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				64565F35196DCCAC00B509B8 /* XCTest.framework in Frameworks */,
+				64565F37196DCCAC00B509B8 /* UIKit.framework in Frameworks */,
+				64565F36196DCCAC00B509B8 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		642DCEBD19702E390021A307 /* TextReader */ = {
+			isa = PBXGroup;
+			children = (
+				6468691F197EB9AA00C2E50D /* HSCommonView.h */,
+				64686920197EB9AA00C2E50D /* HSCommonView.m */,
+				642DCEC719702ECA0021A307 /* HSTextView.h */,
+				642DCEC819702ECA0021A307 /* HSTextView.m */,
+				6468691C197EAD7500C2E50D /* HSMagView.h */,
+				6468691D197EAD7500C2E50D /* HSMagView.m */,
+			);
+			name = TextReader;
+			sourceTree = "<group>";
+		};
+		642DCEBE19702E4C0021A307 /* MenuReader */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = MenuReader;
+			sourceTree = "<group>";
+		};
+		642DCEBF19702E520021A307 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				64CAC0A419775EE000A6E3F1 /* BaseClass */,
+				64565F2A196DCCAB00B509B8 /* ViewController.h */,
+				64565F2B196DCCAB00B509B8 /* ViewController.m */,
+				642DCECB197030D50021A307 /* TextController.h */,
+				642DCECC197030D50021A307 /* TextController.m */,
+				64CAC0A5197870A000A6E3F1 /* MagController.h */,
+				64CAC0A6197870A000A6E3F1 /* MagController.m */,
+				642DCECE197030E70021A307 /* MenuController.h */,
+				642DCECF197030E70021A307 /* MenuController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		642DCEC019702E5B0021A307 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				64565F27196DCCAB00B509B8 /* Main.storyboard */,
+			);
+			name = Storyboard;
+			sourceTree = "<group>";
+		};
+		642DCEC119702E820021A307 /* HandSight */ = {
+			isa = PBXGroup;
+			children = (
+				642DCED11970321F0021A307 /* HSLog.h */,
+				642DCED21970321F0021A307 /* HSLog.m */,
+				642DCED41970322E0021A307 /* HSStat.h */,
+				642DCED51970322E0021A307 /* HSStat.m */,
+				642DCED71970323F0021A307 /* HSState.h */,
+				642DCED81970323F0021A307 /* HSState.m */,
+			);
+			name = HandSight;
+			sourceTree = "<group>";
+		};
+		642DCEC219702E980021A307 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				64CAC09E19772BC000A6E3F1 /* NSMutableArray+QueueAdditions.h */,
+				64CAC09F19772BC000A6E3F1 /* NSMutableArray+QueueAdditions.m */,
+				646869041979AA6F00C2E50D /* HSString.h */,
+				646869051979AA6F00C2E50D /* HSString.m */,
+				642DCEDD197034AA0021A307 /* HSDebug.h */,
+				642DCEDE197034AA0021A307 /* HSDebug.m */,
+				646869011979818800C2E50D /* HSUtils.h */,
+				646869021979818800C2E50D /* HSUtils.m */,
+				64686919197DFF6F00C2E50D /* HSFile.h */,
+				6468691A197DFF6F00C2E50D /* HSFile.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		642DCEC319702E9F0021A307 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				642DCEC419702EBB0021A307 /* SoundManager.h */,
+				642DCEC519702EBB0021A307 /* SoundManager.m */,
+			);
+			name = Library;
+			sourceTree = "<group>";
+		};
+		642DCECA19702EE80021A307 /* Feedback */ = {
+			isa = PBXGroup;
+			children = (
+				64CAC0931977264700A6E3F1 /* BLE */,
+				642DCEDA197032520021A307 /* HSFeedback.h */,
+				642DCEDB197032520021A307 /* HSFeedback.m */,
+				64CAC090197725FC00A6E3F1 /* HSBluetooth.h */,
+				64CAC091197725FC00A6E3F1 /* HSBluetooth.m */,
+				64CAC0981977268100A6E3F1 /* HSSpeech.h */,
+				64CAC0991977268100A6E3F1 /* HSSpeech.m */,
+				64CAC09B197726D000A6E3F1 /* HSAudio.h */,
+				64CAC09C197726D000A6E3F1 /* HSAudio.m */,
+			);
+			name = Feedback;
+			sourceTree = "<group>";
+		};
+		64565F09196DCCAB00B509B8 = {
+			isa = PBXGroup;
+			children = (
+				642DCECA19702EE80021A307 /* Feedback */,
+				64565F1B196DCCAB00B509B8 /* HandSight */,
+				64565F3A196DCCAC00B509B8 /* HandSightTests */,
+				64565F14196DCCAB00B509B8 /* Frameworks */,
+				64565F13196DCCAB00B509B8 /* Products */,
+				B8F659B6DDA9441A89F8EC94 /* Pods.xcconfig */,
+			);
+			sourceTree = "<group>";
+		};
+		64565F13196DCCAB00B509B8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				64565F12196DCCAB00B509B8 /* HandSight.app */,
+				64565F33196DCCAC00B509B8 /* HandSightTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		64565F14196DCCAB00B509B8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				642DCEBB19702E1C0021A307 /* OpenAL.framework */,
+				642DCEB919702E160021A307 /* AudioToolbox.framework */,
+				642DCEB719702E100021A307 /* AVFoundation.framework */,
+				642DCEB519702DE70021A307 /* QuartzCore.framework */,
+				642DCEB319702DE10021A307 /* CoreBluetooth.framework */,
+				642DCEB119702DD90021A307 /* MessageUI.framework */,
+				642DCEAF19702DD30021A307 /* MediaPlayer.framework */,
+				642DCEAD19702DCE0021A307 /* CoreMedia.framework */,
+				642DCEAB19702DC80021A307 /* Accelerate.framework */,
+				64565F15196DCCAB00B509B8 /* Foundation.framework */,
+				64565F17196DCCAB00B509B8 /* CoreGraphics.framework */,
+				64565F19196DCCAB00B509B8 /* UIKit.framework */,
+				64565F34196DCCAC00B509B8 /* XCTest.framework */,
+				83E54E18DB6F441A81A205B6 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		64565F1B196DCCAB00B509B8 /* HandSight */ = {
+			isa = PBXGroup;
+			children = (
+				64CAC0A819788A0900A6E3F1 /* Foundation */,
+				642DCEC319702E9F0021A307 /* Library */,
+				642DCEC219702E980021A307 /* Utils */,
+				642DCEC119702E820021A307 /* HandSight */,
+				642DCEC019702E5B0021A307 /* Storyboard */,
+				642DCEBF19702E520021A307 /* Controller */,
+				642DCEBE19702E4C0021A307 /* MenuReader */,
+				642DCEBD19702E390021A307 /* TextReader */,
+				64565F2D196DCCAB00B509B8 /* Images.xcassets */,
+				64565F1C196DCCAB00B509B8 /* Supporting Files */,
+			);
+			path = HandSight;
+			sourceTree = "<group>";
+		};
+		64565F1C196DCCAB00B509B8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				646869141979B6B700C2E50D /* Text */,
+				646869131979B6B200C2E50D /* Entree */,
+				646869081979B68E00C2E50D /* Image */,
+				646869071979B68800C2E50D /* Audio */,
+				64565F1D196DCCAB00B509B8 /* HandSight-Info.plist */,
+				64565F1E196DCCAB00B509B8 /* InfoPlist.strings */,
+				64565F21196DCCAB00B509B8 /* main.m */,
+				64565F23196DCCAB00B509B8 /* HandSight-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		64565F3A196DCCAC00B509B8 /* HandSightTests */ = {
+			isa = PBXGroup;
+			children = (
+				64565F40196DCCAC00B509B8 /* HandSightTests.m */,
+				64565F3B196DCCAC00B509B8 /* Supporting Files */,
+			);
+			path = HandSightTests;
+			sourceTree = "<group>";
+		};
+		64565F3B196DCCAC00B509B8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				64565F3C196DCCAC00B509B8 /* HandSightTests-Info.plist */,
+				64565F3D196DCCAC00B509B8 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		646869071979B68800C2E50D /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				646869151979B75200C2E50D /* LB_DingDong.wav */,
+				646869161979B75200C2E50D /* LE_DongDing.wav */,
+				646869091979B6AE00C2E50D /* EOP_AirDong.mp3 */,
+				6468690A1979B6AE00C2E50D /* EOP_Dang.mp3 */,
+				6468690B1979B6AE00C2E50D /* OOL_Constant.wav */,
+				6468690C1979B6AE00C2E50D /* OOL_Rain.mp3 */,
+				6468690D1979B6AE00C2E50D /* OOL_Sea.mp3 */,
+			);
+			name = Audio;
+			sourceTree = "<group>";
+		};
+		646869081979B68E00C2E50D /* Image */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Image;
+			sourceTree = "<group>";
+		};
+		646869131979B6B200C2E50D /* Entree */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Entree;
+			sourceTree = "<group>";
+		};
+		646869141979B6B700C2E50D /* Text */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Text;
+			sourceTree = "<group>";
+		};
+		64CAC0931977264700A6E3F1 /* BLE */ = {
+			isa = PBXGroup;
+			children = (
+				64CAC0941977264700A6E3F1 /* BLE.h */,
+				64CAC0951977264700A6E3F1 /* BLE.m */,
+				64CAC0961977264700A6E3F1 /* BLEDefines.h */,
+			);
+			path = BLE;
+			sourceTree = "<group>";
+		};
+		64CAC0A419775EE000A6E3F1 /* BaseClass */ = {
+			isa = PBXGroup;
+			children = (
+				64565F25196DCCAB00B509B8 /* AppDelegate.m */,
+				64565F24196DCCAB00B509B8 /* AppDelegate.h */,
+				64CAC0A11977575400A6E3F1 /* CommonController.h */,
+				64CAC0A21977575400A6E3F1 /* CommonController.m */,
+			);
+			name = BaseClass;
+			sourceTree = "<group>";
+		};
+		64CAC0A819788A0900A6E3F1 /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				64CAC0A919788A2800A6E3F1 /* DesignPattern.h */,
+			);
+			name = Foundation;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		64565F11196DCCAB00B509B8 /* HandSight */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 64565F44196DCCAC00B509B8 /* Build configuration list for PBXNativeTarget "HandSight" */;
+			buildPhases = (
+				AE71201E372F485895DCF26A /* Check Pods Manifest.lock */,
+				64565F0E196DCCAB00B509B8 /* Sources */,
+				64565F0F196DCCAB00B509B8 /* Frameworks */,
+				64565F10196DCCAB00B509B8 /* Resources */,
+				E57F7B10D1E6482BBD84E136 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HandSight;
+			productName = HandSight;
+			productReference = 64565F12196DCCAB00B509B8 /* HandSight.app */;
+			productType = "com.apple.product-type.application";
+		};
+		64565F32196DCCAC00B509B8 /* HandSightTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 64565F47196DCCAC00B509B8 /* Build configuration list for PBXNativeTarget "HandSightTests" */;
+			buildPhases = (
+				64565F2F196DCCAC00B509B8 /* Sources */,
+				64565F30196DCCAC00B509B8 /* Frameworks */,
+				64565F31196DCCAC00B509B8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				64565F39196DCCAC00B509B8 /* PBXTargetDependency */,
+			);
+			name = HandSightTests;
+			productName = HandSightTests;
+			productReference = 64565F33196DCCAC00B509B8 /* HandSightTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		64565F0A196DCCAB00B509B8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Ruofei Du";
+				TargetAttributes = {
+					64565F11196DCCAB00B509B8 = {
+						DevelopmentTeam = 5689Q87G8S;
+					};
+					64565F32196DCCAC00B509B8 = {
+						TestTargetID = 64565F11196DCCAB00B509B8;
+					};
+				};
+			};
+			buildConfigurationList = 64565F0D196DCCAB00B509B8 /* Build configuration list for PBXProject "HandSight" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 64565F09196DCCAB00B509B8;
+			productRefGroup = 64565F13196DCCAB00B509B8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				64565F11196DCCAB00B509B8 /* HandSight */,
+				64565F32196DCCAC00B509B8 /* HandSightTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		64565F10196DCCAB00B509B8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6468690E1979B6AE00C2E50D /* EOP_AirDong.mp3 in Resources */,
+				646869111979B6AE00C2E50D /* OOL_Rain.mp3 in Resources */,
+				646869101979B6AE00C2E50D /* OOL_Constant.wav in Resources */,
+				646869181979B75200C2E50D /* LE_DongDing.wav in Resources */,
+				646869121979B6AE00C2E50D /* OOL_Sea.mp3 in Resources */,
+				64565F2E196DCCAB00B509B8 /* Images.xcassets in Resources */,
+				64565F20196DCCAB00B509B8 /* InfoPlist.strings in Resources */,
+				6468690F1979B6AE00C2E50D /* EOP_Dang.mp3 in Resources */,
+				646869171979B75200C2E50D /* LB_DingDong.wav in Resources */,
+				64565F29196DCCAB00B509B8 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		64565F31196DCCAC00B509B8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				64565F3F196DCCAC00B509B8 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		AE71201E372F485895DCF26A /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E57F7B10D1E6482BBD84E136 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		64565F0E196DCCAB00B509B8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				646869031979818800C2E50D /* HSUtils.m in Sources */,
+				642DCED91970323F0021A307 /* HSState.m in Sources */,
+				64CAC09D197726D000A6E3F1 /* HSAudio.m in Sources */,
+				642DCED0197030E70021A307 /* MenuController.m in Sources */,
+				642DCEDC197032520021A307 /* HSFeedback.m in Sources */,
+				642DCECD197030D50021A307 /* TextController.m in Sources */,
+				6468691B197DFF6F00C2E50D /* HSFile.m in Sources */,
+				64CAC092197725FC00A6E3F1 /* HSBluetooth.m in Sources */,
+				64565F2C196DCCAB00B509B8 /* ViewController.m in Sources */,
+				642DCEC619702EBB0021A307 /* SoundManager.m in Sources */,
+				64CAC0A31977575400A6E3F1 /* CommonController.m in Sources */,
+				64CAC0A019772BC000A6E3F1 /* NSMutableArray+QueueAdditions.m in Sources */,
+				646869061979AA6F00C2E50D /* HSString.m in Sources */,
+				642DCEDF197034AA0021A307 /* HSDebug.m in Sources */,
+				64CAC0A7197870A000A6E3F1 /* MagController.m in Sources */,
+				642DCEC919702ECA0021A307 /* HSTextView.m in Sources */,
+				64686921197EB9AA00C2E50D /* HSCommonView.m in Sources */,
+				64565F26196DCCAB00B509B8 /* AppDelegate.m in Sources */,
+				64565F22196DCCAB00B509B8 /* main.m in Sources */,
+				6468691E197EAD7500C2E50D /* HSMagView.m in Sources */,
+				64CAC09A1977268100A6E3F1 /* HSSpeech.m in Sources */,
+				64CAC0971977264700A6E3F1 /* BLE.m in Sources */,
+				642DCED61970322E0021A307 /* HSStat.m in Sources */,
+				642DCED31970321F0021A307 /* HSLog.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		64565F2F196DCCAC00B509B8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				64565F41196DCCAC00B509B8 /* HandSightTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		64565F39196DCCAC00B509B8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 64565F11196DCCAB00B509B8 /* HandSight */;
+			targetProxy = 64565F38196DCCAC00B509B8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		64565F1E196DCCAB00B509B8 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				64565F1F196DCCAB00B509B8 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		64565F27196DCCAB00B509B8 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				64565F28196DCCAB00B509B8 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		64565F3D196DCCAC00B509B8 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				64565F3E196DCCAC00B509B8 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		64565F42196DCCAC00B509B8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		64565F43196DCCAC00B509B8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		64565F45196DCCAC00B509B8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B8F659B6DDA9441A89F8EC94 /* Pods.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "HandSight/HandSight-Prefix.pch";
+				INFOPLIST_FILE = "HandSight/HandSight-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		64565F46196DCCAC00B509B8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B8F659B6DDA9441A89F8EC94 /* Pods.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "HandSight/HandSight-Prefix.pch";
+				INFOPLIST_FILE = "HandSight/HandSight-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		64565F48196DCCAC00B509B8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/HandSight.app/HandSight";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "HandSight/HandSight-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "HandSightTests/HandSightTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		64565F49196DCCAC00B509B8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/HandSight.app/HandSight";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "HandSight/HandSight-Prefix.pch";
+				INFOPLIST_FILE = "HandSightTests/HandSightTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		64565F0D196DCCAB00B509B8 /* Build configuration list for PBXProject "HandSight" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				64565F42196DCCAC00B509B8 /* Debug */,
+				64565F43196DCCAC00B509B8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		64565F44196DCCAC00B509B8 /* Build configuration list for PBXNativeTarget "HandSight" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				64565F45196DCCAC00B509B8 /* Debug */,
+				64565F46196DCCAC00B509B8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		64565F47196DCCAC00B509B8 /* Build configuration list for PBXNativeTarget "HandSightTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				64565F48196DCCAC00B509B8 /* Debug */,
+				64565F49196DCCAC00B509B8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 64565F0A196DCCAB00B509B8 /* Project object */;
+}
