@@ -149,8 +149,9 @@ OSStatus RenderTone(
 
 - (void)createToneUnit
 {
-    NSLog(@"[Audio] Created A Tone Unit with Freq %.2lf", m_audioFrequency);
-	// Configure the search parameters to find the default playback output unit
+    //NSLog(@"[Audio] Created A Tone Unit with Freq %.2lf", m_audioFrequency);
+	
+    // Configure the search parameters to find the default playback output unit
 	// (called the kAudioUnitSubType_RemoteIO on iOS but
 	// kAudioUnitSubType_DefaultOutput on Mac OS X)
 	AudioComponentDescription defaultOutputDescription;
@@ -203,8 +204,6 @@ OSStatus RenderTone(
 }
 
 - (void) playAudio:(enum AUDIO) audio {
-    NSLog(@"play audio");
-    
     switch (audio) {
         case AU_LINE_BEGIN:  [[SoundManager sharedManager] playSound:@"LB_DingDong.wav" looping:NO]; break;
         case AU_LINE_END:    [[SoundManager sharedManager] playSound:@"LE_DongDing.wav" looping:NO]; break;

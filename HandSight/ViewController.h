@@ -7,46 +7,38 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TextController.h"
 #import "CommonController.h"
-#import "MenuController.h"
-
-#import "HSUtils.h"
-#import "HSFeedback.h"
+#import "CommonTextController.h"
 
 @interface ViewController : CommonController {
     UILabel *lblTitle, *lblFeedbackType, *lblDocument, *lblAudioType, *lblAudioPitch, *lblMaxVolume, *lblHapticType,
             *lblMaxVibration, *lblLineHeight, *lblHapticThres, *lblInsTTS, *lblReadTTS, *lblReadSpeed, *lblReadPitch,
             *lblLineSpacing, *lblAudioThreshold, *lblVisualization,
-            *lblDebug, *lblLog, *lblDemo;
+            *lblDebug, *lblLog, *lblDemo, *lblSightedReading, *lblAudioVolume, *numHapticThres, *lblBluetooth;
     
     UIButton *btnReset, *btnResume, *btnStart,
              *btnTaskStart, *btnLineBegin, *btnLineEnd, *btnParaEnd, *btnTextEnd, *btnAboveLine, *btnBelowLine;
     
     UISegmentedControl *segFeedback, *segDocument, *segAudioType, *segHapticType, *segLineHeight, *segInsTTS, *segReadingTTS,
-                       *segReadingPitch, *segGuidance, *segDebug, *segVisualization, *segLeftResion, *segLog, *segCategory;
+                       *segReadingPitch, *segGuidance, *segDebug, *segVisualization, *segLeftResion, *segLog, *segCategory, *segExploration, *segBluetoothState;
     
-    UISwitch *swcAudioPitch, *swcReadPitch, *swcGuidance, *swcShowDebug, *swcShowLog, *swcLeftRegion, *swcVisualization;
+    UISwitch *swcAudioPitch, *swcAudioVolume, *swcReadPitch, *swcGuidance, *swcShowDebug, *swcShowLog, *swcLeftRegion, *swcVisualization, *swcShowStat, *swcSightedReading;
     
     UISlider *sldMaxVolume, *sldMaxVibration, *sldReadingSpeed, *sldLineHeight, *sldHapticThres, *sldLineSpacing, *sldAudioThreshold,
              *sldAboveLine, *sldBelowLine;
     
-    CGFloat m_inset, m_titleFontSize, m_textFontSize, m_titleHeight, m_textHeight, m_titleWidth, m_textWidth, m_segWidth, m_segHeight, m_segInset,
-            m_btnLeft, m_btnTop;
-    
-    NSString *m_titleFontName, *m_textFontName;
-    
-    UIColor *m_textColor;
-    
-    HSFeedback *Feedback;
-    HSSpeech *Speech;
-    HSState *State;
-    HSLog *Log;
+    UITextView *txtLog, *txtStat;
 }
 
-- (void)addControls;
-- (void) reset;
+- (void) addControls;
 - (void) switchView;
+
+
+- (void)segFeedbackChanged: (id)sender;
+- (void)segCateboryChanged: (id)sender;
+- (void)segDocumentChanged: (id)sender;
+- (void)modeChanged: (id)sender;
+- (void)segInsTTSChanged: (id)sender;
 
 
 @end

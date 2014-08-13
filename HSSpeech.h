@@ -11,17 +11,28 @@
 #import "HSUtils.h"
 
 @interface HSSpeech : NSObject <AVSpeechSynthesizerDelegate> {
-    HSState* State;
-    
 
-    AVSpeechSynthesizer *m_speechSynthesizer;
-    NSMutableArray *m_queue;
+@protected
+
+    HSState                 *State;
+    
+@private
+    
+    int                     m_pause;
+    AVSpeechSynthesizer     *m_speechSynthesizer;
+    NSMutableArray          *m_queue;
+    NSTimer                 *m_timer;
+    NSString                *m_lastSpoken;
+    
 }
 
 + (HSSpeech*) sharedInstance;
+
 - (void)speakText:(NSString *)toBeSpoken;
+- (void)speakTimer: (NSTimer*) timer;
 
+- (void)queueText: (NSString *)s;
+- (void)stopSpeaking; 
 
-
-
+- (BOOL) lastWordNotMode;
 @end

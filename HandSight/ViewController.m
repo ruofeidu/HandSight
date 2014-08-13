@@ -20,30 +20,8 @@
     [super viewDidLoad];
     
     [self hideStatusBar];
-    [self reset];
     [self addControls];
     NSLog(@"[CP] Inited");
-}
-
-- (void) reset
-{
-    NSLog(@"[CP] Reset");
-    
-    m_inset = 20;
-    m_titleFontSize = 38, m_textFontSize = 17;
-    m_titleHeight = 44, m_textHeight = 38, m_titleWidth = 360, m_textWidth = 140, m_segWidth = 360, m_segHeight = 26, m_segInset = 5;
-    
-    m_btnLeft = 800, m_btnTop = 720;
-    
-    
-    m_titleFontName = @"Savoye LET", m_textFontName = @"Palatino";
-    //m_textColor = [UIColor blueColor];
-    m_textColor = [UIColor colorWithRed:(CGFloat)86/256 green:(CGFloat)138/256 blue:(CGFloat)251/256 alpha:1.0];
-    
-    Feedback = [HSFeedback sharedInstance];
-    Speech = [HSSpeech sharedInstance];
-    State = [HSState sharedInstance];
-    Log = [HSLog sharedInstance];
 }
 
 - (void)segFeedbackChanged: (id)sender
@@ -53,8 +31,61 @@
 
 - (void)segCateboryChanged: (id)sender
 {
-    NSLog(@"Category chagned");
     State.categoryType = (enum CategoryType) [segCategory selectedSegmentIndex];
+}
+
+- (void)segDocumentChanged: (id)sender
+{
+    State.documentType = (enum DocumentType) [segDocument selectedSegmentIndex];
+}
+
+- (void)modeChanged: (id)sender
+{
+    State.mode = (enum ModeType) [segExploration selectedSegmentIndex];
+}
+
+- (void)segInsTTSChanged: (id)sender
+{
+    State.instructionGender = (enum SpeechGender) [segInsTTS selectedSegmentIndex];
+}
+
+- (void)segReadingTTSChanged: (id)sender
+{
+    State.readingGender = (enum SpeechGender) [segReadingTTS selectedSegmentIndex];
+}
+
+- (void)sldReadingSpeedChanged: (id)sender
+{
+    State.readingSpeed = [sldReadingSpeed value];
+}
+
+- (void)swcShowLogChanged: (id)sender
+{
+    [txtLog setText: [Log dumpJson]];
+    [txtLog setHidden: ![swcShowLog isOn]];
+}
+
+
+- (void)swcSightedReadingChanged: (id)sender
+{
+    State.sightedReading = [swcSightedReading isOn];
+}
+
+- (void)swcAudioPitchChanged: (id)sender
+{
+    State.audioPitch = [swcAudioPitch isOn];
+}
+
+- (void)swcAudioVolumeChanged: (id)sender
+{
+    State.audioVolume = [swcAudioVolume isOn];
+}
+
+
+- (void)swcShowStatChanged: (id)sender
+{
+    [txtStat setText: [Stat dumpCSV]];
+    [txtStat setHidden: ![swcShowStat isOn]];
 }
 
 - (void)addControls
@@ -87,6 +118,15 @@
         s;
     }); [self.view addSubview:segFeedback];
     
+    segExploration =  ({
+        NSArray *a = [NSArray arrayWithObjects:@"Explore-Text", @"Explore-More", @"Reading", nil];
+        UISegmentedControl *s = [[UISegmentedControl alloc] initWithItems:a];
+        [s setFrame:CGRectMake(m_inset + m_textWidth + m_segWidth + m_inset, verticalInset + m_segInset, m_segWidth, m_segHeight)];
+        [s setSelectedSegmentIndex: [State mode]];
+        [self.view addSubview: s];
+        s;
+    });
+    
     verticalInset += m_textHeight;
     
     lblDocument = ({
@@ -98,7 +138,7 @@
     }); [self.view addSubview:lblDocument];
     
     segCategory =  ({
-        NSArray *a = [NSArray arrayWithObjects:@"Plain", @"Magazine", @"Menu", nil];
+        NSArray *a = [NSArray arrayWithObjects:@"Plain", @"Magazine", nil]; //, @"Menu"
         UISegmentedControl *s = [[UISegmentedControl alloc] initWithItems:a];
         [s setFrame:CGRectMake(m_inset + m_textWidth, verticalInset + m_segInset, m_segWidth, m_segHeight)];
         [s setSelectedSegmentIndex: [State categoryType]];
@@ -111,8 +151,47 @@
         UISegmentedControl *s = [[UISegmentedControl alloc] initWithItems:a];
         [s setFrame:CGRectMake(m_inset + m_textWidth + m_segWidth + m_inset, verticalInset + m_segInset, m_segWidth, m_segHeight)];
         [s setSelectedSegmentIndex: [State documentType]];
+        [s addTarget:self action:@selector(segDocumentChanged:) forControlEvents:UIControlEventValueChanged];
         s;
     }); [self.view addSubview:segDocument];
+    
+    verticalInset += m_textHeight;
+    
+    lblBluetooth = ({
+        UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(m_inset, verticalInset, m_textWidth, m_textHeight)];
+        [l setText:@"Bluetooth State:"];
+        [l setTextColor: m_textColor];
+        [l setFont: [UIFont fontWithName:m_textFontName size:m_textFontSize]];
+        [self.view addSubview:l];
+        l;
+    });
+    
+    segBluetoothState =  ({
+        NSArray *a = [NSArray arrayWithObjects:@"Off", @"Connecting", @"On", nil];
+        UISegmentedControl *s = [[UISegmentedControl alloc] initWithItems:a];
+        [s setFrame:CGRectMake(m_inset + m_textWidth, verticalInset + m_segInset, m_segWidth, m_segHeight)];
+        [s setSelectedSegmentIndex: 0];
+        [s setUserInteractionEnabled: NO];
+        [self.view addSubview:s];
+        s;
+    }); [self.view addSubview:segDocument];
+    
+    lblSightedReading = ({
+        UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(m_inset * 2 + m_textWidth + m_segWidth, verticalInset, m_textWidth, m_textHeight)];
+        [l setText:@"Sighted Reading:"];
+        [l setTextColor: m_textColor];
+        [l setFont: [UIFont fontWithName:m_textFontName size:m_textFontSize]];
+        [self.view addSubview:l];
+        l;
+    });
+    
+    swcSightedReading = ({
+        UISwitch *s = [[UISwitch alloc] initWithFrame: CGRectMake(m_inset * 2 + m_textWidth + m_segWidth + m_textWidth, verticalInset + m_segInset, m_segWidth, m_segHeight) ];
+        [s setOn: NO];
+        [s addTarget:self action:@selector(swcSightedReadingChanged:) forControlEvents:UIControlEventValueChanged];
+        [self.view addSubview:s];
+        s;
+    });
     
     verticalInset += m_textHeight;
     
@@ -133,21 +212,21 @@
         s;
     }); [self.view addSubview:segAudioType];
     
-    verticalInset += m_textHeight;
-    
     lblAudioPitch = ({
-        UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(m_inset, verticalInset, m_textWidth, m_textHeight)];
+        UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(m_inset * 2 + m_textWidth + m_segWidth, verticalInset, m_textWidth, m_textHeight)];
         [l setText:@"Audio Pitch:"];
         [l setTextColor: m_textColor];
         [l setFont: [UIFont fontWithName:m_textFontName size:m_textFontSize]];
+        [self.view addSubview:l];
         l;
-    }); [self.view addSubview:lblAudioPitch];
+    });
     
     swcAudioPitch = ({
-        UISwitch *s = [[UISwitch alloc] initWithFrame: CGRectMake(m_inset + m_textWidth, verticalInset + m_segInset, m_segWidth, m_segHeight) ];
+        UISwitch *s = [[UISwitch alloc] initWithFrame: CGRectMake(m_inset * 2 + m_textWidth + m_segWidth + m_textWidth, verticalInset + m_segInset, m_segWidth, m_segHeight) ];
         [s setOn: YES];
+        [self.view addSubview: s];
         s;
-    }); [self.view addSubview:swcAudioPitch];
+    });
     
     verticalInset += m_textHeight;
     
@@ -225,14 +304,24 @@
     
     lblHapticThres = ({
         UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(m_inset, verticalInset, m_textWidth, m_textHeight)];
-        [l setText:@"haptic Threshold:"];
+        [l setText:@"Haptic Threshold:"];
         [l setTextColor: m_textColor];
         [l setFont: [UIFont fontWithName:m_textFontName size:m_textFontSize]];
+        [self.view addSubview:l];
         l;
-    }); [self.view addSubview:lblHapticThres];
+    });
+    
+    numHapticThres = ({
+        UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(m_inset + m_textWidth, verticalInset, m_swcWidth, m_textHeight)];
+        [l setText: [NSString stringWithFormat:@"%.0f", State.maxFeedbackValue] ];
+        [l setTextColor: m_textColor];
+        [l setFont: [UIFont fontWithName:m_textFontName size:m_textFontSize]];
+        [self.view addSubview:l];
+        l;
+    });
     
     sldHapticThres = ({
-        UISlider *s = [[UISlider alloc] initWithFrame: CGRectMake(m_inset + m_textWidth, verticalInset + m_segInset, m_segWidth, m_segHeight)];
+        UISlider *s = [[UISlider alloc] initWithFrame: CGRectMake(m_inset + m_textWidth + m_swcWidth, verticalInset + m_segInset, m_segWidth - m_swcWidth, m_segHeight)];
         [s setMinimumValue: 16.0f];
         [s setMaximumValue: 32.0f];
         [s setValue:20.0f];
@@ -327,19 +416,41 @@
     
     verticalInset += m_textHeight;
     
+    txtLog = ({
+        UITextView *v = [[UITextView alloc] initWithFrame: CGRectMake(m_inset, m_titleHeight + m_inset, (1024-m_inset) / 2, verticalInset - m_titleHeight)];
+        [v setHidden: YES];
+        [self.view addSubview:v];
+        v;
+    });
+    
+    txtStat = ({
+        UITextView *v = [[UITextView alloc] initWithFrame: CGRectMake(m_inset + (1024-m_inset) / 2, m_titleHeight + m_inset, (1024-m_inset) / 2, verticalInset - m_titleHeight)];
+        [v setHidden: YES];
+        [self.view addSubview:v];
+        v;
+    });
+    
     lblLog = ({
         UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(m_inset, verticalInset, m_textWidth, m_textHeight)];
-        [l setText:@"Show Log File:"];
+        [l setText:@"Show Log & Stat:"];
         [l setTextColor: m_textColor];
         [l setFont: [UIFont fontWithName:m_textFontName size:m_textFontSize]];
         l;
     }); [self.view addSubview:lblLog];
     
     swcShowLog = ({
-        UISwitch *s = [[UISwitch alloc] initWithFrame: CGRectMake(m_inset + m_textWidth, verticalInset + m_segInset, m_segWidth, m_segHeight) ];
+        UISwitch *s = [[UISwitch alloc] initWithFrame: CGRectMake(m_inset + m_textWidth, verticalInset + m_segInset, m_segWidth, m_swcWidth) ];
         [s setOn: NO];
+        [s addTarget:self action:@selector(swcShowLogChanged:) forControlEvents:UIControlEventValueChanged];
         s;
     }); [self.view addSubview:swcShowLog];
+    
+    swcShowStat = ({
+        UISwitch *s = [[UISwitch alloc] initWithFrame: CGRectMake(m_inset*2 + m_textWidth + m_swcWidth, verticalInset + m_segInset, m_segWidth, m_swcWidth) ];
+        [s setOn: NO];
+        [s addTarget:self action:@selector(swcShowStatChanged:) forControlEvents:UIControlEventValueChanged];
+        s;
+    }); [self.view addSubview:swcShowStat];
     
     verticalInset += m_textHeight;
     
@@ -489,6 +600,7 @@
         [b setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
         b;
     }); [self.view addSubview:btnStart];
+    
 }
 
 - (void)switchView
@@ -496,17 +608,17 @@
     NSLog(@"[CP] Switch View to %d", State.categoryType);
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
-    MenuController *viewController;
+    CommonTextController *viewController;
     
     switch (State.categoryType) {
         case CT_PLAIN:
-            viewController = (MenuController *)[storyboard instantiateViewControllerWithIdentifier:@"TextController"];
+            viewController = (CommonTextController *)[storyboard instantiateViewControllerWithIdentifier:@"TextController"];
             break;
         case CT_MAGAZINE:
-            viewController = (MenuController *)[storyboard instantiateViewControllerWithIdentifier:@"MagController"];
+            viewController = (CommonTextController *)[storyboard instantiateViewControllerWithIdentifier:@"MagController"];
             break;
         case CT_MENU:
-            viewController = (MenuController *)[storyboard instantiateViewControllerWithIdentifier:@"MenuController"];
+            viewController = (CommonTextController *)[storyboard instantiateViewControllerWithIdentifier:@"MenuController"];
             break;
     }
     
@@ -520,17 +632,17 @@
 
 - (void)btnLineBeginTouched
 {
-    [[HSFeedback sharedInstance] lineBegin];
+    [Feedback lineBegin];
 }
 
 - (void)btnLineEndTouched
 {
-    [[HSFeedback sharedInstance] lineEnd];
+    [Feedback lineEnd];
 }
 
 - (void)btnParagraphEndTouched
 {
-    [[HSFeedback sharedInstance] paraEnd]; 
+    [Feedback paraEnd];
 }
 
 - (void)btnTextEndTouched
@@ -541,22 +653,22 @@
 
 - (void)sldAboveLineTouched
 {
-    [Feedback start: [sldAboveLine value]];
+    [Feedback verticalStart: [sldAboveLine value]];
 }
 
 - (void)sldAboveLineTouchCanceled
 {
-    [Feedback stop];
+    [Feedback verticalStop];
 }
 
 - (void)sldBelowLineTouched
 {
-    [Feedback start: -[sldBelowLine value]];
+    [Feedback verticalStart: -[sldBelowLine value]];
 }
 
 - (void)sldBelowLineTouchCanceled
 {
-    [Feedback stop];
+    [Feedback verticalStop];
 }
 
 
