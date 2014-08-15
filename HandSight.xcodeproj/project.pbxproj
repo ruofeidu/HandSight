@@ -71,6 +71,7 @@
 		64751FFD19916F3500B75D4A /* 300.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 64751FF919916F3500B75D4A /* 300.jpg */; };
 		64751FFE19916F3500B75D4A /* 100.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 64751FFA19916F3500B75D4A /* 100.jpg */; };
 		64751FFF19916F3500B75D4A /* 400.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 64751FFB19916F3500B75D4A /* 400.jpg */; };
+		64954101199DAF8300887DFD /* HSViz.m in Sources */ = {isa = PBXBuildFile; fileRef = 64954100199DAF8300887DFD /* HSViz.m */; };
 		64CAC092197725FC00A6E3F1 /* HSBluetooth.m in Sources */ = {isa = PBXBuildFile; fileRef = 64CAC091197725FC00A6E3F1 /* HSBluetooth.m */; };
 		64CAC0971977264700A6E3F1 /* BLE.m in Sources */ = {isa = PBXBuildFile; fileRef = 64CAC0951977264700A6E3F1 /* BLE.m */; };
 		64CAC09A1977268100A6E3F1 /* HSSpeech.m in Sources */ = {isa = PBXBuildFile; fileRef = 64CAC0991977268100A6E3F1 /* HSSpeech.m */; };
@@ -182,6 +183,8 @@
 		64751FF919916F3500B75D4A /* 300.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 300.jpg; sourceTree = "<group>"; };
 		64751FFA19916F3500B75D4A /* 100.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 100.jpg; sourceTree = "<group>"; };
 		64751FFB19916F3500B75D4A /* 400.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 400.jpg; sourceTree = "<group>"; };
+		649540FF199DAF8300887DFD /* HSViz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSViz.h; sourceTree = "<group>"; };
+		64954100199DAF8300887DFD /* HSViz.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSViz.m; sourceTree = "<group>"; };
 		64CAC090197725FC00A6E3F1 /* HSBluetooth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSBluetooth.h; path = HandSight/HSBluetooth.h; sourceTree = "<group>"; };
 		64CAC091197725FC00A6E3F1 /* HSBluetooth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HSBluetooth.m; path = HandSight/HSBluetooth.m; sourceTree = "<group>"; };
 		64CAC0941977264700A6E3F1 /* BLE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLE.h; sourceTree = "<group>"; };
@@ -300,6 +303,8 @@
 				642DCED51970322E0021A307 /* HSStat.m */,
 				642DCED71970323F0021A307 /* HSState.h */,
 				642DCED81970323F0021A307 /* HSState.m */,
+				649540FF199DAF8300887DFD /* HSViz.h */,
+				64954100199DAF8300887DFD /* HSViz.m */,
 			);
 			name = HandSight;
 			sourceTree = "<group>";
@@ -727,6 +732,7 @@
 				642DCEDF197034AA0021A307 /* HSDebug.m in Sources */,
 				64CAC0A7197870A000A6E3F1 /* MagController.m in Sources */,
 				642DCEC919702ECA0021A307 /* HSTextView.m in Sources */,
+				64954101199DAF8300887DFD /* HSViz.m in Sources */,
 				64686921197EB9AA00C2E50D /* HSCommonView.m in Sources */,
 				64565F26196DCCAB00B509B8 /* AppDelegate.m in Sources */,
 				64565F22196DCCAB00B509B8 /* main.m in Sources */,

@@ -14,10 +14,51 @@
 
 @implementation ViewController
 
+- (void)blueToothTimer: (NSTimer*) timer
+{
+    [segBluetoothState setSelectedSegmentIndex: State.bluetoothState];
+    if (State.bluetoothState == BT_OFF) {
+        if (State.feedbackType != FT_NONE) {
+            State.feedbackType = FT_AUDIO;
+            [segFeedback setSelectedSegmentIndex:State.feedbackType]; 
+        }
+    }
+}
+
+- (void) segAudioTypeChanged:(id)sender {
+    
+}
+
+- (void) sldMaxVolumeChanged:(id)sender {
+    State.maxVolume = [sldMaxVolume value];
+    [numMaxVolume setText: [NSString stringWithFormat:@"%.0f", [sldMaxVolume value]]];
+}
+
+- (void) swcReadPitchChanged:(id)sender {
+    
+    [numLineHeights setText: [NSString stringWithFormat:@"%.0f", [sldLineHeight value]]];
+}
+
+- (void) segHapticTypeChanged:(id)sender {
+    [numLineHeights setText: [NSString stringWithFormat:@"%.0f", [sldLineHeight value]]];
+    
+}
+
+- (void) sldFeedbackThresChanged:(id)sender {
+    State.maxFeedbackValue = [sldHapticThres value];
+    [numHapticThres setText: [NSString stringWithFormat:@"%.0f", [sldHapticThres value]]];
+    
+}
+
+- (void) sldLineHeightChanged:(id)sender {
+    [numLineHeights setText: [NSString stringWithFormat:@"%.0f", [sldLineHeight value]]];
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    m_timer                 =       [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(blueToothTimer:) userInfo:nil repeats:YES];
     
     [self hideStatusBar];
     [self addControls];
@@ -27,6 +68,7 @@
 - (void)segFeedbackChanged: (id)sender
 {
     State.feedbackType = (enum FeedbackType) [segFeedback selectedSegmentIndex];
+    [Feedback changed]; 
 }
 
 - (void)segCateboryChanged: (id)sender
@@ -96,8 +138,9 @@
         UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(m_inset, m_inset, m_titleWidth, m_titleHeight)];
         [l setText:@"HandSight Control Panel"];
         [l setFont: [UIFont fontWithName:m_titleFontName size:m_titleFontSize]];
+         [self.view addSubview: l];
         l;
-    }); [self.view addSubview:lblTitle];
+    });
     
     verticalInset += m_titleHeight;
     
@@ -106,8 +149,9 @@
         [l setText:@"Feedback Type: "];
         [l setTextColor: m_textColor];
         [l setFont: [UIFont fontWithName:m_textFontName size:m_textFontSize]];
+        [self.view addSubview: l];
         l;
-    }); [self.view addSubview:lblFeedbackType];
+    });
     
     segFeedback =  ({
         NSArray *a = [NSArray arrayWithObjects:@"Audio", @"Haptic", @"Hybrid", @"None", nil];
@@ -115,8 +159,9 @@
         [s setFrame:CGRectMake(m_inset + m_textWidth, verticalInset + m_segInset, m_segWidth, m_segHeight)];
         [s setSelectedSegmentIndex: [State feedbackType]];
         [s addTarget:self action:@selector(segFeedbackChanged:) forControlEvents:UIControlEventValueChanged];
+        [self.view addSubview: s];
         s;
-    }); [self.view addSubview:segFeedback];
+    });
     
     segExploration =  ({
         NSArray *a = [NSArray arrayWithObjects:@"Explore-Text", @"Explore-More", @"Reading", nil];
@@ -134,8 +179,9 @@
         [l setText:@"Document:"];
         [l setTextColor: m_textColor];
         [l setFont: [UIFont fontWithName:m_textFontName size:m_textFontSize]];
+        [self.view addSubview: l];
         l;
-    }); [self.view addSubview:lblDocument];
+    });
     
     segCategory =  ({
         NSArray *a = [NSArray arrayWithObjects:@"Plain", @"Magazine", nil]; //, @"Menu"
@@ -143,8 +189,9 @@
         [s setFrame:CGRectMake(m_inset + m_textWidth, verticalInset + m_segInset, m_segWidth, m_segHeight)];
         [s setSelectedSegmentIndex: [State categoryType]];
         [s addTarget:self action:@selector(segCateboryChanged:) forControlEvents:UIControlEventValueChanged];
+        [self.view addSubview: s];
         s;
-    }); [self.view addSubview:segCategory];
+    });
     
     segDocument =  ({
         NSArray *a = [NSArray arrayWithObjects:@"Train", @"A", @"B", @"C", nil];
@@ -152,8 +199,9 @@
         [s setFrame:CGRectMake(m_inset + m_textWidth + m_segWidth + m_inset, verticalInset + m_segInset, m_segWidth, m_segHeight)];
         [s setSelectedSegmentIndex: [State documentType]];
         [s addTarget:self action:@selector(segDocumentChanged:) forControlEvents:UIControlEventValueChanged];
+        [self.view addSubview: s];
         s;
-    }); [self.view addSubview:segDocument];
+    });
     
     verticalInset += m_textHeight;
     
@@ -174,7 +222,7 @@
         [s setUserInteractionEnabled: NO];
         [self.view addSubview:s];
         s;
-    }); [self.view addSubview:segDocument];
+    });
     
     lblSightedReading = ({
         UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(m_inset * 2 + m_textWidth + m_segWidth, verticalInset, m_textWidth, m_textHeight)];
@@ -200,8 +248,9 @@
         [l setText:@"Audio Type:"];
         [l setTextColor: m_textColor];
         [l setFont: [UIFont fontWithName:m_textFontName size:m_textFontSize]];
+        [self.view addSubview: l];
         l;
-    }); [self.view addSubview:lblAudioType];
+    });
     
     segAudioType =  ({
         NSArray *a = [NSArray arrayWithObjects:@"Beep", @"Piano", @"Flute", nil];
@@ -209,8 +258,10 @@
         [s setFrame:CGRectMake(m_inset + m_textWidth, verticalInset + m_segInset, m_segWidth, m_segHeight)];
         [s setSelectedSegmentIndex: 0];
         [s setEnabled:NO];
+        [s addTarget:self action:@selector(segAudioTypeChanged:) forControlEvents:UIControlEventValueChanged];
+        [self.view addSubview: s];
         s;
-    }); [self.view addSubview:segAudioType];
+    });
     
     lblAudioPitch = ({
         UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(m_inset * 2 + m_textWidth + m_segWidth, verticalInset, m_textWidth, m_textHeight)];
@@ -225,6 +276,7 @@
         UISwitch *s = [[UISwitch alloc] initWithFrame: CGRectMake(m_inset * 2 + m_textWidth + m_segWidth + m_textWidth, verticalInset + m_segInset, m_segWidth, m_segHeight) ];
         [s setOn: YES];
         [self.view addSubview: s];
+        [s addTarget:self action:@selector(swcAudioPitchChanged:) forControlEvents:UIControlEventValueChanged];
         s;
     });
     
@@ -238,22 +290,35 @@
         l;
     }); [self.view addSubview:lblMaxVolume];
     
+    numMaxVolume = ({
+        UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(m_inset + m_textWidth, verticalInset, m_swcWidth, m_textHeight)];
+        [l setText: [NSString stringWithFormat:@"%.0f", State.maxFeedbackValue] ];
+        [l setTextColor: m_textColor];
+        [l setTextAlignment: NSTextAlignmentCenter];
+        [l setFont: [UIFont fontWithName:m_textFontName size:m_textFontSize]];
+        [self.view addSubview:l];
+        l;
+    });
+    
     sldMaxVolume = ({
-        UISlider *s = [[UISlider alloc] initWithFrame: CGRectMake(m_inset + m_textWidth, verticalInset + m_segInset, m_segWidth, m_segHeight)];
+        UISlider *s = [[UISlider alloc] initWithFrame: CGRectMake(m_inset + m_textWidth + m_swcWidth, verticalInset + m_segInset, m_segWidth - m_swcWidth, m_segHeight)];
         [s setMinimumValue: 0.1f];
         [s setMaximumValue: 1.0f];
+        [s addTarget:self action:@selector(sldMaxVolumeChanged:) forControlEvents:UIControlEventValueChanged];
+        [self.view addSubview: s];
         s;
-    }); [self.view addSubview:sldMaxVolume];
+    });
     
     verticalInset += m_textHeight;
     
     lblHapticType = ({
-        UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(m_inset, verticalInset, m_textWidth, m_textHeight)];
+        UILabel *l = [[UILabel alloc] initWithFrame: CGRectMake(m_inset, verticalInset, m_textWidth, m_textHeight)];
         [l setText:@"Haptic Type:"];
         [l setTextColor: m_textColor];
         [l setFont: [UIFont fontWithName:m_textFontName size:m_textFontSize]];
+        [self.view addSubview: l];
         l;
-    }); [self.view addSubview:lblHapticType];
+    });
     
     segHapticType =  ({
         NSArray *a = [NSArray arrayWithObjects:@"Constant", @"Pulse", nil];
@@ -261,26 +326,42 @@
         [s setFrame:CGRectMake(m_inset + m_textWidth, verticalInset + m_segInset, m_segWidth, m_segHeight)];
         [s setSelectedSegmentIndex:0];
         [s setEnabled:NO];
+        [s addTarget:self action:@selector(segHapticTypeChanged:) forControlEvents:UIControlEventValueChanged];
+        [self.view addSubview: s];
         s;
-    }); [self.view addSubview:segHapticType];
+    });
     
     verticalInset += m_textHeight;
     
     lblMaxVibration = ({
-        UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(m_inset, verticalInset, m_textWidth, m_textHeight)];
+        UILabel *l = [[UILabel alloc] initWithFrame: CGRectMake(m_inset, verticalInset, m_textWidth, m_textHeight)];
         [l setText:@"Max Vibration:"];
         [l setTextColor: m_textColor];
         [l setFont: [UIFont fontWithName:m_textFontName size:m_textFontSize]];
+        [self.view addSubview: l];
         l;
-    }); [self.view addSubview:lblMaxVibration];
+    });
+    
+    numMaxVibration = ({
+        UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(m_inset + m_textWidth, verticalInset, m_swcWidth, m_textHeight)];
+        [l setText: [NSString stringWithFormat:@"%.0f", State.maxFeedbackValue] ];
+        [l setTextColor: m_textColor];
+        [l setTextAlignment: NSTextAlignmentCenter];
+        [l setFont: [UIFont fontWithName:m_textFontName size:m_textFontSize]];
+        [self.view addSubview:l];
+        l;
+    });
     
     sldMaxVibration = ({
-        UISlider *s = [[UISlider alloc] initWithFrame: CGRectMake(m_inset + m_textWidth, verticalInset + m_segInset, m_segWidth, m_segHeight)];
+        UISlider *s = [[UISlider alloc] initWithFrame: CGRectMake(m_inset + m_textWidth + m_swcWidth, verticalInset + m_segInset, m_segWidth - m_swcWidth, m_segHeight)];
         [s setMinimumValue: 0.1f];
         [s setMaximumValue: 1.0f];
-        [s setValue:0.5f];
+        [s setValue: State.maxVibration];
+        
+        [s addTarget:self action:@selector(sldLineHeightChanged:) forControlEvents:UIControlEventValueChanged];
+        [self.view addSubview: s];
         s;
-    }); [self.view addSubview:sldMaxVibration];
+    });
     
     verticalInset += m_textHeight;
     
@@ -291,20 +372,33 @@
         [l setFont: [UIFont fontWithName:m_textFontName size:m_textFontSize]];
         l;
     }); [self.view addSubview:lblLineHeight];
+
+    numLineHeights = ({
+        UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(m_inset + m_textWidth, verticalInset, m_swcWidth, m_textHeight)];
+        [l setText: [NSString stringWithFormat:@"%.0f", State.maxFeedbackValue] ];
+        [l setTextColor: m_textColor];
+        [l setTextAlignment: NSTextAlignmentCenter];
+        [l setFont: [UIFont fontWithName:m_textFontName size:m_textFontSize]];
+        [self.view addSubview:l];
+        l;
+    });
     
     sldLineHeight = ({
-        UISlider *s = [[UISlider alloc] initWithFrame: CGRectMake(m_inset + m_textWidth, verticalInset + m_segInset, m_segWidth, m_segHeight)];
+        UISlider *s = [[UISlider alloc] initWithFrame: CGRectMake(m_inset + m_textWidth + m_swcWidth, verticalInset + m_segInset, m_segWidth - m_swcWidth, m_segHeight)];
         [s setMinimumValue: 8.0f];
         [s setMaximumValue: 32.0f];
         [s setValue:16.0f];
+        
+        [s addTarget:self action:@selector(sldLineHeightChanged:) forControlEvents:UIControlEventValueChanged];
+        [self.view addSubview: s];
         s;
-    }); [self.view addSubview:sldLineHeight];
+    });
     
     verticalInset += m_textHeight;
     
     lblHapticThres = ({
         UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(m_inset, verticalInset, m_textWidth, m_textHeight)];
-        [l setText:@"Haptic Threshold:"];
+        [l setText:@"Feedback Thres:"];
         [l setTextColor: m_textColor];
         [l setFont: [UIFont fontWithName:m_textFontName size:m_textFontSize]];
         [self.view addSubview:l];
@@ -315,6 +409,7 @@
         UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(m_inset + m_textWidth, verticalInset, m_swcWidth, m_textHeight)];
         [l setText: [NSString stringWithFormat:@"%.0f", State.maxFeedbackValue] ];
         [l setTextColor: m_textColor];
+        [l setTextAlignment: NSTextAlignmentCenter];
         [l setFont: [UIFont fontWithName:m_textFontName size:m_textFontSize]];
         [self.view addSubview:l];
         l;
@@ -322,11 +417,13 @@
     
     sldHapticThres = ({
         UISlider *s = [[UISlider alloc] initWithFrame: CGRectMake(m_inset + m_textWidth + m_swcWidth, verticalInset + m_segInset, m_segWidth - m_swcWidth, m_segHeight)];
-        [s setMinimumValue: 16.0f];
-        [s setMaximumValue: 32.0f];
-        [s setValue:20.0f];
+        [s setMinimumValue: 100.0f];
+        [s setMaximumValue: 127.0f];
+        [s setValue: State.maxFeedbackValue];
+        [s addTarget:self action:@selector(sldFeedbackThresChanged:) forControlEvents:UIControlEventValueChanged];
+        [self.view addSubview:s];
         s;
-    }); [self.view addSubview:sldHapticThres];
+    });
     
     verticalInset += m_textHeight;
     
@@ -335,16 +432,19 @@
         [l setText:@"Instruction TTS:"];
         [l setTextColor: m_textColor];
         [l setFont: [UIFont fontWithName:m_textFontName size:m_textFontSize]];
+        [self.view addSubview: l];
         l;
-    }); [self.view addSubview:lblInsTTS];
+    });
     
     segInsTTS =  ({
         NSArray *a = [NSArray arrayWithObjects:@"Male", @"Female", nil];
         UISegmentedControl *s = [[UISegmentedControl alloc] initWithItems:a];
         [s setFrame:CGRectMake(m_inset + m_textWidth, verticalInset + m_segInset, m_segWidth, m_segHeight)];
         [s setSelectedSegmentIndex:0];
+        [s addTarget:self action:@selector(segInsTTSChanged:) forControlEvents:UIControlEventValueChanged];
+        [self.view addSubview: s];
         s;
-    }); [self.view addSubview:segInsTTS];
+    });
     
     verticalInset += m_textHeight;
     
@@ -353,16 +453,19 @@
         [l setText:@"Reading TTS:"];
         [l setTextColor: m_textColor];
         [l setFont: [UIFont fontWithName:m_textFontName size:m_textFontSize]];
+        [self.view addSubview: l];
         l;
-    }); [self.view addSubview:lblReadTTS];
+    });
     
     segReadingTTS =  ({
         NSArray *a = [NSArray arrayWithObjects:@"Male", @"Female", nil];
         UISegmentedControl *s = [[UISegmentedControl alloc] initWithItems:a];
         [s setFrame:CGRectMake(m_inset + m_textWidth, verticalInset + m_segInset, m_segWidth, m_segHeight)];
         [s setSelectedSegmentIndex:1];
+        [s addTarget:self action:@selector(segReadingTTSChanged:) forControlEvents:UIControlEventValueChanged];
+        [self.view addSubview: s];
         s;
-    }); [self.view addSubview:segReadingTTS];
+    });
     
     verticalInset += m_textHeight;
     
@@ -371,16 +474,19 @@
         [l setText:@"Reading Speed:"];
         [l setTextColor: m_textColor];
         [l setFont: [UIFont fontWithName:m_textFontName size:m_textFontSize]];
+        [self.view addSubview: l];
         l;
-    }); [self.view addSubview:lblReadSpeed];
+    });
     
     sldReadingSpeed = ({
         UISlider *s = [[UISlider alloc] initWithFrame: CGRectMake(m_inset + m_textWidth, verticalInset + m_segInset, m_segWidth, m_segHeight)];
         [s setMinimumValue: 16.0f];
         [s setMaximumValue: 32.0f];
         [s setValue:32.0f];
+        [s addTarget:self action:@selector(sldReadingSpeedChanged:) forControlEvents:UIControlEventValueChanged];
+        [self.view addSubview: s];
         s;
-    }); [self.view addSubview:sldReadingSpeed];
+    });
     
     verticalInset += m_textHeight;
     
@@ -389,14 +495,17 @@
         [l setText:@"Reading Pitch:"];
         [l setTextColor: m_textColor];
         [l setFont: [UIFont fontWithName:m_textFontName size:m_textFontSize]];
+        [self.view addSubview: l];
         l;
-    }); [self.view addSubview:lblReadPitch];
+    });
     
     swcReadPitch = ({
         UISwitch *s = [[UISwitch alloc] initWithFrame: CGRectMake(m_inset + m_textWidth, verticalInset + m_segInset, m_segWidth, m_segHeight) ];
         [s setOn: YES];
+        [s addTarget:self action:@selector(swcReadPitchChanged:) forControlEvents:UIControlEventValueChanged];
+        [self.view addSubview: s];
         s;
-    }); [self.view addSubview:swcReadPitch];
+    }); ;
     
     verticalInset += m_textHeight;
     
@@ -411,8 +520,9 @@
     swcShowDebug = ({
         UISwitch *s = [[UISwitch alloc] initWithFrame: CGRectMake(m_inset + m_textWidth, verticalInset + m_segInset, m_segWidth, m_segHeight) ];
         [s setOn: YES];
+        [self.view addSubview: s];
         s;
-    }); [self.view addSubview:swcShowDebug];
+    });
     
     verticalInset += m_textHeight;
     
@@ -449,8 +559,9 @@
         UISwitch *s = [[UISwitch alloc] initWithFrame: CGRectMake(m_inset*2 + m_textWidth + m_swcWidth, verticalInset + m_segInset, m_segWidth, m_swcWidth) ];
         [s setOn: NO];
         [s addTarget:self action:@selector(swcShowStatChanged:) forControlEvents:UIControlEventValueChanged];
+        [self.view addSubview: s];
         s;
-    }); [self.view addSubview:swcShowStat];
+    });
     
     verticalInset += m_textHeight;
     
@@ -459,8 +570,9 @@
         [l setText:@"Demo:"];
         [l setTextColor: m_textColor];
         [l setFont: [UIFont fontWithName:m_textFontName size:m_textFontSize]];
+        [self.view addSubview: l];
         l;
-    }); [self.view addSubview:lblDemo];
+    });
     
     CGFloat m_horizontalInset = m_inset + m_textWidth - 30;
     
@@ -473,8 +585,9 @@
         [b setTitleColor:m_textColor forState: UIControlStateNormal ];
         [b setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
         [b addTarget:self action:@selector(btnTaskStartTouched) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview: b];
         b;
-    }); [self.view addSubview:btnTaskStart];
+    });
     
     m_horizontalInset += m_textWidth - 20;
     
@@ -486,8 +599,9 @@
         [b setTitleColor:m_textColor forState: UIControlStateNormal ];
         [b setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
         [b addTarget:self action:@selector(btnLineBeginTouched) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview: b];
         b;
-    }); [self.view addSubview:btnLineBegin];
+    });
     
     m_horizontalInset += m_textWidth - 20;
     
@@ -499,8 +613,9 @@
         [b setTitleColor:m_textColor forState: UIControlStateNormal ];
         [b setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
         [b addTarget:self action:@selector(btnLineEndTouched) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview: b];
         b;
-    }); [self.view addSubview:btnLineEnd];
+    });
     
     m_horizontalInset += m_textWidth;
     
@@ -512,8 +627,10 @@
         [b setTitleColor:m_textColor forState: UIControlStateNormal ];
         [b setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
         [b addTarget:self action:@selector(btnParagraphEndTouched) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:b];
+        [self.view addSubview: b];
         b;
-    }); [self.view addSubview:btnParaEnd];
+    });
     
     m_horizontalInset += m_textWidth;
     
@@ -525,8 +642,9 @@
         [b setTitleColor:m_textColor forState: UIControlStateNormal ];
         [b setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
         [b addTarget:self action:@selector(btnTextEndTouched) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview: b];
         b;
-    }); [self.view addSubview:btnTextEnd];
+    });
     
     m_horizontalInset = m_inset + m_textWidth - 5;
     verticalInset += m_textHeight;
@@ -537,8 +655,9 @@
         [[b titleLabel] setFont:[UIFont fontWithName:m_textFontName size:m_textFontSize]];
         [b setTitleColor:m_textColor forState: UIControlStateNormal ];
         [b setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+        [self.view addSubview: b];
         b;
-    }); [self.view addSubview:btnAboveLine];
+    });
     
     m_horizontalInset += m_textWidth;
     
@@ -550,8 +669,9 @@
         [s addTarget:self action:@selector(sldAboveLineTouchCanceled) forControlEvents:UIControlEventTouchUpInside];
         [s addTarget:self action:@selector(sldAboveLineTouchCanceled) forControlEvents:UIControlEventTouchUpOutside];
         [s addTarget:self action:@selector(sldAboveLineTouchCanceled) forControlEvents:UIControlEventTouchCancel];
+        [self.view addSubview: s];
         s;
-    }); [self.view addSubview:sldAboveLine];
+    });
     
     m_horizontalInset = m_inset*2 + m_textWidth + m_segWidth;
     
@@ -561,8 +681,9 @@
         [[b titleLabel] setFont:[UIFont fontWithName:m_textFontName size:m_textFontSize]];
         [b setTitleColor:m_textColor forState: UIControlStateNormal ];
         [b setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+        [self.view addSubview: b];
         b;
-    }); [self.view addSubview:btnBelowLine];
+    });
     
     m_horizontalInset += m_textWidth;
     
@@ -574,8 +695,9 @@
         [s addTarget:self action:@selector(sldBelowLineTouchCanceled) forControlEvents:UIControlEventTouchUpInside];
         [s addTarget:self action:@selector(sldBelowLineTouchCanceled) forControlEvents:UIControlEventTouchUpOutside];
         [s addTarget:self action:@selector(sldBelowLineTouchCanceled) forControlEvents:UIControlEventTouchCancel];
+        [self.view addSubview: s];
         s;
-    }); [self.view addSubview:sldBelowLine];
+    });
     
     // Buttons
     btnReset = ({
@@ -587,8 +709,9 @@
         [b addTarget:self action:@selector(reset) forControlEvents:UIControlEventTouchUpInside];
         [b setTitleColor:m_textColor forState: UIControlStateNormal ];
         [b setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+        [self.view addSubview: b];
         b;
-    }); [self.view addSubview:btnReset];
+    });
     
     btnStart = ({
         UIButton *b = [UIButton buttonWithType: UIButtonTypeSystem];
@@ -598,8 +721,9 @@
         [b addTarget:self action:@selector(switchView) forControlEvents:UIControlEventTouchUpInside];
         [b setTitleColor:m_textColor forState: UIControlStateNormal ];
         [b setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+         [self.view addSubview: b];
         b;
-    }); [self.view addSubview:btnStart];
+    });
     
 }
 

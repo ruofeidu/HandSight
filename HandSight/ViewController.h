@@ -14,7 +14,7 @@
     UILabel *lblTitle, *lblFeedbackType, *lblDocument, *lblAudioType, *lblAudioPitch, *lblMaxVolume, *lblHapticType,
             *lblMaxVibration, *lblLineHeight, *lblHapticThres, *lblInsTTS, *lblReadTTS, *lblReadSpeed, *lblReadPitch,
             *lblLineSpacing, *lblAudioThreshold, *lblVisualization,
-            *lblDebug, *lblLog, *lblDemo, *lblSightedReading, *lblAudioVolume, *numHapticThres, *lblBluetooth;
+            *lblDebug, *lblLog, *lblDemo, *lblSightedReading, *lblAudioVolume, *numHapticThres, *lblBluetooth, *numLineHeights, *numMaxVolume, *numReadingSpeed, *numMaxVibration;
     
     UIButton *btnReset, *btnResume, *btnStart,
              *btnTaskStart, *btnLineBegin, *btnLineEnd, *btnParaEnd, *btnTextEnd, *btnAboveLine, *btnBelowLine;
@@ -28,6 +28,8 @@
              *sldAboveLine, *sldBelowLine;
     
     UITextView *txtLog, *txtStat;
+    
+    NSTimer                 *m_timer;
 }
 
 - (void) addControls;
@@ -39,6 +41,13 @@
 - (void)segDocumentChanged: (id)sender;
 - (void)modeChanged: (id)sender;
 - (void)segInsTTSChanged: (id)sender;
-
+- (void)swcReadPitchChanged: (id)sender;
+- (void)sldFeedbackThresChanged: (id)sender;
+- (void)segHapticTypeChanged: (id)sender;
+- (void)segReadingTTSChanged: (id)sender;
+- (void)sldReadingSpeedChanged: (id)sender;
+- (void)sldLineHeightChanged: (id)sender;
+- (void)segAudioTypeChanged: (id)sender;
+- (void)sldMaxVolumeChanged: (id)sender;
 
 @end
