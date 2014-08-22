@@ -71,6 +71,13 @@
 		64751FFD19916F3500B75D4A /* 300.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 64751FF919916F3500B75D4A /* 300.jpg */; };
 		64751FFE19916F3500B75D4A /* 100.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 64751FFA19916F3500B75D4A /* 100.jpg */; };
 		64751FFF19916F3500B75D4A /* 400.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 64751FFB19916F3500B75D4A /* 400.jpg */; };
+		647FAF3C19A262B100534068 /* Flute.wav in Resources */ = {isa = PBXBuildFile; fileRef = 647FAF3B19A262B100534068 /* Flute.wav */; };
+		647FAF3E19A264F400534068 /* Violin.wav in Resources */ = {isa = PBXBuildFile; fileRef = 647FAF3D19A264F400534068 /* Violin.wav */; };
+		647FAF4819A3924D00534068 /* HSMeasure.m in Sources */ = {isa = PBXBuildFile; fileRef = 647FAF4719A3924D00534068 /* HSMeasure.m */; };
+		647FAF4C19A398B300534068 /* 14.txt in Resources */ = {isa = PBXBuildFile; fileRef = 647FAF4B19A398B300534068 /* 14.txt */; };
+		647FAF4E19A398C100534068 /* 04.txt in Resources */ = {isa = PBXBuildFile; fileRef = 647FAF4D19A398C100534068 /* 04.txt */; };
+		647FAF5019A59D3B00534068 /* Cello.wav in Resources */ = {isa = PBXBuildFile; fileRef = 647FAF4F19A59D3B00534068 /* Cello.wav */; };
+		647FAF5219A65FE700534068 /* 05.txt in Resources */ = {isa = PBXBuildFile; fileRef = 647FAF5119A65FE700534068 /* 05.txt */; };
 		64954101199DAF8300887DFD /* HSViz.m in Sources */ = {isa = PBXBuildFile; fileRef = 64954100199DAF8300887DFD /* HSViz.m */; };
 		64CAC092197725FC00A6E3F1 /* HSBluetooth.m in Sources */ = {isa = PBXBuildFile; fileRef = 64CAC091197725FC00A6E3F1 /* HSBluetooth.m */; };
 		64CAC0971977264700A6E3F1 /* BLE.m in Sources */ = {isa = PBXBuildFile; fileRef = 64CAC0951977264700A6E3F1 /* BLE.m */; };
@@ -183,6 +190,14 @@
 		64751FF919916F3500B75D4A /* 300.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 300.jpg; sourceTree = "<group>"; };
 		64751FFA19916F3500B75D4A /* 100.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 100.jpg; sourceTree = "<group>"; };
 		64751FFB19916F3500B75D4A /* 400.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 400.jpg; sourceTree = "<group>"; };
+		647FAF3B19A262B100534068 /* Flute.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = Flute.wav; path = Resource/Audio/Flute.wav; sourceTree = SOURCE_ROOT; };
+		647FAF3D19A264F400534068 /* Violin.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = Violin.wav; path = Resource/Audio/Violin.wav; sourceTree = SOURCE_ROOT; };
+		647FAF4619A3924D00534068 /* HSMeasure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSMeasure.h; path = ../HSMeasure.h; sourceTree = "<group>"; };
+		647FAF4719A3924D00534068 /* HSMeasure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HSMeasure.m; path = ../HSMeasure.m; sourceTree = "<group>"; };
+		647FAF4B19A398B300534068 /* 14.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 14.txt; sourceTree = "<group>"; };
+		647FAF4D19A398C100534068 /* 04.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 04.txt; sourceTree = "<group>"; };
+		647FAF4F19A59D3B00534068 /* Cello.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = Cello.wav; path = Resource/Audio/Cello.wav; sourceTree = SOURCE_ROOT; };
+		647FAF5119A65FE700534068 /* 05.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 05.txt; sourceTree = "<group>"; };
 		649540FF199DAF8300887DFD /* HSViz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSViz.h; sourceTree = "<group>"; };
 		64954100199DAF8300887DFD /* HSViz.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSViz.m; sourceTree = "<group>"; };
 		64CAC090197725FC00A6E3F1 /* HSBluetooth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSBluetooth.h; path = HandSight/HSBluetooth.h; sourceTree = "<group>"; };
@@ -247,16 +262,8 @@
 		642DCEBD19702E390021A307 /* TextReader */ = {
 			isa = PBXGroup;
 			children = (
-				6440A9971981ACA400E5BEC3 /* HSMultiView.h */,
-				6440A9981981ACA400E5BEC3 /* HSMultiView.m */,
-				6468691C197EAD7500C2E50D /* HSMagView.h */,
-				6468691D197EAD7500C2E50D /* HSMagView.m */,
 				642DCEC719702ECA0021A307 /* HSTextView.h */,
 				642DCEC819702ECA0021A307 /* HSTextView.m */,
-				64E7A070199A2D18007EE4A3 /* HSMenuView.h */,
-				64E7A071199A2D18007EE4A3 /* HSMenuView.m */,
-				646D1978198BE85800558CD2 /* HSDocument.h */,
-				646D1979198BE85800558CD2 /* HSDocument.m */,
 				6468691F197EB9AA00C2E50D /* HSCommonView.h */,
 				64686920197EB9AA00C2E50D /* HSCommonView.m */,
 			);
@@ -266,6 +273,8 @@
 		642DCEBE19702E4C0021A307 /* MenuReader */ = {
 			isa = PBXGroup;
 			children = (
+				64E7A070199A2D18007EE4A3 /* HSMenuView.h */,
+				64E7A071199A2D18007EE4A3 /* HSMenuView.m */,
 			);
 			name = MenuReader;
 			sourceTree = "<group>";
@@ -273,6 +282,10 @@
 		642DCEBF19702E520021A307 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				642DCEBD19702E390021A307 /* TextReader */,
+				642DCEBE19702E4C0021A307 /* MenuReader */,
+				647FAF4019A2767600534068 /* Document */,
+				647FAF3F19A2766800534068 /* MagazineReader */,
 				64CAC0A419775EE000A6E3F1 /* BaseClass */,
 				64565F2A196DCCAB00B509B8 /* ViewController.h */,
 				64565F2B196DCCAB00B509B8 /* ViewController.m */,
@@ -297,10 +310,8 @@
 		642DCEC119702E820021A307 /* HandSight */ = {
 			isa = PBXGroup;
 			children = (
-				642DCED11970321F0021A307 /* HSLog.h */,
-				642DCED21970321F0021A307 /* HSLog.m */,
-				642DCED41970322E0021A307 /* HSStat.h */,
-				642DCED51970322E0021A307 /* HSStat.m */,
+				647FAF4A19A3926400534068 /* Log */,
+				647FAF4919A3925800534068 /* Statistics */,
 				642DCED71970323F0021A307 /* HSState.h */,
 				642DCED81970323F0021A307 /* HSState.m */,
 				649540FF199DAF8300887DFD /* HSViz.h */,
@@ -358,6 +369,8 @@
 				6440A9B019881E2E00E5BEC3 /* 01.txt */,
 				6440A9B219881E3600E5BEC3 /* 02.txt */,
 				6440A9B419881E3D00E5BEC3 /* 03.txt */,
+				647FAF4D19A398C100534068 /* 04.txt */,
+				647FAF5119A65FE700534068 /* 05.txt */,
 			);
 			name = Plain;
 			sourceTree = "<group>";
@@ -374,6 +387,7 @@
 				6440A9AA19881E1300E5BEC3 /* 11.txt */,
 				6440A9AC19881E1C00E5BEC3 /* 12.txt */,
 				6440A9AE19881E2300E5BEC3 /* 13.txt */,
+				647FAF4B19A398B300534068 /* 14.txt */,
 			);
 			name = Magazine;
 			sourceTree = "<group>";
@@ -430,8 +444,6 @@
 				642DCEC119702E820021A307 /* HandSight */,
 				642DCEC019702E5B0021A307 /* Storyboard */,
 				642DCEBF19702E520021A307 /* Controller */,
-				642DCEBE19702E4C0021A307 /* MenuReader */,
-				642DCEBD19702E390021A307 /* TextReader */,
 				64565F2D196DCCAB00B509B8 /* Images.xcassets */,
 				64565F1C196DCCAB00B509B8 /* Supporting Files */,
 			);
@@ -471,6 +483,9 @@
 		646869071979B68800C2E50D /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				647FAF3D19A264F400534068 /* Violin.wav */,
+				647FAF4F19A59D3B00534068 /* Cello.wav */,
+				647FAF3B19A262B100534068 /* Flute.wav */,
 				646869151979B75200C2E50D /* LB_DingDong.wav */,
 				646869161979B75200C2E50D /* LE_DongDing.wav */,
 				646869091979B6AE00C2E50D /* EOP_AirDong.mp3 */,
@@ -515,6 +530,46 @@
 				64565F23196DCCAB00B509B8 /* HandSight-Prefix.pch */,
 			);
 			name = PList;
+			sourceTree = "<group>";
+		};
+		647FAF3F19A2766800534068 /* MagazineReader */ = {
+			isa = PBXGroup;
+			children = (
+				6468691C197EAD7500C2E50D /* HSMagView.h */,
+				6468691D197EAD7500C2E50D /* HSMagView.m */,
+				6440A9971981ACA400E5BEC3 /* HSMultiView.h */,
+				6440A9981981ACA400E5BEC3 /* HSMultiView.m */,
+			);
+			name = MagazineReader;
+			sourceTree = "<group>";
+		};
+		647FAF4019A2767600534068 /* Document */ = {
+			isa = PBXGroup;
+			children = (
+				646D1978198BE85800558CD2 /* HSDocument.h */,
+				646D1979198BE85800558CD2 /* HSDocument.m */,
+			);
+			name = Document;
+			sourceTree = "<group>";
+		};
+		647FAF4919A3925800534068 /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+				647FAF4619A3924D00534068 /* HSMeasure.h */,
+				647FAF4719A3924D00534068 /* HSMeasure.m */,
+				642DCED41970322E0021A307 /* HSStat.h */,
+				642DCED51970322E0021A307 /* HSStat.m */,
+			);
+			name = Statistics;
+			sourceTree = "<group>";
+		};
+		647FAF4A19A3926400534068 /* Log */ = {
+			isa = PBXGroup;
+			children = (
+				642DCED11970321F0021A307 /* HSLog.h */,
+				642DCED21970321F0021A307 /* HSLog.m */,
+			);
+			name = Log;
 			sourceTree = "<group>";
 		};
 		64CAC0931977264700A6E3F1 /* BLE */ = {
@@ -639,6 +694,7 @@
 				6468690E1979B6AE00C2E50D /* EOP_AirDong.mp3 in Resources */,
 				6440A9AF19881E2300E5BEC3 /* 13.txt in Resources */,
 				64751FFC19916F3500B75D4A /* 200.jpg in Resources */,
+				647FAF5019A59D3B00534068 /* Cello.wav in Resources */,
 				6440A9941981A3FF00E5BEC3 /* 10.txt in Resources */,
 				64751FFD19916F3500B75D4A /* 300.jpg in Resources */,
 				646869111979B6AE00C2E50D /* OOL_Rain.mp3 in Resources */,
@@ -655,10 +711,15 @@
 				6440A9A11981D41F00E5BEC3 /* 011.jpeg in Resources */,
 				64751FFF19916F3500B75D4A /* 400.jpg in Resources */,
 				6440A9B519881E3D00E5BEC3 /* 03.txt in Resources */,
+				647FAF4C19A398B300534068 /* 14.txt in Resources */,
 				6468690F1979B6AE00C2E50D /* EOP_Dang.mp3 in Resources */,
 				6440A9921981A3F600E5BEC3 /* 00.txt in Resources */,
+				647FAF3C19A262B100534068 /* Flute.wav in Resources */,
+				647FAF5219A65FE700534068 /* 05.txt in Resources */,
+				647FAF4E19A398C100534068 /* 04.txt in Resources */,
 				646869171979B75200C2E50D /* LB_DingDong.wav in Resources */,
 				64565F29196DCCAB00B509B8 /* Main.storyboard in Resources */,
+				647FAF3E19A264F400534068 /* Violin.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -711,6 +772,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				64E7A072199A2D18007EE4A3 /* HSMenuView.m in Sources */,
+				647FAF4819A3924D00534068 /* HSMeasure.m in Sources */,
 				646869031979818800C2E50D /* HSUtils.m in Sources */,
 				6440A9A91988168000E5BEC3 /* HSImageView.m in Sources */,
 				642DCED91970323F0021A307 /* HSState.m in Sources */,

@@ -107,10 +107,29 @@
     [txtLog setHidden: ![swcShowLog isOn]];
 }
 
-
 - (void)swcSightedReadingChanged: (id)sender
 {
     State.sightedReading = [swcSightedReading isOn];
+    if (State.sightedReading) {
+        [segDocument setTitle:@"1" forSegmentAtIndex:0];
+        [segDocument setTitle:@"2" forSegmentAtIndex:1];
+        [segDocument setTitle:@"3" forSegmentAtIndex:2];
+        [segDocument setTitle:@"4" forSegmentAtIndex:3];
+        [segDocument setTitle:@"Train" forSegmentAtIndex:4];
+        [segDocument setEnabled:YES forSegmentAtIndex:4];
+    } else {
+        [segDocument setTitle:@"Train" forSegmentAtIndex:0];
+        [segDocument setTitle:@"A" forSegmentAtIndex:1];
+        [segDocument setTitle:@"B" forSegmentAtIndex:2];
+        [segDocument setTitle:@"C" forSegmentAtIndex:3];
+        [segDocument setTitle:@"D" forSegmentAtIndex:4];
+        [segDocument setEnabled:NO forSegmentAtIndex:4];
+    }
+}
+
+- (void)swcShowDebugChanged: (id)sender
+{
+    State.debugMode = [swcShowDebug isOn];
 }
 
 - (void)swcAudioPitchChanged: (id)sender
@@ -134,6 +153,10 @@
 {
     CGFloat verticalInset = m_inset;
     
+    if (lblTitle == nil) {
+        [Log recordSoftwareStart];
+    }
+    
     lblTitle = ({
         UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(m_inset, m_inset, m_titleWidth, m_titleHeight)];
         [l setText:@"HandSight Control Panel"];
@@ -154,7 +177,7 @@
     });
     
     segFeedback =  ({
-        NSArray *a = [NSArray arrayWithObjects:@"Audio", @"Haptic", @"Hybrid", @"None", nil];
+        NSArray *a = [NSArray arrayWithObjects:@"Audio", @"Haptic", @"Hybrid", @"Haptio", nil];
         UISegmentedControl *s = [[UISegmentedControl alloc] initWithItems:a];
         [s setFrame:CGRectMake(m_inset + m_textWidth, verticalInset + m_segInset, m_segWidth, m_segHeight)];
         [s setSelectedSegmentIndex: [State feedbackType]];
@@ -164,13 +187,19 @@
     });
     
     segExploration =  ({
-        NSArray *a = [NSArray arrayWithObjects:@"Explore-Text", @"Explore-More", @"Reading", nil];
+        NSArray *a = [NSArray arrayWithObjects:@"Explore-Text", @"Reading", nil];
         UISegmentedControl *s = [[UISegmentedControl alloc] initWithItems:a];
         [s setFrame:CGRectMake(m_inset + m_textWidth + m_segWidth + m_inset, verticalInset + m_segInset, m_segWidth, m_segHeight)];
         [s setSelectedSegmentIndex: [State mode]];
+        [s setEnabled:NO forSegmentAtIndex:MD_EXPLORATION_TEXT];
+        [s addTarget:self action:@selector(modeChanged:) forControlEvents:UIControlEventValueChanged];
         [self.view addSubview: s];
         s;
     });
+    
+    verticalInset += m_textHeight;
+    
+    
     
     verticalInset += m_textHeight;
     
@@ -194,11 +223,12 @@
     });
     
     segDocument =  ({
-        NSArray *a = [NSArray arrayWithObjects:@"Train", @"A", @"B", @"C", nil];
+        NSArray *a = [State sightedReading] ? [NSArray arrayWithObjects:@"1", @"2", @"3", @"4", @"Train", nil] : [NSArray arrayWithObjects:@"Train", @"A", @"B", @"C", @"D", nil];
         UISegmentedControl *s = [[UISegmentedControl alloc] initWithItems:a];
         [s setFrame:CGRectMake(m_inset + m_textWidth + m_segWidth + m_inset, verticalInset + m_segInset, m_segWidth, m_segHeight)];
         [s setSelectedSegmentIndex: [State documentType]];
         [s addTarget:self action:@selector(segDocumentChanged:) forControlEvents:UIControlEventValueChanged];
+        [s setEnabled:NO forSegmentAtIndex:4];
         [self.view addSubview: s];
         s;
     });
@@ -235,7 +265,7 @@
     
     swcSightedReading = ({
         UISwitch *s = [[UISwitch alloc] initWithFrame: CGRectMake(m_inset * 2 + m_textWidth + m_segWidth + m_textWidth, verticalInset + m_segInset, m_segWidth, m_segHeight) ];
-        [s setOn: NO];
+        [s setOn: State.sightedReading];
         [s addTarget:self action:@selector(swcSightedReadingChanged:) forControlEvents:UIControlEventValueChanged];
         [self.view addSubview:s];
         s;
@@ -304,6 +334,7 @@
         UISlider *s = [[UISlider alloc] initWithFrame: CGRectMake(m_inset + m_textWidth + m_swcWidth, verticalInset + m_segInset, m_segWidth - m_swcWidth, m_segHeight)];
         [s setMinimumValue: 0.1f];
         [s setMaximumValue: 1.0f];
+        [s setEnabled: NO];
         [s addTarget:self action:@selector(sldMaxVolumeChanged:) forControlEvents:UIControlEventValueChanged];
         [self.view addSubview: s];
         s;
@@ -375,7 +406,7 @@
 
     numLineHeights = ({
         UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(m_inset + m_textWidth, verticalInset, m_swcWidth, m_textHeight)];
-        [l setText: [NSString stringWithFormat:@"%.0f", State.maxFeedbackValue] ];
+        [l setText: [NSString stringWithFormat:@"%.0f", State.lineHeight] ];
         [l setTextColor: m_textColor];
         [l setTextAlignment: NSTextAlignmentCenter];
         [l setFont: [UIFont fontWithName:m_textFontName size:m_textFontSize]];
@@ -387,8 +418,8 @@
         UISlider *s = [[UISlider alloc] initWithFrame: CGRectMake(m_inset + m_textWidth + m_swcWidth, verticalInset + m_segInset, m_segWidth - m_swcWidth, m_segHeight)];
         [s setMinimumValue: 8.0f];
         [s setMaximumValue: 32.0f];
-        [s setValue:16.0f];
-        
+        [s setValue:State.lineHeight];
+        [s setEnabled: NO]; 
         [s addTarget:self action:@selector(sldLineHeightChanged:) forControlEvents:UIControlEventValueChanged];
         [self.view addSubview: s];
         s;
@@ -440,7 +471,7 @@
         NSArray *a = [NSArray arrayWithObjects:@"Male", @"Female", nil];
         UISegmentedControl *s = [[UISegmentedControl alloc] initWithItems:a];
         [s setFrame:CGRectMake(m_inset + m_textWidth, verticalInset + m_segInset, m_segWidth, m_segHeight)];
-        [s setSelectedSegmentIndex:0];
+        [s setSelectedSegmentIndex: State.instructionGender];
         [s addTarget:self action:@selector(segInsTTSChanged:) forControlEvents:UIControlEventValueChanged];
         [self.view addSubview: s];
         s;
@@ -461,7 +492,7 @@
         NSArray *a = [NSArray arrayWithObjects:@"Male", @"Female", nil];
         UISegmentedControl *s = [[UISegmentedControl alloc] initWithItems:a];
         [s setFrame:CGRectMake(m_inset + m_textWidth, verticalInset + m_segInset, m_segWidth, m_segHeight)];
-        [s setSelectedSegmentIndex:1];
+        [s setSelectedSegmentIndex: State.readingGender];
         [s addTarget:self action:@selector(segReadingTTSChanged:) forControlEvents:UIControlEventValueChanged];
         [self.view addSubview: s];
         s;
@@ -519,16 +550,17 @@
     
     swcShowDebug = ({
         UISwitch *s = [[UISwitch alloc] initWithFrame: CGRectMake(m_inset + m_textWidth, verticalInset + m_segInset, m_segWidth, m_segHeight) ];
-        [s setOn: YES];
+        [s setOn: State.debugMode];
         [self.view addSubview: s];
+        [s addTarget:self action:@selector(swcShowDebugChanged:) forControlEvents:UIControlEventValueChanged];
         s;
     });
-    
-    verticalInset += m_textHeight;
     
     txtLog = ({
         UITextView *v = [[UITextView alloc] initWithFrame: CGRectMake(m_inset, m_titleHeight + m_inset, (1024-m_inset) / 2, verticalInset - m_titleHeight)];
         [v setHidden: YES];
+        [v setEditable: NO];
+        [v setSelectable: NO];
         [self.view addSubview:v];
         v;
     });
@@ -536,12 +568,14 @@
     txtStat = ({
         UITextView *v = [[UITextView alloc] initWithFrame: CGRectMake(m_inset + (1024-m_inset) / 2, m_titleHeight + m_inset, (1024-m_inset) / 2, verticalInset - m_titleHeight)];
         [v setHidden: YES];
+        [v setEditable: NO];
+        [v setSelectable: NO];
         [self.view addSubview:v];
         v;
     });
     
     lblLog = ({
-        UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(m_inset, verticalInset, m_textWidth, m_textHeight)];
+        UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(m_inset + m_textWidth + m_segWidth, verticalInset, m_textWidth, m_textHeight)];
         [l setText:@"Show Log & Stat:"];
         [l setTextColor: m_textColor];
         [l setFont: [UIFont fontWithName:m_textFontName size:m_textFontSize]];
@@ -549,14 +583,14 @@
     }); [self.view addSubview:lblLog];
     
     swcShowLog = ({
-        UISwitch *s = [[UISwitch alloc] initWithFrame: CGRectMake(m_inset + m_textWidth, verticalInset + m_segInset, m_segWidth, m_swcWidth) ];
+        UISwitch *s = [[UISwitch alloc] initWithFrame: CGRectMake(m_inset + m_textWidth + m_segWidth + m_textWidth, verticalInset + m_segInset, m_segWidth, m_swcWidth) ];
         [s setOn: NO];
         [s addTarget:self action:@selector(swcShowLogChanged:) forControlEvents:UIControlEventValueChanged];
         s;
     }); [self.view addSubview:swcShowLog];
     
     swcShowStat = ({
-        UISwitch *s = [[UISwitch alloc] initWithFrame: CGRectMake(m_inset*2 + m_textWidth + m_swcWidth, verticalInset + m_segInset, m_segWidth, m_swcWidth) ];
+        UISwitch *s = [[UISwitch alloc] initWithFrame: CGRectMake(m_inset*2 + m_textWidth + m_segWidth + m_textWidth + m_swcWidth, verticalInset + m_segInset, m_segWidth, m_swcWidth) ];
         [s setOn: NO];
         [s addTarget:self action:@selector(swcShowStatChanged:) forControlEvents:UIControlEventValueChanged];
         [self.view addSubview: s];
@@ -761,6 +795,7 @@
 
 - (void)btnLineEndTouched
 {
+    State.thisLineHasAtLeastOneWordSpoken = true;
     [Feedback lineEnd];
 }
 

@@ -16,6 +16,7 @@
     enum AUDIO { AU_LINE_BEGIN, AU_LINE_END, AU_PARA_END, AU_SKIP_WORD };
     HSState *State;
     SoundManager *Sound;
+    BOOL m_flutePlaying, m_violinPlaying;
 }
 
 + (HSAudio*) sharedInstance;
@@ -30,5 +31,8 @@
 - (void) stop;
 
 - (void) playAudio:(enum AUDIO) audio;
+- (void) playFlute;
+- (void) playViolin;
+- (void) stopMusic;
 
 @end

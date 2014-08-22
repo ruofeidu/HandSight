@@ -33,6 +33,7 @@ static uint MIN_SPOKEN_LENGTH = 3;
         m_speechSynthesizer     =       [[AVSpeechSynthesizer alloc] init];
         m_queue                 =       [NSMutableArray array];
         State                   =       [HSState sharedInstance];
+        Log                     =       [HSLog sharedInstance];
         m_pause                 =       0;
         m_lastSpoken            =       @"";
 
@@ -86,12 +87,17 @@ static uint MIN_SPOKEN_LENGTH = 3;
                 }
             }
             
-            s = [NSString stringWithFormat:@"%@ %@", s, t];
-            if ([self isTooShort:s] && [m_queue empty]) {
-                //NSLog(@"[SP] Words %@ too short", s);
-                break;
-            }
+            t = [t lowercaseString];
+            if ([t isEqualToString:@"-"]) t = @"";
+            if ([t isEqualToString:@"ms."]) t = @"miss";
             
+            s = [NSString stringWithFormat:@"%@ %@", s, t];
+            /*
+            if ([self isTooShort:s] && [m_queue count] == 1) {
+                //NSLog(@"[SP] Words %@ too short", s);
+                return;
+            }
+            */
             [m_queue dequeue];
             if ([t isEnded]) break;
         }
@@ -121,8 +127,10 @@ static uint MIN_SPOKEN_LENGTH = 3;
         if ([State readingGender] == SG_MALE) {
             utt.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"en-GB"];
         }
-        utt.rate = 0.6;  //TODO
+        if (State.sightedReading) utt.rate = 0.6; else utt.rate = 0.5 + ([s length] * 0.2) / 10;  //TODO
     }
+    
+    [Log recordSpeakWord:s withSpeed:utt.rate]; 
     [m_speechSynthesizer speakUtterance:utt];
 }
 

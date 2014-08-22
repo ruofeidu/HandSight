@@ -15,6 +15,7 @@
 @protected
 
     HSState                 *State;
+    HSLog                   *Log;
     
 @private
     

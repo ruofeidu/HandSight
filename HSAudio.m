@@ -19,29 +19,9 @@ OSStatus RenderTone(
                     UInt32 						inNumberFrames,
                     AudioBufferList 			*ioData)
 {
-	// amplitude corresponds to the frequency
-    // 200-300
-    // 500-600
-    //m_audioFrequency = 400 - y / fabs(y) * 100 * powf(2.f, fabs(y) / 127);
-    
-	// Get the tone parameters out of the view controller
-	//HSAudio *me = (__bridge HSAudio*)inRefCon;
-    
-    
-    //double frequency = viewController->m_audioFrequency;
-    
+
     double amplitude = 0.25;
     
-    /*
-     if (frequency > 400 && frequency < 700) {
-     amplitude = 0.05 + 0.35 * (frequency - 500) / 100;
-     } else
-     if (frequency < 400 && frequency > 100) {
-     amplitude = 0.8 - 0.1 * (frequency - 200) / 100;
-     }
-     amplitude = ceil(amplitude * 10) / 10;
-     NSLog(@"amplitude: %.2f, frequency: %.2f", amplitude, frequency);
-     */
     
 	double theta = m_audioTheta;
 	double theta_increment = 2.0 * M_PI * m_audioFrequency / m_audioSampleRate;
@@ -68,6 +48,29 @@ OSStatus RenderTone(
 	return noErr;
 }
 
+// amplitude corresponds to the frequency
+// 200-300
+// 500-600
+//m_audioFrequency = 400 - y / fabs(y) * 100 * powf(2.f, fabs(y) / 127);
+
+// Get the tone parameters out of the view controller
+//HSAudio *me = (__bridge HSAudio*)inRefCon;
+
+
+//double frequency = viewController->m_audioFrequency;
+
+
+/*
+ if (frequency > 400 && frequency < 700) {
+ amplitude = 0.05 + 0.35 * (frequency - 500) / 100;
+ } else
+ if (frequency < 400 && frequency > 100) {
+ amplitude = 0.8 - 0.1 * (frequency - 200) / 100;
+ }
+ amplitude = ceil(amplitude * 10) / 10;
+ NSLog(@"amplitude: %.2f, frequency: %.2f", amplitude, frequency);
+ */
+
 @implementation HSAudio
 
 - (id)init
@@ -78,8 +81,11 @@ OSStatus RenderTone(
         toneUnit = nil;
         
         m_audioTheta = 0.0;
+        m_flutePlaying = false;
+        m_violinPlaying = false;
         m_audioFrequency = 440.0;
         m_audioSampleRate = 44100.00;
+        
         
         [SoundManager sharedManager].allowsBackgroundMusic = YES;
         [[SoundManager sharedManager] prepareToPlay];
@@ -134,14 +140,22 @@ OSStatus RenderTone(
 }
 
 - (double) audioFrequency {
-    return m_audioFrequency; 
+    return [State isAudioOn] ? m_audioFrequency : -1;
 }
 
+/**
+ * update audio frequency
+ *
+ * @para y distance from the line center
+ * @memo by default, audioMiddleValue = 400Hz, audioStartThres = audioIncValue = 100Hz
+ * @range y <= maxFeedbackValue = 127
+ * @return if y > 0, 300~200; else 500~600
+ *
+ */
 - (void) updateAudioFrequency: (CGFloat) y {
     if (y == 0) return;
     if ([State audioLinear]) {
-        // TODO
-        m_audioFrequency = [State audioMiddleValue] - y / fabs(y) * [State audioIncValue] * powf(2.f, fabs(y) / [State maxFeedbackValue]);
+        m_audioFrequency = [State audioMiddleValue] - y / fabs(y) * [State audioStartThres] - y / [State maxFeedbackValue] * [State audioIncValue];
     } else {
         m_audioFrequency = [State audioMiddleValue] - y / fabs(y) * [State audioIncValue] * powf(2.f, fabs(y) / [State maxFeedbackValue]);
     }
@@ -209,6 +223,30 @@ OSStatus RenderTone(
         case AU_LINE_END:    [[SoundManager sharedManager] playSound:@"LE_DongDing.wav" looping:NO]; break;
         case AU_PARA_END:    [[SoundManager sharedManager] playSound:@"EOP_Dang.mp3" looping:NO]; break;
         case AU_SKIP_WORD:   [[SoundManager sharedManager] playSound:@"EOP_AirDong.wav" looping:NO]; break;
+    }
+}
+
+- (void) playFlute {
+    if (m_violinPlaying) [[SoundManager sharedManager] stopMusic: NO];
+    if (m_flutePlaying) return;
+    [[SoundManager sharedManager] playMusic:@"Flute.wav" looping:YES];
+    m_flutePlaying = true;
+    m_violinPlaying = NO;
+}
+
+- (void) playViolin {
+    if (m_flutePlaying) [[SoundManager sharedManager] stopMusic: NO];
+    if (m_violinPlaying) return;
+    [[SoundManager sharedManager] playMusic:@"Cello.mp3" looping:YES];
+    m_violinPlaying = YES;
+    m_flutePlaying = NO;
+}
+
+- (void) stopMusic {
+    if ([[SoundManager sharedManager] isPlayingMusic]) {
+        [[SoundManager sharedManager] stopMusic: NO];
+        m_flutePlaying = false;
+        m_violinPlaying = false;
     }
 }
 

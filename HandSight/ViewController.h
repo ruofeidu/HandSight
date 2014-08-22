@@ -13,14 +13,15 @@
 @interface ViewController : CommonController {
     UILabel *lblTitle, *lblFeedbackType, *lblDocument, *lblAudioType, *lblAudioPitch, *lblMaxVolume, *lblHapticType,
             *lblMaxVibration, *lblLineHeight, *lblHapticThres, *lblInsTTS, *lblReadTTS, *lblReadSpeed, *lblReadPitch,
-            *lblLineSpacing, *lblAudioThreshold, *lblVisualization,
-            *lblDebug, *lblLog, *lblDemo, *lblSightedReading, *lblAudioVolume, *numHapticThres, *lblBluetooth, *numLineHeights, *numMaxVolume, *numReadingSpeed, *numMaxVibration;
+            *lblLineSpacing, *lblAudioThreshold, *lblVisualization, *lblDebug, *lblLog, *lblDemo, *lblSightedReading, *lblAudioVolume, *lblBluetooth, *lblExpDemo, *lblExpDoc;
+    
+    UILabel *numHapticThres, *numLineHeights, *numMaxVolume, *numReadingSpeed, *numMaxVibration;
     
     UIButton *btnReset, *btnResume, *btnStart,
              *btnTaskStart, *btnLineBegin, *btnLineEnd, *btnParaEnd, *btnTextEnd, *btnAboveLine, *btnBelowLine;
     
     UISegmentedControl *segFeedback, *segDocument, *segAudioType, *segHapticType, *segLineHeight, *segInsTTS, *segReadingTTS,
-                       *segReadingPitch, *segGuidance, *segDebug, *segVisualization, *segLeftResion, *segLog, *segCategory, *segExploration, *segBluetoothState;
+                       *segReadingPitch, *segGuidance, *segDebug, *segVisualization, *segLeftResion, *segLog, *segCategory, *segExploration, *segBluetoothState, *segExpDemo, *segExpDoc;
     
     UISwitch *swcAudioPitch, *swcAudioVolume, *swcReadPitch, *swcGuidance, *swcShowDebug, *swcShowLog, *swcLeftRegion, *swcVisualization, *swcShowStat, *swcSightedReading;
     
