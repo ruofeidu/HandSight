@@ -43,5 +43,6 @@
 - (void) addControls;
 - (void) clearViews;
 - (void) hideLineLabels;
+- (BOOL) sightedReading;
 
 @end

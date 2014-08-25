@@ -441,11 +441,12 @@
  * Whether the point enters the next word region
  */
 - (BOOL) enterNextWordRegion: (CGPoint) point {
-    if ([State sightedReading]) {
-        return (point.x > lblNext.frame.origin.x && point.x <= lblNext.frame.origin.x + lblNext.frame.size
-                .width + 50) || (point.x < lblNext.frame.origin.x && point.x >= lblNext.frame.origin.x - 10);
-    } else {
-        return [lblNext contains: point];
+    switch (State.mode) {
+        case MD_SIGHTED:
+            return (point.x > lblNext.frame.origin.x && point.x <= lblNext.frame.origin.x + lblNext.frame.size
+                    .width + 50) || (point.x < lblNext.frame.origin.x && point.x >= lblNext.frame.origin.x - 10);
+        default:
+             return [lblNext contains: point];
     }
 }
 
@@ -467,7 +468,7 @@
     rect.size.height -= m_wordMargin.size.height;
     
     // field of view modification
-    if (!State.sightedReading) {
+    if (State.mode != MD_SIGHTED) {
         CGFloat h = rect.size.height * State.fieldOfView;
         CGFloat center = rect.origin.y + rect.size.height / 2;
         rect.origin.y = center - h / 2;
@@ -990,7 +991,7 @@
     if (delta == 0) {
         [Feedback verticalStop];
     } else {
-        [Feedback verticalStart: delta];
+        [Feedback verticalFeedback: delta];
     }
     
 }

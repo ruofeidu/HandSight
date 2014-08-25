@@ -8,17 +8,20 @@
 
 #import <Foundation/Foundation.h>
 
-enum FeedbackType { FT_AUDIO, FT_HAPTIC, FT_HYBRID, FT_HAPTIO, FT_NONE };
+enum FeedbackType { FT_AUDIO, FT_HAPTIO, FT_HAPTIC, FT_HYBRID, FT_NONE };
 enum CategoryType { CT_PLAIN, CT_MAGAZINE, CT_MENU };
 enum DocumentType { DT_TRAIN, DT_A, DT_B, DT_C, DT_D };
+enum ExpDocType { ED_1, ED_2, ED_NONE };
+enum PlainDocType { PD_Train, PD_1, PD_2, PD_3, PD_NONE };
+enum MagazineDocType { MD_Train, MD_1, MD_2, MD_3, MD_NONE };
+
 enum HapticType { HT_CONSTANT, HT_PULSE };
 enum AudioType { AT_CONSTANT, AT_PIANO, AT_FLUTE, AT_PULSE };
 
 enum SpeechGender { SG_MALE, SG_FEMALE };
-enum ModeType { MD_EXPLORATION_TEXT, MD_READING };
+enum ModeType { MD_EXPLORATION_TEXT, MD_READING, MD_SIGHTED };
 enum BlueToothState { BT_OFF, BT_CONNECTING, BT_ON  };
 enum TouchType { TT_DOWN, TT_MOVE, TT_UP  };
-
 
 @interface HSState : NSObject {
 
@@ -38,14 +41,16 @@ enum TouchType { TT_DOWN, TT_MOVE, TT_UP  };
 @property (nonatomic) enum AudioType audioType;
 @property (nonatomic) enum ModeType mode;
 @property (nonatomic) enum TouchType touchType;
-
+@property (nonatomic) enum ExpDocType expDocType;
+@property (nonatomic) enum PlainDocType plainDocType;
+@property (nonatomic) enum MagazineDocType magDocType;
 
 @property (nonatomic) NSString *insStartPlain, *insStartPlainExplore, *insStartMag, *insExploreMode, *insReadingMode,
                                 *insStartMagExplore, *insStartSighted, *insEndPlain, *insTitle, *insParagraph, *insPicture, *insText, *insEOC;
 @property (nonatomic) NSMutableArray *arrInstruction;
 
 @property (nonatomic) BOOL taskStarted, taskEnded, lockTaskStarted, softwareStarted, audioPitch, audioVolume;
-@property (nonatomic) BOOL waitLineBegin, waitLineEnd, waitParaEnd, waitTaskEnd, waitColumnEnd, sightedReading, sightedSpeaking, readingPitch, audioVolumeChange, hasEndColume, debugMode, thisLineHasAtLeastOneWordSpoken;
+@property (nonatomic) BOOL waitLineBegin, waitLineEnd, waitParaEnd, waitTaskEnd, waitColumnEnd, sightedSpeaking, readingPitch, audioVolumeChange, hasEndColume, debugMode, showLog, showStat, thisLineHasAtLeastOneWordSpoken;
 
 @property (nonatomic) int currentWordID, lastWordID, nextWordID, paraID, lineID, numWords;
 @property (nonatomic) CGFloat readingSpeed, maxVibration, maxVolume, lineHeight, fieldOfView;
@@ -60,6 +65,7 @@ enum TouchType { TT_DOWN, TT_MOVE, TT_UP  };
 - (bool) isExplorationTextMode;
 - (bool) isReadingMode;
 - (void) toggleMode; 
+- (BOOL) sightedReading;
 
 @end
 

@@ -10,73 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HandSight/ViewController.m"
-            timestampString = "430333845.795322"
+            timestampString = "430682194.995888"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "735"
-            endingLineNumber = "735"
-            landmarkName = "-addControls"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "HandSight/ViewController.m"
-            timestampString = "430333845.795322"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "738"
-            endingLineNumber = "738"
-            landmarkName = "-addControls"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[ViewController addControls]"
-                  moduleName = "HandSight"
-                  urlString = "file:///Users/duruofei/Research/SVN/handsight/src/HandSight/HandSight/ViewController.m"
-                  timestampString = "427303220.046163"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "204"
-                  endingLineNumber = "204"
-                  offsetFromSymbolStart = "8350">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[ViewController addControls]"
-                  moduleName = "HandSight"
-                  urlString = "file:///Users/duruofei/Research/SVN/handsight/src/HandSight/HandSight/ViewController.m"
-                  timestampString = "427303220.046412"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "204"
-                  endingLineNumber = "204"
-                  offsetFromSymbolStart = "8408">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "HandSight/ViewController.m"
-            timestampString = "430333845.795322"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "733"
-            endingLineNumber = "733"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
             landmarkName = "-addControls"
             landmarkType = "5">
          </BreakpointContent>
@@ -104,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HandSight/HSState.m"
-            timestampString = "430070905.919822"
+            timestampString = "430682793.272918"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
             landmarkName = "-init"
             landmarkType = "5">
          </BreakpointContent>
@@ -136,7 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HandSight/HSState.m"
-            timestampString = "430151705.893838"
+            timestampString = "430682793.272918"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "126"
@@ -184,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HandSight/HSFeedback.m"
-            timestampString = "430409642.681525"
+            timestampString = "430426912.738615"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "154"
-            endingLineNumber = "154"
+            startingLineNumber = "172"
+            endingLineNumber = "172"
             landmarkName = "-convertMode"
             landmarkType = "5">
          </BreakpointContent>
@@ -222,22 +160,6 @@
             startingLineNumber = "119"
             endingLineNumber = "119"
             landmarkName = "-speakText:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "HandSight/ViewController.m"
-            timestampString = "430333845.795322"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "761"
-            endingLineNumber = "761"
-            landmarkName = "-addControls"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -376,11 +298,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HandSight/HSMultiView.m"
-            timestampString = "430409642.681525"
+            timestampString = "430416371.966259"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "853"
-            endingLineNumber = "853"
+            startingLineNumber = "854"
+            endingLineNumber = "854"
             landmarkName = "-handleSingleTouch:"
             landmarkType = "5">
          </BreakpointContent>
@@ -392,11 +314,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HandSight/HSMultiView.m"
-            timestampString = "430409642.681525"
+            timestampString = "430416371.966259"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "771"
-            endingLineNumber = "771"
+            startingLineNumber = "772"
+            endingLineNumber = "772"
             landmarkName = "-setupCurrentWordRect:"
             landmarkType = "5">
          </BreakpointContent>
@@ -408,11 +330,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HandSight/HSMultiView.m"
-            timestampString = "430409642.681525"
+            timestampString = "430416371.966259"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "482"
-            endingLineNumber = "482"
+            startingLineNumber = "483"
+            endingLineNumber = "483"
             landmarkName = "-getWordIDFromPoint:"
             landmarkType = "5">
          </BreakpointContent>
@@ -456,11 +378,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HandSight/HSMultiView.m"
-            timestampString = "430409642.681525"
+            timestampString = "430416371.966259"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "883"
-            endingLineNumber = "883"
+            startingLineNumber = "884"
+            endingLineNumber = "884"
             landmarkName = "-handleSingleTouch:"
             landmarkType = "5">
          </BreakpointContent>
@@ -472,11 +394,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HandSight/HSMultiView.m"
-            timestampString = "430409642.681525"
+            timestampString = "430416371.966259"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "885"
-            endingLineNumber = "885"
+            startingLineNumber = "886"
+            endingLineNumber = "886"
             landmarkName = "-handleSingleTouch:"
             landmarkType = "5">
          </BreakpointContent>
@@ -488,11 +410,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HandSight/HSState.m"
-            timestampString = "430070905.919822"
+            timestampString = "430682793.272918"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
             landmarkName = "-reset"
             landmarkType = "5">
          </BreakpointContent>
@@ -616,11 +538,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HandSight/HSMultiView.m"
-            timestampString = "430409642.681525"
+            timestampString = "430416371.966259"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "587"
-            endingLineNumber = "587"
+            startingLineNumber = "588"
+            endingLineNumber = "588"
             landmarkName = "-addAttributes"
             landmarkType = "5">
          </BreakpointContent>
@@ -632,11 +554,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HandSight/HSMultiView.m"
-            timestampString = "430409642.681525"
+            timestampString = "430416371.966259"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "934"
-            endingLineNumber = "934"
+            startingLineNumber = "935"
+            endingLineNumber = "935"
             landmarkName = "-handleSingleTouch:"
             landmarkType = "5">
          </BreakpointContent>
@@ -648,11 +570,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HandSight/HSFeedback.m"
-            timestampString = "430409642.681525"
+            timestampString = "430426912.738615"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "201"
-            endingLineNumber = "201"
+            startingLineNumber = "219"
+            endingLineNumber = "219"
             landmarkName = "-paraEnd"
             landmarkType = "5">
          </BreakpointContent>
@@ -664,11 +586,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HandSight/HSFeedback.m"
-            timestampString = "430409642.681525"
+            timestampString = "430426912.738615"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "200"
-            endingLineNumber = "200"
+            startingLineNumber = "218"
+            endingLineNumber = "218"
             landmarkName = "-paraEnd"
             landmarkType = "5">
          </BreakpointContent>
@@ -680,12 +602,60 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HandSight/HSMultiView.m"
-            timestampString = "430409642.681525"
+            timestampString = "430416371.966259"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "599"
-            endingLineNumber = "599"
+            startingLineNumber = "600"
+            endingLineNumber = "600"
             landmarkName = "-addAttributes"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HandSight/HSFeedback.h"
+            timestampString = "430410360.092511"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "@interface HSFeedback"
+            landmarkType = "2">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HandSight/ViewController.m"
+            timestampString = "430681243.968009"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "-addControls"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HandSight/ViewController.m"
+            timestampString = "430682194.995888"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "-addControls"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

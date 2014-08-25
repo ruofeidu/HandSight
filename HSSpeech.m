@@ -127,7 +127,7 @@ static uint MIN_SPOKEN_LENGTH = 3;
         if ([State readingGender] == SG_MALE) {
             utt.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"en-GB"];
         }
-        if (State.sightedReading) utt.rate = 0.6; else utt.rate = 0.5 + ([s length] * 0.2) / 10;  //TODO
+        if ([State sightedReading]) utt.rate = 0.6; else utt.rate = 0.5 + ([s length] * 0.2) / 10;  //TODO
     }
     
     [Log recordSpeakWord:s withSpeed:utt.rate]; 

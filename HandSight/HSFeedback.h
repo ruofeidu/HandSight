@@ -21,29 +21,37 @@
 }
 
 + (HSFeedback *) sharedInstance;
+- (void) changed;
+- (void) convertMode;
 
+/**
+ * Reading Feedbacks
+ */
 - (void) verticalFeedback: (CGFloat) y;
-- (void) verticalStart: (CGFloat) y;
 - (void) verticalStop;
+- (void) speekCurrentWord: (NSString*) s;
 
-- (void) changed; 
+/**
+ * Task Feedback
+ */
+- (void) taskStart;
+- (void) taskEnd;
 
+/**
+ * Structure Feedback
+ */
 - (void) lineBegin;
 - (void) lineEnd;
 - (void) paraEnd;
 
-- (void) taskStart;
-- (void) taskEnd;
-
+/**
+ * Exploration Feedback
+ */
 - (void) overTitle;
-- (void) overText;
 - (void) overParagraph: (int) i;
 - (void) overPicture;
-
-- (void) speak: (NSString*) s;
 - (void) overSpacing;
 
-- (void) convertMode;
-- (void) speekCurrentWord: (NSString*) s;
+
 
 @end

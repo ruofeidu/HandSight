@@ -38,12 +38,18 @@
 }
 
 /**
- * by guidance, y > 0 if upwards, y < 0 if downwards
+ * The interface to provide vertical feedback to users
  */
 - (void) verticalFeedback: (CGFloat) y {
     if (y == 0) [self verticalStop]; else [self verticalStart:y];
 }
 
+/**
+ * The implementation of vertical feedback
+ *
+ * by guidance, y > 0 if upwards, y < 0 if downwards
+ *
+ */
 - (void) verticalStart: (CGFloat) y {
     if (y == 0) return;
     
@@ -58,6 +64,9 @@
     [Log recordVerticalFeedback:1 withVibrationDistance:y withAudioFrequency:[Audio audioFrequency]];
 }
 
+/**
+ * Task start feedback, called only once in each document
+ */
 - (void) taskStart {
     if ([State lockTaskStarted]) return;
     State.lockTaskStarted = true;
@@ -73,9 +82,6 @@
             }
             break;
         case MD_READING:
-            if ([State sightedReading]) {
-                [Speech queueText:[State insStartSighted]];
-            } else
             if ([State categoryType] == CT_MAGAZINE) {
                 [Speech queueText:[State insStartMag]];
             } else
@@ -83,49 +89,65 @@
                 [Speech queueText:[State insStartPlain]];
             }
             break;
+        case MD_SIGHTED:
+            [Speech queueText:[State insStartSighted]];
+            break;
     }
     
-    CGFloat delay = State.sightedReading ? 0.01 : 2.0;
+    CGFloat delay = State.mode == MD_SIGHTED ? 0.01 : 2.0;
     [NSTimer scheduledTimerWithTimeInterval:delay target:self selector:@selector(setTaskStart:) userInfo:nil repeats:NO];
     
     [Log recordTaskBegin];
 }
 
+/**
+ * Call task tasked; 2 seconds delay for speech "Please start to read the following text below"
+ */
 - (void) setTaskStart: (NSTimer*) timer {
     [self lineBegin];
     State.taskStarted = true;
 }
 
+/**
+ * Feedback for over title
+ */
 - (void) overTitle {
     [self overText];
 }
 
+/**
+ * Feedback for over text
+ */
 - (void) overText {
     [Audio playFlute];
 }
 
+/**
+ * Feedback for over paragraph
+ */
 - (void) overParagraph: (int) i {
     [self overText];
 }
 
+/**
+ * Feedback for over picture
+ */
 - (void) overPicture {
     [Audio playViolin];
-    /*
-    if ([State isAudioOn]) {
-        [Audio playViolin];
-    }
-    if ([State isHapticOn]) {
-        //[Bluetooth overText];
-    }
-     */
 }
 
+/**
+ * Feedback for task end
+ */
 - (void) taskEnd {
     [Log recordTaskEnd];
     [Speech queueText: [State insEndPlain]];
     [Log saveToFile];
 }
 
+/**
+ * Feedback for vertical stop
+ */
 - (void) verticalStop {
     if ([State isAudioOn]) {
         [Audio stop];
@@ -134,10 +156,6 @@
         [Bluetooth verticalStop];
     }
     [Log recordVerticalStop];
-}
-
-- (void) speak:(NSString *)s {
-    
 }
 
 - (void) stopFeedback {
@@ -210,25 +228,11 @@
 }
 
 - (void) overSpacing {
-    /*
-    if ([Speech lastWordNotMode]) {
-        [Speech stopSpeaking];
-    }
-    */
     [Audio stopMusic];
-    /*
-    if ([State isAudioOn]) {
-        [Audio stopMusic];
-    }
-    
-    if ([State isHapticOn]) {
-        [self verticalStop];
-    }
-     */
 }
 
 - (void)speekCurrentWord: (NSString*) s {
-    if ([State sightedReading] && ![State sightedSpeaking]) return;
+    if (State.mode == MD_SIGHTED && ![State sightedSpeaking]) return;
     [Speech queueText: s]; 
 }
 

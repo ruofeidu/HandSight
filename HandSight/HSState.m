@@ -23,6 +23,7 @@
 -(void) reset
 {
     NSLog(@"[ST] State Reset");
+    self.mode               =       MD_EXPLORATION_TEXT;
     self.taskStarted        =       false;
     self.taskEnded          =       false;
     self.waitLineBegin      =       false;
@@ -48,7 +49,7 @@
     self = [super init];
     
     if (self) {
-        self.mode                   =       MD_READING; //MD_EXPLORATION;
+        self.mode                   =       MD_EXPLORATION_TEXT;
         self.bluetoothState         =       BT_OFF;
         
         self.debugMode              =       NO;
@@ -66,7 +67,6 @@
         self.audioLinear            =       NO;
         self.audioPitch             =       YES;
         self.audioVolume            =       NO;
-        self.sightedReading         =       NO;
         self.sightedSpeaking        =       YES; 
         
         self.touchType              =       TT_UP; 
@@ -151,6 +151,11 @@
 
 - (bool) isHaptio {
     return self.feedbackType == FT_HAPTIO;
+}
+
+
+- (BOOL) sightedReading {
+    return self.mode == MD_SIGHTED; 
 }
 
 @end
