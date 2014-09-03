@@ -28,9 +28,10 @@
     Log             =       [HSLog sharedInstance];
     File            =       [HSFile sharedInstance];
     Doc             =       [HSDocument sharedInstance];
-    Viz             =       [HSViz sharedInstance]; 
+    Viz             =       [HSViz sharedInstance];
+    Stat            =       [HSStat sharedInstance];
     
-    m_textFontName  =       @"Palatino-Roman";
+    m_textFontName  =       @"Times New Roman";
     self = [super init];
     [self reset];
     return self;
@@ -38,7 +39,7 @@
 
 - (void)reset
 {
-
+    m_lblLineBeginX =       100; 
 }
 
 
@@ -54,18 +55,19 @@
     
     if ([Doc hasTitle]) h += m_titleSize; else h += m_textSize;
     
+    m_lblStartX     =       0;
     lblStart = ({
         CGFloat y = 0;
         if ([State categoryType] == CT_MAGAZINE) {
             switch ([State documentType]) {
                 case DT_TRAIN:
-                    y = 389.21;
+                    y = 429.21;
                     break;
                 case DT_A:
-                    y = 483.2124;
+                    y = 343.2124; //581.78491; //483.2124;
                     break;
                 case DT_B:
-                    y = 359;
+                    y = 269;
                     break;
                 case DT_C:
                     y = 539;
@@ -74,7 +76,8 @@
                     y = 539; 
             }
         }
-        UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(0, y, m_left, h)];
+        y += 70;
+        UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(m_lblStartX, y, m_left, h)];
         [l setText:@"Start Region"];
         [l setTextColor:[UIColor blackColor]];
         [l setTextAlignment:NSTextAlignmentCenter];
@@ -315,5 +318,7 @@
     [lblLineBegin setHidden:YES];
     [lblLineEnd setHidden:YES];
 }
+
+
 
 @end

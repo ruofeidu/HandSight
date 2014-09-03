@@ -23,7 +23,13 @@
 -(void) reset
 {
     NSLog(@"[ST] State Reset");
+    
+    if (self.mode != MD_SIGHTED)
     self.mode               =       MD_EXPLORATION_TEXT;
+    
+    if (self.documentType == DT_D && self.categoryType == CT_PLAIN)
+    self.mode               =       MD_READING;
+    
     self.taskStarted        =       false;
     self.taskEnded          =       false;
     self.waitLineBegin      =       false;
@@ -51,6 +57,7 @@
     if (self) {
         self.mode                   =       MD_EXPLORATION_TEXT;
         self.bluetoothState         =       BT_OFF;
+        self.speedType              =       ST_TRAIN;
         
         self.debugMode              =       NO;
         self.audioMiddleValue       =       400.0f;
@@ -66,6 +73,7 @@
         
         self.audioLinear            =       NO;
         self.audioPitch             =       YES;
+        self.speechOn               =       YES;
         self.audioVolume            =       NO;
         self.sightedSpeaking        =       YES; 
         
@@ -75,6 +83,9 @@
         self.documentType           =       DT_TRAIN;
         self.instructionGender      =       SG_MALE;
         self.readingGender          =       SG_FEMALE;
+        
+        // speed reading
+        //self.mode                   =       MD_SIGHTED;
         
         self.insStartSighted        =       @"Start!";
         self.insStartPlain          =       @"Please start reading the following text.";

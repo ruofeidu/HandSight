@@ -47,9 +47,13 @@
     self.dictParaLine       =           [[NSMutableDictionary alloc] init];
 }
 
+
 - (void) setLoaded {
     NSLog(@"[Doc] Set loaded");
     self.isLoaded           =           YES;
+    
+    if (State.documentType == DT_D && State.plainDocType == CT_PLAIN)
+        State.mode               =       MD_READING;
 }
 
 - (void) clear {

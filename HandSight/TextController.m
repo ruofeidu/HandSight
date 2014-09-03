@@ -24,6 +24,7 @@
 {
     if (m_text != nil) [m_text removeFromSuperview];
     if (m_viz != nil) [m_viz removeFromSuperview];
+    if (m_label != nil) [m_label removeFromSuperview];
     
     m_text = ({
         HSTextView *t = [HSTextView sharedInstance];
@@ -37,6 +38,12 @@
         [v reset];
         [self.view addSubview:v];
         v;
+    });
+    
+    m_label = ({
+        HSStatLabel *l = [HSStatLabel sharedInstance];
+        [self.view addSubview:l];
+        l;
     });
     
     [super addControls];

@@ -32,11 +32,16 @@
         t;
     });
     
-    
     m_viz = ({
         HSViz *v = [HSViz sharedInstance];
         [v reset];
         v;
+    });
+    
+    m_label = ({
+        HSStatLabel *l = [HSStatLabel sharedInstance];
+        [self.view addSubview:l];
+        l;
     });
     
     [super addControls];

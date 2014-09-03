@@ -30,6 +30,9 @@
         Log = [HSLog sharedInstance];
         State = [HSState sharedInstance];
         Speech = [HSSpeech sharedInstance];
+        Stat = [HSStat sharedInstance];
+        
+        m_verticalOn = NO;
         
         NSLog(@"[FB] Inited"); 
     }
@@ -53,6 +56,11 @@
 - (void) verticalStart: (CGFloat) y {
     if (y == 0) return;
     
+    if (!m_verticalOn) {
+        m_verticalOn = YES;
+        [Stat exitLine:y]; 
+    }
+    
     if ([State isAudioOn]) {
         [Audio updateAudioFrequency:y];
         [Audio play];
@@ -62,6 +70,21 @@
     }
     
     [Log recordVerticalFeedback:1 withVibrationDistance:y withAudioFrequency:[Audio audioFrequency]];
+}
+
+/**
+ * Feedback for vertical stop
+ */
+- (void) verticalStop {
+    m_verticalOn = NO;
+    
+    if ([State isAudioOn]) {
+        [Audio stop];
+    }
+    if ([State isHapticOn] || [State isHaptio]) {
+        [Bluetooth verticalStop];
+    }
+    [Log recordVerticalStop];
 }
 
 /**
@@ -120,6 +143,7 @@
  */
 - (void) overText {
     [Audio playFlute];
+    [Bluetooth verticalFeedback: 10];
 }
 
 /**
@@ -134,6 +158,7 @@
  */
 - (void) overPicture {
     [Audio playViolin];
+    [Bluetooth verticalStop];
 }
 
 /**
@@ -141,21 +166,14 @@
  */
 - (void) taskEnd {
     [Log recordTaskEnd];
-    [Speech queueText: [State insEndPlain]];
-    [Log saveToFile];
+    
+    CGFloat delay = State.mode == MD_SIGHTED ? 0.01 : 2.0;
+    [NSTimer scheduledTimerWithTimeInterval:delay target:self selector:@selector(setTaskEnd:) userInfo:nil repeats:NO];
 }
 
-/**
- * Feedback for vertical stop
- */
-- (void) verticalStop {
-    if ([State isAudioOn]) {
-        [Audio stop];
-    }
-    if ([State isHapticOn] || [State isHaptio]) {
-        [Bluetooth verticalStop];
-    }
-    [Log recordVerticalStop];
+- (void) setTaskEnd: (NSTimer*) timer {
+    [Speech queueText: [State insEndPlain]];
+    [Log saveToFile];
 }
 
 - (void) stopFeedback {
@@ -178,8 +196,6 @@
         [Audio stopMusic]; 
     }
     
-    
-    [self stopFeedback];
     [Log recordConvertMode];
 }
 
@@ -229,6 +245,7 @@
 
 - (void) overSpacing {
     [Audio stopMusic];
+    [Bluetooth verticalStop];
 }
 
 - (void)speekCurrentWord: (NSString*) s {

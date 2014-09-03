@@ -7,6 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6407DA6819AE6D9200A19C53 /* 20.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6407DA6719AE6D9200A19C53 /* 20.txt */; };
+		6407DA6A19AE6D9A00A19C53 /* 21.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6407DA6919AE6D9A00A19C53 /* 21.txt */; };
+		6407DA6C19AE6DA100A19C53 /* 22.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6407DA6B19AE6DA100A19C53 /* 22.txt */; };
+		6407DA6E19AE6DA900A19C53 /* 23.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6407DA6D19AE6DA900A19C53 /* 23.txt */; };
+		6407DA7819AE785300A19C53 /* 24.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6407DA7719AE785300A19C53 /* 24.txt */; };
+		6407DA7A19AE786600A19C53 /* 25.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6407DA7919AE786600A19C53 /* 25.txt */; };
+		6407DA7F19AE7B4E00A19C53 /* HSSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = 6407DA7E19AE7B4E00A19C53 /* HSSummary.m */; };
+		6407DA8119AEB09B00A19C53 /* 05.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6407DA8019AEB09B00A19C53 /* 05.txt */; };
+		6407DA8519AEBF8800A19C53 /* tips.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6407DA8419AEBF8800A19C53 /* tips.jpg */; };
+		6407DA8719AF7B5A00A19C53 /* backup.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6407DA8619AF7B5A00A19C53 /* backup.txt */; };
+		6407DA8A19AFD1F700A19C53 /* HSStatLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6407DA8919AFD1F700A19C53 /* HSStatLabel.m */; };
+		6407DA8C19B0D4EC00A19C53 /* pizza.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6407DA8B19B0D4EC00A19C53 /* pizza.jpg */; };
+		6407DA8E19B0E23100A19C53 /* NewCello.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6407DA8D19B0E23100A19C53 /* NewCello.wav */; };
 		642DCEAC19702DC80021A307 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 642DCEAB19702DC80021A307 /* Accelerate.framework */; };
 		642DCEAE19702DCE0021A307 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 642DCEAD19702DCE0021A307 /* CoreMedia.framework */; };
 		642DCEB019702DD30021A307 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 642DCEAF19702DD30021A307 /* MediaPlayer.framework */; };
@@ -30,7 +43,6 @@
 		6440A9941981A3FF00E5BEC3 /* 10.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6440A9931981A3FF00E5BEC3 /* 10.txt */; };
 		6440A9991981ACA400E5BEC3 /* HSMultiView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6440A9981981ACA400E5BEC3 /* HSMultiView.m */; };
 		6440A9A11981D41F00E5BEC3 /* 011.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 6440A9A01981D41F00E5BEC3 /* 011.jpeg */; };
-		6440A9A31985A5EC00E5BEC3 /* 100.png in Resources */ = {isa = PBXBuildFile; fileRef = 6440A9A21985A5EC00E5BEC3 /* 100.png */; };
 		6440A9A61988135800E5BEC3 /* HSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6440A9A51988135800E5BEC3 /* HSLabel.m */; };
 		6440A9A91988168000E5BEC3 /* HSImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6440A9A81988168000E5BEC3 /* HSImageView.m */; };
 		6440A9AB19881E1300E5BEC3 /* 11.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6440A9AA19881E1300E5BEC3 /* 11.txt */; };
@@ -76,8 +88,7 @@
 		647FAF4819A3924D00534068 /* HSMeasure.m in Sources */ = {isa = PBXBuildFile; fileRef = 647FAF4719A3924D00534068 /* HSMeasure.m */; };
 		647FAF4C19A398B300534068 /* 14.txt in Resources */ = {isa = PBXBuildFile; fileRef = 647FAF4B19A398B300534068 /* 14.txt */; };
 		647FAF4E19A398C100534068 /* 04.txt in Resources */ = {isa = PBXBuildFile; fileRef = 647FAF4D19A398C100534068 /* 04.txt */; };
-		647FAF5019A59D3B00534068 /* Cello.wav in Resources */ = {isa = PBXBuildFile; fileRef = 647FAF4F19A59D3B00534068 /* Cello.wav */; };
-		647FAF5219A65FE700534068 /* 05.txt in Resources */ = {isa = PBXBuildFile; fileRef = 647FAF5119A65FE700534068 /* 05.txt */; };
+		647FAF5419ABB53400534068 /* Flute_loopable.wav in Resources */ = {isa = PBXBuildFile; fileRef = 647FAF5319ABB53400534068 /* Flute_loopable.wav */; };
 		64954101199DAF8300887DFD /* HSViz.m in Sources */ = {isa = PBXBuildFile; fileRef = 64954100199DAF8300887DFD /* HSViz.m */; };
 		64CAC092197725FC00A6E3F1 /* HSBluetooth.m in Sources */ = {isa = PBXBuildFile; fileRef = 64CAC091197725FC00A6E3F1 /* HSBluetooth.m */; };
 		64CAC0971977264700A6E3F1 /* BLE.m in Sources */ = {isa = PBXBuildFile; fileRef = 64CAC0951977264700A6E3F1 /* BLE.m */; };
@@ -102,6 +113,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6407DA6719AE6D9200A19C53 /* 20.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 20.txt; sourceTree = "<group>"; };
+		6407DA6919AE6D9A00A19C53 /* 21.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 21.txt; sourceTree = "<group>"; };
+		6407DA6B19AE6DA100A19C53 /* 22.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 22.txt; sourceTree = "<group>"; };
+		6407DA6D19AE6DA900A19C53 /* 23.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 23.txt; sourceTree = "<group>"; };
+		6407DA7719AE785300A19C53 /* 24.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 24.txt; sourceTree = "<group>"; };
+		6407DA7919AE786600A19C53 /* 25.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 25.txt; sourceTree = "<group>"; };
+		6407DA7D19AE7B4E00A19C53 /* HSSummary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSSummary.h; sourceTree = "<group>"; };
+		6407DA7E19AE7B4E00A19C53 /* HSSummary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSSummary.m; sourceTree = "<group>"; };
+		6407DA8019AEB09B00A19C53 /* 05.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 05.txt; sourceTree = "<group>"; };
+		6407DA8419AEBF8800A19C53 /* tips.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tips.jpg; sourceTree = "<group>"; };
+		6407DA8619AF7B5A00A19C53 /* backup.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = backup.txt; sourceTree = "<group>"; };
+		6407DA8819AFD1F700A19C53 /* HSStatLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSStatLabel.h; sourceTree = "<group>"; };
+		6407DA8919AFD1F700A19C53 /* HSStatLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSStatLabel.m; sourceTree = "<group>"; };
+		6407DA8B19B0D4EC00A19C53 /* pizza.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pizza.jpg; sourceTree = "<group>"; };
+		6407DA8D19B0E23100A19C53 /* NewCello.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = NewCello.wav; path = Resource/Audio/NewCello.wav; sourceTree = SOURCE_ROOT; };
 		642DCEAB19702DC80021A307 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		642DCEAD19702DCE0021A307 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		642DCEAF19702DD30021A307 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
@@ -135,7 +161,6 @@
 		6440A9971981ACA400E5BEC3 /* HSMultiView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSMultiView.h; sourceTree = "<group>"; };
 		6440A9981981ACA400E5BEC3 /* HSMultiView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSMultiView.m; sourceTree = "<group>"; };
 		6440A9A01981D41F00E5BEC3 /* 011.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 011.jpeg; path = ../../../../../../Downloads/011.jpeg; sourceTree = "<group>"; };
-		6440A9A21985A5EC00E5BEC3 /* 100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 100.png; path = ../../../../../../Dropbox/Screenshots/100.png; sourceTree = "<group>"; };
 		6440A9A41988135800E5BEC3 /* HSLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSLabel.h; sourceTree = "<group>"; };
 		6440A9A51988135800E5BEC3 /* HSLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSLabel.m; sourceTree = "<group>"; };
 		6440A9A71988168000E5BEC3 /* HSImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSImageView.h; sourceTree = "<group>"; };
@@ -196,8 +221,7 @@
 		647FAF4719A3924D00534068 /* HSMeasure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HSMeasure.m; path = ../HSMeasure.m; sourceTree = "<group>"; };
 		647FAF4B19A398B300534068 /* 14.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 14.txt; sourceTree = "<group>"; };
 		647FAF4D19A398C100534068 /* 04.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 04.txt; sourceTree = "<group>"; };
-		647FAF4F19A59D3B00534068 /* Cello.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = Cello.wav; path = Resource/Audio/Cello.wav; sourceTree = SOURCE_ROOT; };
-		647FAF5119A65FE700534068 /* 05.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 05.txt; sourceTree = "<group>"; };
+		647FAF5319ABB53400534068 /* Flute_loopable.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = Flute_loopable.wav; path = Resource/Audio/Flute_loopable.wav; sourceTree = SOURCE_ROOT; };
 		649540FF199DAF8300887DFD /* HSViz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSViz.h; sourceTree = "<group>"; };
 		64954100199DAF8300887DFD /* HSViz.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSViz.m; sourceTree = "<group>"; };
 		64CAC090197725FC00A6E3F1 /* HSBluetooth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HSBluetooth.h; path = HandSight/HSBluetooth.h; sourceTree = "<group>"; };
@@ -259,6 +283,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6407DA6619AE6D8300A19C53 /* Sighted */ = {
+			isa = PBXGroup;
+			children = (
+				6407DA6719AE6D9200A19C53 /* 20.txt */,
+				6407DA6919AE6D9A00A19C53 /* 21.txt */,
+				6407DA6B19AE6DA100A19C53 /* 22.txt */,
+				6407DA6D19AE6DA900A19C53 /* 23.txt */,
+				6407DA7719AE785300A19C53 /* 24.txt */,
+				6407DA7919AE786600A19C53 /* 25.txt */,
+			);
+			name = Sighted;
+			sourceTree = "<group>";
+		};
 		642DCEBD19702E390021A307 /* TextReader */ = {
 			isa = PBXGroup;
 			children = (
@@ -370,7 +407,7 @@
 				6440A9B219881E3600E5BEC3 /* 02.txt */,
 				6440A9B419881E3D00E5BEC3 /* 03.txt */,
 				647FAF4D19A398C100534068 /* 04.txt */,
-				647FAF5119A65FE700534068 /* 05.txt */,
+				6407DA8019AEB09B00A19C53 /* 05.txt */,
 			);
 			name = Plain;
 			sourceTree = "<group>";
@@ -378,16 +415,12 @@
 		6440A9961981A40F00E5BEC3 /* Magazine */ = {
 			isa = PBXGroup;
 			children = (
-				64751FF819916F3500B75D4A /* 200.jpg */,
-				64751FF919916F3500B75D4A /* 300.jpg */,
-				64751FFA19916F3500B75D4A /* 100.jpg */,
-				64751FFB19916F3500B75D4A /* 400.jpg */,
-				6440A9A21985A5EC00E5BEC3 /* 100.png */,
 				6440A9931981A3FF00E5BEC3 /* 10.txt */,
 				6440A9AA19881E1300E5BEC3 /* 11.txt */,
 				6440A9AC19881E1C00E5BEC3 /* 12.txt */,
 				6440A9AE19881E2300E5BEC3 /* 13.txt */,
 				647FAF4B19A398B300534068 /* 14.txt */,
+				6407DA8619AF7B5A00A19C53 /* backup.txt */,
 			);
 			name = Magazine;
 			sourceTree = "<group>";
@@ -484,8 +517,9 @@
 			isa = PBXGroup;
 			children = (
 				647FAF3D19A264F400534068 /* Violin.wav */,
-				647FAF4F19A59D3B00534068 /* Cello.wav */,
+				6407DA8D19B0E23100A19C53 /* NewCello.wav */,
 				647FAF3B19A262B100534068 /* Flute.wav */,
+				647FAF5319ABB53400534068 /* Flute_loopable.wav */,
 				646869151979B75200C2E50D /* LB_DingDong.wav */,
 				646869161979B75200C2E50D /* LE_DongDing.wav */,
 				646869091979B6AE00C2E50D /* EOP_AirDong.mp3 */,
@@ -500,6 +534,12 @@
 		646869081979B68E00C2E50D /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				6407DA8B19B0D4EC00A19C53 /* pizza.jpg */,
+				64751FF819916F3500B75D4A /* 200.jpg */,
+				64751FF919916F3500B75D4A /* 300.jpg */,
+				64751FFA19916F3500B75D4A /* 100.jpg */,
+				64751FFB19916F3500B75D4A /* 400.jpg */,
+				6407DA8419AEBF8800A19C53 /* tips.jpg */,
 				6440A9A01981D41F00E5BEC3 /* 011.jpeg */,
 			);
 			name = Image;
@@ -515,6 +555,7 @@
 		646869141979B6B700C2E50D /* Text */ = {
 			isa = PBXGroup;
 			children = (
+				6407DA6619AE6D8300A19C53 /* Sighted */,
 				6440A9951981A40800E5BEC3 /* Plain */,
 				6440A9961981A40F00E5BEC3 /* Magazine */,
 			);
@@ -555,10 +596,14 @@
 		647FAF4919A3925800534068 /* Statistics */ = {
 			isa = PBXGroup;
 			children = (
+				6407DA7D19AE7B4E00A19C53 /* HSSummary.h */,
+				6407DA7E19AE7B4E00A19C53 /* HSSummary.m */,
 				647FAF4619A3924D00534068 /* HSMeasure.h */,
 				647FAF4719A3924D00534068 /* HSMeasure.m */,
 				642DCED41970322E0021A307 /* HSStat.h */,
 				642DCED51970322E0021A307 /* HSStat.m */,
+				6407DA8819AFD1F700A19C53 /* HSStatLabel.h */,
+				6407DA8919AFD1F700A19C53 /* HSStatLabel.m */,
 			);
 			name = Statistics;
 			sourceTree = "<group>";
@@ -691,31 +736,40 @@
 			buildActionMask = 2147483647;
 			files = (
 				6440A9AB19881E1300E5BEC3 /* 11.txt in Resources */,
+				6407DA8E19B0E23100A19C53 /* NewCello.wav in Resources */,
 				6468690E1979B6AE00C2E50D /* EOP_AirDong.mp3 in Resources */,
 				6440A9AF19881E2300E5BEC3 /* 13.txt in Resources */,
+				6407DA7A19AE786600A19C53 /* 25.txt in Resources */,
 				64751FFC19916F3500B75D4A /* 200.jpg in Resources */,
-				647FAF5019A59D3B00534068 /* Cello.wav in Resources */,
 				6440A9941981A3FF00E5BEC3 /* 10.txt in Resources */,
+				6407DA8519AEBF8800A19C53 /* tips.jpg in Resources */,
 				64751FFD19916F3500B75D4A /* 300.jpg in Resources */,
 				646869111979B6AE00C2E50D /* OOL_Rain.mp3 in Resources */,
 				646869101979B6AE00C2E50D /* OOL_Constant.wav in Resources */,
+				6407DA7819AE785300A19C53 /* 24.txt in Resources */,
 				646869181979B75200C2E50D /* LE_DongDing.wav in Resources */,
 				64751FFE19916F3500B75D4A /* 100.jpg in Resources */,
 				646869121979B6AE00C2E50D /* OOL_Sea.mp3 in Resources */,
 				6440A9AD19881E1C00E5BEC3 /* 12.txt in Resources */,
+				647FAF5419ABB53400534068 /* Flute_loopable.wav in Resources */,
 				64565F2E196DCCAB00B509B8 /* Images.xcassets in Resources */,
 				64565F20196DCCAB00B509B8 /* InfoPlist.strings in Resources */,
 				6440A9B119881E2E00E5BEC3 /* 01.txt in Resources */,
-				6440A9A31985A5EC00E5BEC3 /* 100.png in Resources */,
+				6407DA8719AF7B5A00A19C53 /* backup.txt in Resources */,
 				6440A9B319881E3600E5BEC3 /* 02.txt in Resources */,
 				6440A9A11981D41F00E5BEC3 /* 011.jpeg in Resources */,
 				64751FFF19916F3500B75D4A /* 400.jpg in Resources */,
+				6407DA8119AEB09B00A19C53 /* 05.txt in Resources */,
 				6440A9B519881E3D00E5BEC3 /* 03.txt in Resources */,
+				6407DA6C19AE6DA100A19C53 /* 22.txt in Resources */,
+				6407DA6819AE6D9200A19C53 /* 20.txt in Resources */,
 				647FAF4C19A398B300534068 /* 14.txt in Resources */,
+				6407DA8C19B0D4EC00A19C53 /* pizza.jpg in Resources */,
 				6468690F1979B6AE00C2E50D /* EOP_Dang.mp3 in Resources */,
+				6407DA6A19AE6D9A00A19C53 /* 21.txt in Resources */,
 				6440A9921981A3F600E5BEC3 /* 00.txt in Resources */,
 				647FAF3C19A262B100534068 /* Flute.wav in Resources */,
-				647FAF5219A65FE700534068 /* 05.txt in Resources */,
+				6407DA6E19AE6DA900A19C53 /* 23.txt in Resources */,
 				647FAF4E19A398C100534068 /* 04.txt in Resources */,
 				646869171979B75200C2E50D /* LB_DingDong.wav in Resources */,
 				64565F29196DCCAB00B509B8 /* Main.storyboard in Resources */,
@@ -795,11 +849,13 @@
 				64CAC0A7197870A000A6E3F1 /* MagController.m in Sources */,
 				642DCEC919702ECA0021A307 /* HSTextView.m in Sources */,
 				64954101199DAF8300887DFD /* HSViz.m in Sources */,
+				6407DA8A19AFD1F700A19C53 /* HSStatLabel.m in Sources */,
 				64686921197EB9AA00C2E50D /* HSCommonView.m in Sources */,
 				64565F26196DCCAB00B509B8 /* AppDelegate.m in Sources */,
 				64565F22196DCCAB00B509B8 /* main.m in Sources */,
 				6468691E197EAD7500C2E50D /* HSMagView.m in Sources */,
 				64CAC09A1977268100A6E3F1 /* HSSpeech.m in Sources */,
+				6407DA7F19AE7B4E00A19C53 /* HSSummary.m in Sources */,
 				64CAC0971977264700A6E3F1 /* BLE.m in Sources */,
 				646D197A198BE85800558CD2 /* HSDocument.m in Sources */,
 				642DCED61970322E0021A307 /* HSStat.m in Sources */,

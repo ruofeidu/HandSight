@@ -54,9 +54,6 @@
  */
 
 /*
- 
- 
- /*
  lblSightedReading = ({
  UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(m_inset * 2 + m_textWidth + m_segWidth, verticalInset, m_textWidth, m_textHeight)];
  [l setText:@"Sighted Reading:"];

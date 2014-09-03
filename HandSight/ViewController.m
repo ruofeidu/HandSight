@@ -26,7 +26,7 @@
     btnExpPicture       =   [self allocHoldButton:btnExpPicture text:@"Picture" touchDown:@selector(btnExpPicture:) touchUp:@selector(btnExpUp:)]; x = m_inset + m_textWidth + m_segWidth; [self addSpace];
     [self lineBreak];
     
-    lblExpDoc           =   [self allocLabel:lblExpDoc withText:@"Docuemnt:"];
+    lblExpDoc           =   [self allocLabel:lblExpDoc withText:@"Document:"];
     segExpDoc           =   [self allocSegmentation:segExpDoc arr:[NSArray arrayWithObjects:@"1: Plain", @"2: Magazine", nil] select:[State expDocType] action:@selector(segExpDocChanged:)];
     [self lineBreak];
     
@@ -55,6 +55,11 @@
     sldBelowLine        =   [self allocSlider:sldBelowLine min:0.0f max:State.maxFeedbackValue down:@selector(sldBelowLineTouched) up:@selector(sldBelowLineTouchCanceled)]; y -= 8;
     [self lineBreak];
     
+    lblFeedbackTrain    =   [self allocLabel:lblFeedbackTrain withText:@"Feedback:"];
+    segFeedbackTrain    =   [self allocSegmentation:segPlainDoc arr:[NSArray arrayWithObjects:@"Feedback Training Document", nil] select:[State feedbackTrainType] action: @selector(segFeedbackTrainChanged:)]; [self addSpace];
+    [self lineBreak];
+    
+    
     lblPlainDoc         =   [self allocLabel:lblPlainDoc withText:@"Plain:"];
     segPlainDoc         =   [self allocSegmentation:segPlainDoc arr:[NSArray arrayWithObjects:@"1", @"2", nil] select:[State plainDocType] action: @selector(segPlainDocChanged:)]; [self addSpace];
     [self lineBreak];
@@ -62,6 +67,19 @@
     lblMagDoc           =   [self allocLabel:lblMagDoc withText:@"Magazine:"];
     segMagDoc           =   [self allocSegmentation:segMagDoc arr:[NSArray arrayWithObjects:@"1", @"2", nil] select:[State magDocType] action: @selector(segMagDocChanged:)]; [self addSpace];
     [self lineBreak];
+
+    m_render = NO;
+    y += m_inset;
+    lblSpeedTest        =   [self allocTitle:lblAdvanced withText:@"Speed Test"];
+    [self lineBreak];
+    
+    lblSpeed            =   [self allocLabel:lblSpeed withText:@"Document"];
+    segSpeed            =   [self allocSegmentation:segSpeed arr:[NSArray arrayWithObjects:@"Train", @"1", @"2", @"3", @"4", nil] select:[State speedType] action: @selector(segSpeedChanged:)];  [self addSpace];
+    lblSpeech           =   [self allocLabel:lblSpeech withText:@"Speech:"];
+    swcSpeech           =   [self allocSwitch:swcSpeech isOn:State.speechOn action:@selector(swcSpeechChanged:)];
+    
+    [self lineBreak];
+    m_render = YES;
     
     y += m_inset;
     m_render = YES;
@@ -70,7 +88,7 @@
     
     lblDocument         =   [self allocLabel:lblDocument withText:@"Document:"];
     segCategory         =   [self allocSegmentation:segCategory arr:[NSArray arrayWithObjects:@"Plain", @"Magazine", nil] select:[State categoryType] action: @selector(segCateboryChanged:)]; [self addSpace];
-    segDocument         =   [self allocSegmentation:segDocument arr:[NSArray arrayWithObjects:@"Train", @"1", @"2", @"3", nil] select:[State documentType] action: @selector(segDocumentChanged:)];
+    segDocument         =   [self allocSegmentation:segDocument arr:[NSArray arrayWithObjects:@"Train", @"1", @"2", @"3", @"4", nil] select:[State documentType] action: @selector(segDocumentChanged:)];
     x = m_inset + m_textWidth;
     [segCategory setFrame:CGRectMake(x, y + m_segInset, m_segWidth / 5 * 2 - m_inset / 2, m_segHeight)]; x += m_segWidth / 3 + m_inset;
     [segDocument setFrame:CGRectMake(x, y + m_segInset, m_segWidth / 5 * 3, m_segHeight)]; x += segDocument.frame.size.width; [self addSpace];
@@ -220,6 +238,17 @@
     [self updateDocuments];
 }
 
+- (void)segSpeedChanged: (id)sender
+{
+    NSInteger index = [segSpeed selectedSegmentIndex];
+    if (index == 0) State.documentType = DT_D; else State.documentType = (enum DocumentType) (index - 1);
+    
+    State.categoryType = CT_PLAIN;
+    State.mode = MD_SIGHTED;
+    
+    [self updateDocuments];
+}
+
 - (void)segDocumentChanged: (id)sender
 {
     State.documentType = (enum DocumentType) [segDocument selectedSegmentIndex];
@@ -256,6 +285,13 @@
     State.magDocType = (enum MagazineDocType) ([segMagDoc selectedSegmentIndex] + 1);
     State.documentType = (enum DocumentType) ([segMagDoc selectedSegmentIndex] + 1);
     State.categoryType = CT_MAGAZINE;
+    State.mode = MD_READING;
+    [self updateDocuments];
+}
+
+- (void)segFeedbackTrainChanged: (id)sender {
+    State.documentType = DT_D;
+    State.categoryType = CT_PLAIN;
     State.mode = MD_READING;
     [self updateDocuments];
 }
@@ -299,6 +335,12 @@
 {
     [txtLog setText: [Log dumpJson]];
     [txtLog setHidden: ![swcShowLog isOn]];
+}
+
+
+- (void)swcSpeechChanged: (id)sender
+{
+    State.speechOn = [swcSpeech isOn];
 }
 
 - (void)swcShowDebugChanged: (id)sender
@@ -370,7 +412,7 @@
         UISegmentedControl *s = [[UISegmentedControl alloc] initWithItems: arr];
         [s setFrame:CGRectMake(x, y + m_segInset, m_segWidth, m_segHeight)];
         x += m_segWidth;
-        [s setSelectedSegmentIndex: [State feedbackType]];
+        [s setSelectedSegmentIndex: index];
         if (action != nil) [s addTarget:self action:action forControlEvents: UIControlEventValueChanged];
         [self addView: s];
         s;
@@ -426,6 +468,7 @@
         x += m_segWidth - m_textWidth;
         [s setMinimumValue: min];
         [s setMaximumValue: max];
+        [s setValue: max]; 
         [s addTarget:self action:down forControlEvents:UIControlEventTouchDown];
         [s addTarget:self action:down forControlEvents:UIControlEventValueChanged];
         [s addTarget:self action:up forControlEvents:UIControlEventTouchUpInside];
@@ -468,7 +511,7 @@
 }
 
 - (void) lineBreak {
-    y += m_titleHeight; x = m_inset;
+    if (m_render) y += m_titleHeight; x = m_inset;
 }
 
 - (void) addSpace {
@@ -476,36 +519,67 @@
 }
 
 - (void) updateDocuments {
-    if (State.isExplorationTextMode) {
-        if (State.documentType == DT_TRAIN) {
-            State.plainDocType = PD_NONE;
-            State.magDocType = MD_NONE;
+    switch (State.mode) {
+        case MD_EXPLORATION_TEXT:
+            State.feedbackTrainType = FTT_NONE;
+            if (State.documentType == DT_TRAIN) {
+                State.plainDocType = PD_NONE;
+                State.magDocType = MD_NONE;
+                
+                if (State.categoryType == CT_PLAIN) {
+                    State.expDocType = ED_1;
+                } else
+                    if (State.categoryType == CT_MAGAZINE) {
+                        State.expDocType = ED_2;
+                    }
+                [segExpDoc setSelectedSegmentIndex: State.expDocType];
+            }
+            break;
+            
+        case MD_READING:
+            State.expDocType = ED_NONE;
             
             if (State.categoryType == CT_PLAIN) {
-                State.expDocType = ED_1;
+                if (State.documentType == DT_D) {
+                    State.feedbackTrainType = FTT_TRAIN;
+                    State.plainDocType = PD_NONE;
+                } else {
+                    State.feedbackTrainType = FTT_NONE;
+                    State.plainDocType = (enum PlainDocType) State.documentType;
+                }
+                State.magDocType = MD_NONE;
             } else
-            if (State.categoryType == CT_MAGAZINE) {
-                State.expDocType = ED_2;
-            }
-            [segExpDoc setSelectedSegmentIndex: State.expDocType];
-        }
-    } else {
-        State.expDocType = ED_NONE;
-        
-        if (State.categoryType == CT_PLAIN) {
-            State.plainDocType = (enum PlainDocType) State.documentType;
+                State.feedbackTrainType = FTT_NONE;
+                if (State.categoryType == CT_MAGAZINE) {
+                    State.plainDocType = PD_NONE;
+                    State.magDocType = (enum MagazineDocType) State.documentType;
+                }
+            break;
+            
+        case MD_SIGHTED:
+            State.feedbackTrainType = FTT_NONE;
+            State.expDocType = ED_NONE;
+            State.plainDocType = PD_NONE;
             State.magDocType = MD_NONE;
-        } else
-        if (State.categoryType == CT_MAGAZINE) {
-            State.plainDocType = PD_NONE; 
-            State.magDocType = (enum MagazineDocType) State.documentType;
-        }
+            State.categoryType = CT_PLAIN;
+            if (State.documentType == DT_D) {
+                State.speedType = ST_TRAIN;
+            } else {
+                State.speedType = (enum SpeedType) (State.documentType + 1);
+            }
+            break;
+            
+        default:
+            break;
     }
     
     [segExpDoc setSelectedSegmentIndex: State.expDocType];
-    [segMagDoc setSelectedSegmentIndex: State.magDocType + 1];
-    [segPlainDoc setSelectedSegmentIndex: State.plainDocType + 1];
+    [segMagDoc setSelectedSegmentIndex: State.magDocType - 1];
+    [segPlainDoc setSelectedSegmentIndex: State.plainDocType - 1];
+    [segSpeed setSelectedSegmentIndex: State.speedType];
+    [segFeedbackTrain setSelectedSegmentIndex: State.feedbackTrainType];
     
+    if (State.feedbackTrainType == FTT_NONE) [segFeedbackTrain setSelectedSegmentIndex: UISegmentedControlNoSegment];
     if (State.expDocType == ED_NONE) [segExpDoc setSelectedSegmentIndex: UISegmentedControlNoSegment];
     if (State.magDocType == MD_NONE) [segMagDoc setSelectedSegmentIndex: UISegmentedControlNoSegment];
     if (State.plainDocType == PD_NONE) [segPlainDoc setSelectedSegmentIndex: UISegmentedControlNoSegment];

@@ -31,6 +31,7 @@ static uint MIN_SPOKEN_LENGTH = 3;
     
     if (self) {
         m_speechSynthesizer     =       [[AVSpeechSynthesizer alloc] init];
+        m_dict                  =       [NSMutableDictionary dictionary];
         m_queue                 =       [NSMutableArray array];
         State                   =       [HSState sharedInstance];
         Log                     =       [HSLog sharedInstance];
@@ -38,6 +39,10 @@ static uint MIN_SPOKEN_LENGTH = 3;
         m_lastSpoken            =       @"";
 
         m_timer                 =       [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(speakTimer:) userInfo:nil repeats:YES];
+        
+        [m_dict setValue:@"Doctor" forKey:@"Dr."];
+        [m_dict setValue:@"Leave" forKey:@"live"];
+        
         
         NSLog(@"[SP] Inited");
     }
@@ -90,6 +95,7 @@ static uint MIN_SPOKEN_LENGTH = 3;
             t = [t lowercaseString];
             if ([t isEqualToString:@"-"]) t = @"";
             if ([t isEqualToString:@"ms."]) t = @"miss";
+            if ([t isEqualToString:@"dr."]) t = @"doctor";
             
             s = [NSString stringWithFormat:@"%@ %@", s, t];
             /*
@@ -124,10 +130,11 @@ static uint MIN_SPOKEN_LENGTH = 3;
         utt.rate = 0.6;
         m_pause += 3;
     } else {
+        if (!State.speechOn) return;
         if ([State readingGender] == SG_MALE) {
             utt.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"en-GB"];
         }
-        if ([State sightedReading]) utt.rate = 0.6; else utt.rate = 0.5 + ([s length] * 0.2) / 10;  //TODO
+        utt.rate = 0.4 + ([s length] * 0.08) / 10;  //larger means faster speech
     }
     
     [Log recordSpeakWord:s withSpeed:utt.rate]; 

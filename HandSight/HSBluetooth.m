@@ -178,12 +178,14 @@ NSTimer *rssiTimer;
 
 
 - (void) write: (NSInteger)command {
+    if (State.bluetoothState != BT_ON) return;
     SInt8 buf[4] = {command, 0, 0, '\n'};
     NSData *data = [[NSData alloc] initWithBytes:buf length:4];
     [ble write:data];
 }
 
 - (void) write: (NSInteger)command withY: (NSInteger) y {
+    if (State.bluetoothState != BT_ON) return;
     SInt8 buf[4] = {command, 0, y, '\n'};
     NSData *data = [[NSData alloc] initWithBytes:buf length:4];
     [ble write:data];

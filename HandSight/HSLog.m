@@ -47,6 +47,7 @@
     ++m_numOfLogs;
     [m_data appendFormat:@"%d\t%.3f\n", SOFTWARE_STARTED, CACurrentMediaTime()];
     [m_json appendFormat:@"\"Software-started\": {\n\t\"T\": %.3f\n}\n\n", CACurrentMediaTime()];
+    [m_txt appendFormat:@"Software-start    %.4f\n", CACurrentMediaTime()];
 }
 
 -(void) recordTaskEnd {
@@ -56,6 +57,7 @@
     
     [m_data appendFormat:@"%d\t%.3f\n", TASK_ENDED , time];
     [m_json appendFormat:@"\"Task-ended\": {\n\t\"T\": %.3f\n}\n\n", time];
+    [m_txt appendFormat:@"Task-end    %.4f\n", CACurrentMediaTime()];
 }
 
 -(void) recordTaskBegin {
@@ -64,6 +66,7 @@
     [Stat reset: time];
     [m_data appendFormat:@"%d\t%.3f\n", TASK_BEGIN , time];
     [m_json appendFormat:@"\"Task-Begin\": {\n\t\"T\": %.3f\n}\n\n", time];
+    [m_txt appendFormat:@"Task-begin    %d  %d  %.4f\n", State.categoryType, State.documentType, CACurrentMediaTime()];
 }
 
 -(void) recordReset {
@@ -91,7 +94,7 @@
     
     [m_data appendFormat:@"%d\t%.3f\t%d\n", FEEDBACK_TYPE, CACurrentMediaTime(), State.feedbackType];
     
-    [m_json appendFormat:@"\"Feedback-type\": {\n\t\"T\": %.3f,\n\t\"Type:\"%d\n}\n\n", CACurrentMediaTime(), State.feedbackType];
+    [m_json appendFormat:@"\"Feedback-type\": {\n\t\"T\": %.3f,\n\t\"Type:\"%d\"\n}\n\n", CACurrentMediaTime(), State.feedbackType];
 }
 
 -(void) recordAudioOn {

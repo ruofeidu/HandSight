@@ -110,12 +110,13 @@
 
 - (void)reset
 {
+    [super reset]; 
     [Doc reset];
     // the view bound
     m_left          =       120;
-    m_top           =       30;
-    m_bottom        =       50;
-    m_right         =       80;
+    m_top           =       70;
+    m_bottom        =       70;
+    m_right         =       100;
     m_width         =       1024;
     m_height        =       768;
     
@@ -127,15 +128,14 @@
     m_alphaShow     =       1.0f;
     
     // the text
-    m_textSize      =       24.0f;
-    m_textFontName  =       @"Palatino-Roman";
-    m_titleFontName =       @"Palatino-Roman";
+    m_textFontName  =       @"Times New Roman";
+    m_titleFontName =       @"Times New Roman";
     
     m_lineSpacing   =       6;
     m_lineHeight    =       m_textSize + m_lineSpacing;
 
     m_columnSpacing =       40;
-    m_textSize      =       22.0f;
+    m_textSize      =       21.0f;
     m_titleSize     =       26.0f;
     m_pictureInset  =       10.0f;
     m_titleHeight   =       m_titleSize + 2;
@@ -173,14 +173,17 @@
     m_textStyle.lineSpacing = m_lineSpacing;
     m_textStyle.minimumLineHeight = m_textHeight;
     m_textStyle.maximumLineHeight = m_textHeight;
-    m_textStyle.alignment = NSTextAlignmentJustified;
+    
+    if (State.categoryType == CT_MAGAZINE) {
+        m_textStyle.alignment = NSTextAlignmentJustified;
+    }
     
     m_wordMargin    =       CGRectMake(m_textSize / 2, m_lineSpacing + 2, m_textSize * 2, m_lineSpacing * 2);
 }
 
 - (NSAttributedString*) getAttributedString {
-    
-    NSString* textContent = [File readTxt: [NSString stringWithFormat:@"%d%d", [State categoryType], [State documentType]]];
+    int c = [State sightedReading] ? 2 : [State categoryType]; 
+    NSString* textContent = [File readTxt: [NSString stringWithFormat:@"%d%d", c, [State documentType]]];
     NSString* text = [textContent stringByReplacingOccurrencesOfString:@"\n" withString:@" \n "];
     
     Doc.arrWord = [[text componentsSeparatedByString:@" "] mutableCopy];
@@ -301,17 +304,21 @@
     CGPoint point = [[touches anyObject] locationInView: self];
     BOOL multiTouch = [touches count] > 1;
     
+    CGFloat leftBoundary = State.hasEndColume ? m_left + m_columnWidth + m_columnSpacing - 10 : m_left - 10;
+    
     if (multiTouch) {
         for (UITouch *aTouch in touches) {
             CGPoint aPoint = [aTouch locationInView: self];
-            if (aPoint.x > m_left) {
+            
+            if (aPoint.x > leftBoundary) {
                 point = aPoint;
             }
+            NSLog(@"Multitouch: %@", NSStringFromCGPoint(aPoint));
         }
         
         for (UITouch *aTouch in touches) {
             CGPoint aPoint = [aTouch locationInView: self];
-            if (aPoint.y < point.y && aPoint.x > m_left) {
+            if (aPoint.x > point.x && aPoint.x > leftBoundary) {
                 point = aPoint;
             }
         }
@@ -401,23 +408,30 @@
 
 - (BOOL) enterLineBeginRegion: (CGPoint) point {
     if ([self isRightColumn]) {
-        return point.x < m_left + m_columnWidth + m_columnSpacing;
+        return point.x <= m_left + m_columnWidth + m_columnSpacing && point.x >= m_left + m_columnWidth + m_columnSpacing - 20;
     } else {
-        return point.x < m_left;
+        return point.x <= m_left && point.x >= m_left - 20;
     }
 }
 
+/**
+ * If point.x is greater than the last word in the same line's right boundary, return true
+ */
 - (BOOL) enterLineEndRegion: (CGPoint) point {
     if (!State.thisLineHasAtLeastOneWordSpoken) return NO;
     
-    if ([self isLeftColumn]) {
-        return point.x > m_left + m_columnWidth;
-    } else {
-        return point.x > m_width - m_right;
-    }
+    int i = [Doc getTheLastWordIDInTheSameLine];
+    CGRect rect = [self getWordRect: i];
+    
+    return point.x > rect.origin.x + rect.size.width;
 }
 
+/**
+ * If point.x is greater than the last word in the same line's right boundary, return true
+ */
 - (BOOL) enterParaEndRegion: (CGPoint) point {
+    if (!State.thisLineHasAtLeastOneWordSpoken) return NO;
+    
     int i = [Doc getTheLastWordIDInTheSameLine];
     int j = [Doc getNextWordID:i];
     int k = State.nextWordID;
@@ -427,6 +441,8 @@
     }
     
     if ([Doc getParaFromWordIndex:i] == [Doc getParaFromWordIndex:j]) return NO;
+    
+    
     CGRect rect = [self getWordRect: i];
     float parabd = rect.origin.x + rect.size.width;
     
@@ -434,6 +450,7 @@
     if (point.x >= parabd && [Doc getColFromWordIndex:k] != [Doc getColFromWordIndex:i]) {
         State.hasEndColume = YES;
     }
+    
     return point.x >= parabd;
 }
 
@@ -473,6 +490,9 @@
         CGFloat center = rect.origin.y + rect.size.height / 2;
         rect.origin.y = center - h / 2;
         rect.size.height = h;
+    } else {
+        rect.origin.y -= 2;
+        rect.size.height += 2;
     }
     
     return rect;
@@ -500,7 +520,6 @@
     return ans;
 }
 
-
 -(CGRect) getWordRect: (int) wordIndex {
     NSUInteger characterIndex = [[Doc.arrWordStartIndex objectAtIndex:wordIndex] intValue];
     if (characterIndex < self.textStorage.length) {
@@ -514,7 +533,6 @@
 
 - (void) copyLastWordRegion {
     lblLast.frame = lblCurrent.frame;
-    [lblLast setHidden: NO];
 }
 
 /**
@@ -537,11 +555,7 @@
  */
 - (void) setupNextWordRegion {
     lblNext.frame = [self getWordRect: State.nextWordID];
-    [lblNext setHidden: NO];
-    
-    // clear the rest frames if overlaped
-    if (lblNext.frame.origin.x == lblLast.frame.origin.x) [lblLast setHidden:YES];
-    if (lblNext.frame.origin.x == lblCurrent.frame.origin.x) [lblCurrent setHidden:YES];
+    [self setupRectVisibility];
 }
 
 /**
@@ -605,11 +619,11 @@
             ++para;
             line = 1;
             ++totalLines;
-            if (totalLines > 17) {
+            if (totalLines > 20) {
                 col = 1;
             }
             
-            if ((State.documentType == DT_C || State.documentType == DT_A) && State.categoryType == CT_MAGAZINE) {
+            if ((State.documentType == DT_C) && State.categoryType == CT_MAGAZINE) {
                 if (totalLines > 13) {
                     col = 1;
                 }
@@ -620,11 +634,11 @@
         [dict setColumn: col];
         rect = [self getWordRect:i];
         
+        [self setupRectVisibility];
         
         lblLast.frame = lastRect;
-        [lblLast setHidden:NO];
         lblCurrent.frame = rect;
-        [lblCurrent setHidden:NO];
+        
         
         if ([self inTwoLines:lastRect aboveOn:rect])
         {
@@ -640,14 +654,14 @@
     }
     
     NSLog(@"Add attributes end");
-    State.numWords = [Doc numActualWords]; 
+    State.numWords = (int)[Doc numActualWords];
     State.softwareStarted = true;
 }
 
 
 - (void) setupLineEndRegion {
     if ([self isLeftColumn]) {
-        [lblLineEnd setFrame: CGRectMake(m_left + m_columnWidth, 0, m_width - m_left - m_columnWidth, m_height)];
+        [lblLineEnd setFrame: CGRectMake(m_left + m_columnWidth, 0, m_columnSpacing, m_height)];
     } else {
         [lblLineEnd setFrame: CGRectMake(m_width - m_right, 0, m_right, m_height)];
     }
@@ -656,9 +670,9 @@
 
 - (void) setupLineBeginRegion {
     if ([self isRightColumn]) {
-        [lblLineBegin setFrame: CGRectMake(0, 0, m_left + m_columnWidth + m_columnSpacing, m_height)];
+        [lblLineBegin setFrame: CGRectMake(m_left + m_columnWidth + m_columnSpacing - 20, 0, 20, m_height)];
     } else {
-        [lblLineBegin setFrame: CGRectMake(0, 0, m_left, m_height)];
+        [lblLineBegin setFrame: CGRectMake(m_left - 20, 0, 20, m_height)];
     }
     [lblLineBegin setHidden: NO];
 }
@@ -682,7 +696,6 @@
     State.waitParaEnd = NO;
     State.waitLineBegin = NO;
     [lblLineBegin setHidden:YES];
-    [lblCurrent setHidden:YES]; 
     [Feedback verticalStop];
 }
 
@@ -696,7 +709,6 @@
     State.waitParaEnd = NO;
     State.waitLineBegin = YES;
     [lblLineEnd setHidden:YES];
-    [lblCurrent setHidden:YES];
     [self setupLineBeginRegion];
     [Feedback verticalStop];
 }
@@ -724,6 +736,9 @@
     CGFloat y = point.y;
     CGFloat center = lblNext.frame.origin.y + lblNext.frame.size.height / 2;
     CGFloat delta = center - y;
+    
+    [Stat distance: delta];
+    
     if (fabs(delta) <= m_lineHeight / 2) delta = 0;
     if (delta > State.maxFeedbackValue) delta = State.maxFeedbackValue; else if (delta < State.minFeedbackValue) delta = State.minFeedbackValue;
     return delta;
@@ -741,13 +756,13 @@
     if ([State categoryType] == CT_MAGAZINE) {
         switch ([State documentType]) {
             case DT_TRAIN:
-                State.lastWordID = 60;
+                State.lastWordID = 28-1;
                 break;
             case DT_A:
-                State.lastWordID = 53;
+                State.lastWordID = 66-1;
                 break;
             case DT_B:
-                State.lastWordID = 65;
+                State.lastWordID = 51-1;
                 break;
             case DT_C:
                 State.lastWordID = 65;
@@ -758,6 +773,7 @@
     }
     State.currentWordID = State.lastWordID;
     State.nextWordID = State.currentWordID + 1;
+    [lblStart setHidden: YES];
     [self setupNextWordRegion];
 }
 
@@ -785,7 +801,6 @@
 - (void) speakCurrentWord {
     State.lastWordID = State.currentWordID;
     lblLast.frame = lblCurrent.frame;
-    [lblLast setHidden: NO];
     [self speakWord:State.currentWordID];
 }
 
@@ -813,17 +828,15 @@
         // see if exceed
         if (State.nextWordID >= [Doc.arrWordDict count] - 1) {
             lblNext.frame = INVISIBLE_RECT;
+            [Feedback paraEnd];
             [Feedback taskEnd];
             State.taskEnded = YES;
-            [Feedback paraEnd];
             return;
         }
         
         // setup next word region
         lblNext.frame = [self getWordRect: State.nextWordID];
-        [lblNext setHidden: NO];
-        [lblLast setHidden: YES];
-        [lblCurrent setHidden: YES];
+        [self setupRectVisibility];
         
         // clear the rest frames if overlaped
         if (lblNext.frame.origin.x == lblLast.frame.origin.x) [lblLast setHidden:YES];
@@ -869,6 +882,10 @@
         return [Feedback overSpacing];
     }
     
+    if (State.hasEndColume && point.x < m_left + m_columnWidth) {
+        return; 
+    }
+    
     if ([State taskEnded]) return;
     if (![State taskStarted]) {
         if ([lblStart contains:point] || [State sightedReading]) {
@@ -880,6 +897,12 @@
     
     if (![State softwareStarted]) return;
     
+    if (!State.hasEndColume) {
+        if (point.x < m_left - 10) return;
+    } else {
+        if (point.x < m_left + m_columnWidth + m_columnSpacing - 10) return;
+    }
+    
     if ([State sightedReading]) return [self sightedReading: point];
     
     if ([State waitLineBegin]) {
@@ -890,18 +913,23 @@
         return;
     }
     
-    if ([State waitLineEnd]) {
-        if ([self enterLineEndRegion:point]) {
-            [self waitLineBegin];
-            return [Feedback lineEnd];
-        }
-        return;
+    
+    if (point.x < m_lblLineBeginX) {
+        return; 
     }
     
     if ([State waitParaEnd]) {
         if ([self enterParaEndRegion:point]) {
             [self waitLineBegin];
             [Feedback paraEnd];
+        }
+        return;
+    }
+    
+    if ([State waitLineEnd]) {
+        if ([self enterLineEndRegion:point]) {
+            [self waitLineBegin];
+            return [Feedback lineEnd];
         }
         return;
     }
@@ -920,14 +948,8 @@
     [self hideLineLabels];
     
     if ([self enterNextWordRegion:point]) {
-        //[self setupCurrentWordID];//
-        if (State.currentWordID != State.nextWordID) {
-            NSLog(@"[BUG] Current Word: %d, Next word: %d", State.currentWordID, State.nextWordID);
-        }
-        
         State.lastWordID = State.nextWordID;
         lblLast.frame = lblNext.frame;
-        [lblLast setHidden: NO];
         
         [self speakWord: State.lastWordID];
 
@@ -955,8 +977,12 @@
             [self waitLineEnd];
         }
         
-        [lblLast setHidden: YES];
-        [lblCurrent setHidden: YES];
+        if ([a getColumn] != [b getColumn]) {
+            [self waitLineBegin];
+            [Feedback paraEnd];
+        }
+        
+        [self setupRectVisibility];
         return;
     }
     
@@ -975,6 +1001,7 @@
     
     if ([self skipNextWord:point]) {
         NSLog(@"skip next word! State currentword %d lastWordID %d, nextWordID %d", [State currentWordID], [State lastWordID], [State nextWordID]);
+        [Stat skipWord: [State currentWordID] - [State lastWordID] - 1];
         [self speakCurrentWord];
         
         [self setupNextWordID];
@@ -994,6 +1021,22 @@
         [Feedback verticalFeedback: delta];
     }
     
+}
+
+- (void) setupRectVisibility {
+    [lblNext setHidden: NO];
+    
+    if ([State debugMode]) {
+        [lblLast setHidden: NO];
+        [lblCurrent setHidden: NO];
+        
+        // clear the rest frames if overlaped
+        if (lblNext.frame.origin.x == lblLast.frame.origin.x) [lblLast setHidden:YES];
+        if (lblNext.frame.origin.x == lblCurrent.frame.origin.x) [lblCurrent setHidden:YES];
+    } else {
+        [lblLast setHidden: YES];
+        [lblCurrent setHidden: YES];
+    }
 }
 
 - (void) clearViews {

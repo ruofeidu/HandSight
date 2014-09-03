@@ -18,10 +18,10 @@
     HSLog                   *Log;
     
 @private
-    
     int                     m_pause;
     AVSpeechSynthesizer     *m_speechSynthesizer;
     NSMutableArray          *m_queue;
+    NSMutableDictionary     *m_dict; 
     NSTimer                 *m_timer;
     NSString                *m_lastSpoken;
     

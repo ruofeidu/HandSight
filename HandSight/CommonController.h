@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "HSUtils.h"
 #import "HSFeedback.h"
+#import "HSStatLabel.h"
 
 @interface CommonController : UIViewController {
     CGFloat m_btnLeft, m_btnTop;
@@ -18,6 +19,8 @@
     UIColor *m_textColor;
     
     NSString *m_titleFontName, *m_textFontName;
+    
+    HSStatLabel *m_label;
     
     HSFeedback *Feedback;
     HSSpeech *Speech;

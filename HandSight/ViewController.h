@@ -12,18 +12,18 @@
 
 @interface ViewController : CommonController {
     UILabel *lblTitle, *lblAdvanced, *lblFeedbackType, *lblDocument, *lblAudioType, *lblAudioPitch, *lblMaxVolume, *lblHapticType, *lblExpCues, *lblSighted, *lblExplorationStudy, *lblReadingStudy,
-            *lblMaxVibration, *lblLineHeight, *lblHapticThres, *lblInsTTS, *lblReadTTS, *lblReadSpeed, *lblReadPitch, *lblAboveLine, *lblBelowLine,
-            *lblLineSpacing, *lblAudioThreshold, *lblVisualization, *lblDebug, *lblLog, *lblDemo, *lblSightedReading, *lblAudioVolume, *lblBluetooth, *lblExpDemo, *lblExpDoc, *lblPlainDoc, *lblMagDoc;
+            *lblMaxVibration, *lblLineHeight, *lblHapticThres, *lblInsTTS, *lblReadTTS, *lblReadSpeed, *lblReadPitch, *lblAboveLine, *lblBelowLine, *lblSpeed, *lblSpeedTest, *lblSpeech,
+            *lblLineSpacing, *lblAudioThreshold, *lblVisualization, *lblDebug, *lblLog, *lblDemo, *lblSightedReading, *lblAudioVolume, *lblBluetooth, *lblExpDemo, *lblExpDoc, *lblPlainDoc, *lblMagDoc, *lblFeedbackTrain;
     
     UILabel *numHapticThres, *numLineHeights, *numMaxVolume, *numReadingSpeed, *numMaxVibration;
     
     UIButton *btnReset, *btnResume, *btnStart,
              *btnTaskStart, *btnLineBegin, *btnLineEnd, *btnParaEnd, *btnTextEnd, *btnAboveLine, *btnBelowLine, *btnExpText, *btnExpPicture, *btnExpSpacing;
     
-    UISegmentedControl *segFeedback, *segDocument, *segAudioType, *segHapticType, *segLineHeight, *segInsTTS, *segReadingTTS,
-                       *segReadingPitch, *segGuidance, *segDebug, *segVisualization, *segLeftResion, *segLog, *segCategory, *segMode, *segBluetoothState, *segExpDemo, *segExpDoc, *segPlainDoc, *segMagDoc;
+    UISegmentedControl *segFeedback, *segDocument, *segAudioType, *segHapticType, *segLineHeight, *segInsTTS, *segReadingTTS, *segSpeed,
+                       *segReadingPitch, *segGuidance, *segDebug, *segVisualization, *segLeftResion, *segLog, *segCategory, *segMode, *segBluetoothState, *segExpDemo, *segExpDoc, *segPlainDoc, *segMagDoc, *segFeedbackTrain;
     
-    UISwitch *swcAudioPitch, *swcAudioVolume, *swcReadPitch, *swcGuidance, *swcShowDebug, *swcShowLog, *swcLeftRegion, *swcVisualization, *swcShowStat, *swcSightedReading;
+    UISwitch *swcAudioPitch, *swcAudioVolume, *swcReadPitch, *swcGuidance, *swcShowDebug, *swcShowLog, *swcLeftRegion, *swcVisualization, *swcShowStat, *swcSightedReading, *swcSpeech;
     
     UISlider *sldMaxVolume, *sldMaxVibration, *sldReadingSpeed, *sldLineHeight, *sldHapticThres, *sldLineSpacing, *sldAudioThreshold,
              *sldAboveLine, *sldBelowLine;

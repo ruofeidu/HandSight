@@ -229,7 +229,7 @@ OSStatus RenderTone(
 - (void) playFlute {
     if (m_violinPlaying) [[SoundManager sharedManager] stopMusic: NO];
     if (m_flutePlaying) return;
-    [[SoundManager sharedManager] playMusic:@"Flute.wav" looping:YES];
+    [[SoundManager sharedManager] playMusic:@"Flute_loopable.wav" looping:YES];
     m_flutePlaying = true;
     m_violinPlaying = NO;
 }
@@ -237,7 +237,7 @@ OSStatus RenderTone(
 - (void) playViolin {
     if (m_flutePlaying) [[SoundManager sharedManager] stopMusic: NO];
     if (m_violinPlaying) return;
-    [[SoundManager sharedManager] playMusic:@"Cello.mp3" looping:YES];
+    [[SoundManager sharedManager] playMusic:@"NewCello.wav" looping:YES];
     m_violinPlaying = YES;
     m_flutePlaying = NO;
 }

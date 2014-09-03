@@ -10,14 +10,18 @@
 #import "HSUtils.h"
 #import "HSAudio.h"
 #import "HSBluetooth.h"
+#import "HSStat.h"
 #import "HSSpeech.h"
 
 @interface HSFeedback : NSObject {
+    BOOL m_verticalOn;
+    
     HSState* State;
     HSAudio* Audio;
     HSBluetooth* Bluetooth;
     HSLog* Log;
     HSSpeech* Speech;
+    HSStat* Stat; 
 }
 
 + (HSFeedback *) sharedInstance;

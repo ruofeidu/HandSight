@@ -1,15 +1,10 @@
-*Brand New Look at the Face of Mars*
-%Title: 2 Para: 7 8 10 0 1 10 105 4
-What really lies across the surface of Mars? Rovers have scurried about the red planet for years, drilling, scooping and analyzing for signs of life, past or present. But to really understand the Martian landscape, scientists need to look at the entire surface. What they have needed is a global geologic map.
+*Pizza and Parenthood*
+%Title: 1 Para: 6 6 12 0 9 1 108
+I had everything I needed - the sweet sausage, the grilled shrimp, the three kinds of cheese. All my spices were lined up, the sauces in the right bowls. You could say I’d been getting ready to make this pizza for 20 years.
 
-The red planet is long overdue for a new one. The last major effort in Martian cartography was published in 1987, scraped together from the early Viking probes’ scant images and datasets. Since then, four additional orbiters with superior imaging capabilities have journeyed into Martian orbit, collected data and transmitted their findings back to 
-Earth.
+My father left the Catholic Church when he was 12. There’s not much Catholic left in me, except for my fondness for ritual. And so, as my wife and I have approached the date of the departure of our younger son for college, I thought long and hard about the proper way to mark the moment. We’d climb a nearby mountain, I thought, with the symbolic name of Tumbledown. We’d go out for lobsters and steamers. We’d head to the local Shakespeare theater and watch some Oscar Wilde.
+But reality interceded. It rained the day we were going to hike Tumbledown; my boys decided they wanted to go out with their friends instead of to the theater; when I’d hoped to go to the lobster pound, my son needed to go shopping, and headed to the Maine Mall instead. And so, what with one thing and another, there wasn’t time for any of the sacraments I’d so carefully imagined.
 
-Now, scientists at the United States Geological Survey have used that data to create an updated map of the entire Martian surface. The new map shows that ancient rock — dating back billions of years ago, when Mars’s environmental conditions might have closely resembled Earth’s— exists in many more locations than previously thought. 
+Instead we ate pizza.
 
-~300.jpg colume: 2 Lines: 12 height: 6
-
-
-
-
-Because the map highlights the location of the oldest rocks on Mars, it could help future missions chart a course for these areas.
+~pizza.jpg colume: 2 Lines: 12 height: 9
