@@ -20,6 +20,8 @@
 		6407DA8A19AFD1F700A19C53 /* HSStatLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6407DA8919AFD1F700A19C53 /* HSStatLabel.m */; };
 		6407DA8C19B0D4EC00A19C53 /* pizza.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6407DA8B19B0D4EC00A19C53 /* pizza.jpg */; };
 		6407DA8E19B0E23100A19C53 /* NewCello.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6407DA8D19B0E23100A19C53 /* NewCello.wav */; };
+		640A21A619D9DCBE005DC844 /* 06.txt in Resources */ = {isa = PBXBuildFile; fileRef = 640A21A419D9DCBE005DC844 /* 06.txt */; };
+		640A21A719D9DCBE005DC844 /* TemplateIcon2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 640A21A519D9DCBE005DC844 /* TemplateIcon2x.png */; };
 		642DCEAC19702DC80021A307 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 642DCEAB19702DC80021A307 /* Accelerate.framework */; };
 		642DCEAE19702DCE0021A307 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 642DCEAD19702DCE0021A307 /* CoreMedia.framework */; };
 		642DCEB019702DD30021A307 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 642DCEAF19702DD30021A307 /* MediaPlayer.framework */; };
@@ -128,6 +130,8 @@
 		6407DA8919AFD1F700A19C53 /* HSStatLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSStatLabel.m; sourceTree = "<group>"; };
 		6407DA8B19B0D4EC00A19C53 /* pizza.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pizza.jpg; sourceTree = "<group>"; };
 		6407DA8D19B0E23100A19C53 /* NewCello.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = NewCello.wav; path = Resource/Audio/NewCello.wav; sourceTree = SOURCE_ROOT; };
+		640A21A419D9DCBE005DC844 /* 06.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 06.txt; sourceTree = "<group>"; };
+		640A21A519D9DCBE005DC844 /* TemplateIcon2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TemplateIcon2x.png; sourceTree = "<group>"; };
 		642DCEAB19702DC80021A307 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		642DCEAD19702DCE0021A307 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		642DCEAF19702DD30021A307 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
@@ -408,6 +412,8 @@
 				6440A9B419881E3D00E5BEC3 /* 03.txt */,
 				647FAF4D19A398C100534068 /* 04.txt */,
 				6407DA8019AEB09B00A19C53 /* 05.txt */,
+				640A21A419D9DCBE005DC844 /* 06.txt */,
+				640A21A519D9DCBE005DC844 /* TemplateIcon2x.png */,
 			);
 			name = Plain;
 			sourceTree = "<group>";
@@ -745,12 +751,14 @@
 				6407DA8519AEBF8800A19C53 /* tips.jpg in Resources */,
 				64751FFD19916F3500B75D4A /* 300.jpg in Resources */,
 				646869111979B6AE00C2E50D /* OOL_Rain.mp3 in Resources */,
+				640A21A619D9DCBE005DC844 /* 06.txt in Resources */,
 				646869101979B6AE00C2E50D /* OOL_Constant.wav in Resources */,
 				6407DA7819AE785300A19C53 /* 24.txt in Resources */,
 				646869181979B75200C2E50D /* LE_DongDing.wav in Resources */,
 				64751FFE19916F3500B75D4A /* 100.jpg in Resources */,
 				646869121979B6AE00C2E50D /* OOL_Sea.mp3 in Resources */,
 				6440A9AD19881E1C00E5BEC3 /* 12.txt in Resources */,
+				640A21A719D9DCBE005DC844 /* TemplateIcon2x.png in Resources */,
 				647FAF5419ABB53400534068 /* Flute_loopable.wav in Resources */,
 				64565F2E196DCCAB00B509B8 /* Images.xcassets in Resources */,
 				64565F20196DCCAB00B509B8 /* InfoPlist.strings in Resources */,

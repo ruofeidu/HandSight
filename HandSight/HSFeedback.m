@@ -200,12 +200,18 @@
 }
 
 - (void) lineBegin {
+    if (State.automaticMode) [self overSpacing];
+    
+    if (State.feedbackStepByStep == StepVertical) return;
+        
     State.thisLineHasAtLeastOneWordSpoken = false;
     [Log recordBeginLine: State.lineID];
     
     if ([State isAudioOn] || [State isHaptio]) {
         [Audio playAudio:AU_LINE_BEGIN];
     }
+    
+    State.automaticExploration = NO; 
     
     if ([State isHapticOn]) {
         [Bluetooth lineBegin];
@@ -218,9 +224,15 @@
 - (void) lineEnd {
     [Log recordEndLine: State.lineID];
     
+    if (State.feedbackStepByStep == StepVertical) return;
+    
     NSLog(@"%d, %d, %d", [State feedbackType], FT_AUDIO, [State feedbackType] == FT_AUDIO);
     
     NSLog(@"%d", [State isAudioOn]);
+    
+    if (State.automaticMode) {
+        State.automaticExploration = YES;
+    }
     
     if ([State isAudioOn] || [State isHaptio]) {
         [Audio playAudio:AU_LINE_END];
@@ -233,6 +245,7 @@
 
 - (void) paraEnd {
     [Log recordEndParagraph: State.paraID];
+    if (State.feedbackStepByStep == StepVertical || State.feedbackStepByStep == StepLine) return;
     
     if ([State isAudioOn] || [State isHaptio]) {
         [Audio playAudio:AU_PARA_END];

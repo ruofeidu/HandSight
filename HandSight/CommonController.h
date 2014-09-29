@@ -20,8 +20,9 @@
     
     NSString *m_titleFontName, *m_textFontName;
     
-    HSStatLabel *m_label;
     
+    
+    HSStatLabel *m_label;
     HSFeedback *Feedback;
     HSSpeech *Speech;
     HSState *State;

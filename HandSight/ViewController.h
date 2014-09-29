@@ -21,7 +21,7 @@
              *btnTaskStart, *btnLineBegin, *btnLineEnd, *btnParaEnd, *btnTextEnd, *btnAboveLine, *btnBelowLine, *btnExpText, *btnExpPicture, *btnExpSpacing;
     
     UISegmentedControl *segFeedback, *segDocument, *segAudioType, *segHapticType, *segLineHeight, *segInsTTS, *segReadingTTS, *segSpeed,
-                       *segReadingPitch, *segGuidance, *segDebug, *segVisualization, *segLeftResion, *segLog, *segCategory, *segMode, *segBluetoothState, *segExpDemo, *segExpDoc, *segPlainDoc, *segMagDoc, *segFeedbackTrain;
+                       *segReadingPitch, *segGuidance, *segDebug, *segVisualization, *segLeftResion, *segLog, *segCategory, *segMode, *segBluetoothState, *segExpDemo, *segExpDoc, *segPlainDoc, *segMagDoc, *segFeedbackTrain, *segFeedbackStep;
     
     UISwitch *swcAudioPitch, *swcAudioVolume, *swcReadPitch, *swcGuidance, *swcShowDebug, *swcShowLog, *swcLeftRegion, *swcVisualization, *swcShowStat, *swcSightedReading, *swcSpeech;
     
@@ -41,6 +41,7 @@
 
 
 - (void)segFeedbackChanged: (id)sender;
+- (void)segFeedbackStepChanged: (id)sender;
 - (void)segCateboryChanged: (id)sender;
 - (void)segDocumentChanged: (id)sender;
 - (void)modeChanged: (id)sender;

@@ -44,8 +44,7 @@
     self.lastWordID         =       -1;
     self.nextWordID         =       0;
     self.paraID             =       0;
-    self.lineID             =       0; 
-    
+    self.lineID             =       0;
     
     self.lockTaskStarted    =       NO;
 }
@@ -58,6 +57,8 @@
         self.mode                   =       MD_EXPLORATION_TEXT;
         self.bluetoothState         =       BT_OFF;
         self.speedType              =       ST_TRAIN;
+        
+        self.automaticMode          =       YES;
         
         self.debugMode              =       NO;
         self.audioMiddleValue       =       400.0f;
@@ -83,6 +84,7 @@
         self.documentType           =       DT_TRAIN;
         self.instructionGender      =       SG_MALE;
         self.readingGender          =       SG_FEMALE;
+        self.feedbackStepByStep     =       Step0; 
         
         // speed reading
         //self.mode                   =       MD_SIGHTED;

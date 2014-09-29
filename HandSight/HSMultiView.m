@@ -351,7 +351,7 @@
     
     [Log recordTouchUp:point.x withY:point.y withLineIndex:State.lineID withWordIndex:State.currentWordID withWordText:[Doc getKeyFromWordIndex:State.currentWordID]];
     
-    if (State.mode == MD_EXPLORATION_TEXT) [Feedback overSpacing];
+    if (State.mode == MD_EXPLORATION_TEXT || (State.automaticMode && State.automaticExploration)) [Feedback overSpacing];
     [Feedback verticalStop];
 }
 
@@ -609,6 +609,8 @@
     int totalLines = 1;
     int col = 0;
     
+    
+    
     while (i < Doc.textEndID) {
         
         lastID = i;
@@ -642,6 +644,7 @@
         
         if ([self inTwoLines:lastRect aboveOn:rect])
         {
+            [Doc.lineWidth addObject: [NSNumber numberWithFloat:lastRect.origin.x + lastRect.size.width - m_left]];
             ++line;
             ++totalLines;
         }
@@ -651,9 +654,16 @@
         
         // print every line
         NSLog(@"%d|%@:\t%d,%d,%d; %@, %@", i, [dict getKey], [dict getLine], [dict getPara], [dict getColumn], NSStringFromCGRect(lastRect), NSStringFromCGRect(rect) );
+        
+        //NSLog(@"How many lines in total: %d", [Doc.lineWidth count]);}
     }
     
-    NSLog(@"Add attributes end");
+    for (NSNumber *num in Doc.lineWidth) {
+        NSLog(@"LineWidth: %.1f", [num floatValue]);
+    }
+    NSLog(@"How many lines in total: %d", [Doc.lineWidth count]);
+    
+    NSLog(@"========= Add attributes end =============");
     State.numWords = (int)[Doc numActualWords];
     State.softwareStarted = true;
 }
@@ -737,7 +747,7 @@
     CGFloat center = lblNext.frame.origin.y + lblNext.frame.size.height / 2;
     CGFloat delta = center - y;
     
-    [Stat distance: delta];
+    [Stat distance:point.x withY: delta];
     
     if (fabs(delta) <= m_lineHeight / 2) delta = 0;
     if (delta > State.maxFeedbackValue) delta = State.maxFeedbackValue; else if (delta < State.minFeedbackValue) delta = State.minFeedbackValue;
@@ -845,6 +855,7 @@
     return;
 }
 
+
 /**
  * Handle Single Touch
  *
@@ -862,7 +873,15 @@
  *    6. whenever reached the end of line / para, wait line end.
  */
 - (void)handleSingleTouch:(CGPoint) point {
-    if ([State isExplorationTextMode]) {
+    if ([State isExplorationTextMode] || (State.automaticMode && State.automaticExploration)) {
+
+        if ((State.automaticMode && State.automaticExploration)) {
+            if ([self enterLineBeginRegion:point]) {
+                [self cancelWaitLineBegin];
+                return [Feedback lineBegin];
+            }
+        }
+        
         if (Doc.hasTitle && [lblTitle contains:point]) {
             return [Feedback overTitle];
         }
@@ -944,7 +963,6 @@
     }
     
     [self setupCurrentWordRect: point];
-    //NSLog(@"State current %d", [State currentWordID]);
     [self hideLineLabels];
     
     if ([self enterNextWordRegion:point]) {
@@ -1000,7 +1018,7 @@
     }
     
     if ([self skipNextWord:point]) {
-        NSLog(@"skip next word! State currentword %d lastWordID %d, nextWordID %d", [State currentWordID], [State lastWordID], [State nextWordID]);
+        NSLog(@"Skip next word! State currentword %d lastWordID %d, nextWordID %d", [State currentWordID], [State lastWordID], [State nextWordID]);
         [Stat skipWord: [State currentWordID] - [State lastWordID] - 1];
         [self speakCurrentWord];
         
@@ -1015,12 +1033,12 @@
     }
     
     CGFloat delta = [self getFeedbackValueFromPoint:point];
+    
     if (delta == 0) {
         [Feedback verticalStop];
     } else {
         [Feedback verticalFeedback: delta];
     }
-    
 }
 
 - (void) setupRectVisibility {
@@ -1045,3 +1063,4 @@
 
 
 @end
+

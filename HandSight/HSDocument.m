@@ -44,9 +44,10 @@
     self.arrWord            =           nil; 
     self.arrWordStartIndex  =           [[NSMutableArray alloc] init];
     self.arrWordDict        =           [[NSMutableArray alloc] init];
+    self.lineWidth          =           [[NSMutableArray alloc] init];
+    
     self.dictParaLine       =           [[NSMutableDictionary alloc] init];
 }
-
 
 - (void) setLoaded {
     NSLog(@"[Doc] Set loaded");
@@ -61,7 +62,8 @@
     [self.dictParaLine removeAllObjects];
     [self.arrImg removeAllObjects];
     [self.arrWordDict removeAllObjects];
-    [self.arrWordStartIndex removeAllObjects]; 
+    [self.arrWordStartIndex removeAllObjects];
+    [self.lineWidth removeAllObjects];
     
     [State reset];
     
@@ -111,12 +113,9 @@
     return nextWordIndex;
 }
 
-
 - (int) getNextWordID: (int) currentWordID {
     return [self getValidWordIndex: currentWordID + 1];
 }
-
-
 
 -(int) getColFromWordIndex: (int) wordIndex {
     NSMutableDictionary* dict = [self getWordDict: wordIndex];

@@ -11,12 +11,14 @@
 #import "HSSummary.h"
 #import "HSMeasure.h"
 #import "HSState.h"
+#import "HSDocument.h"
 
 @interface HSStat : NSObject {
     NSMutableString* m_data;
     NSMutableString* m_csv;
     NSMutableString* m_txt;
     
+    int m_count; 
     int m_numOfStat;
     
     CGFloat m_startTime, m_endTime;
@@ -34,6 +36,7 @@
     
     //Average absolute distance from line center
     HSMeasure *aad;
+    HSMeasure *aadx;
     
     //Maximum distance reached above line center
     HSMeasure *mda;
@@ -70,6 +73,7 @@
     
     HSFile* File;
     HSState* State;
+    HSDocument* Doc; 
 }
 
 
@@ -83,7 +87,7 @@
 - (void) lineEnd: (CGFloat) time;
 
 - (void) exitLine: (CGFloat) y;
-- (void) distance: (CGFloat) y;
+- (void) distance: (CGFloat) x withY: (CGFloat) y;
 - (void) skipWord: (int) numWords;
 - (void) reverseHorizontalDirection: (BOOL) offLine;
 - (void) reverseVerticalDirection: (BOOL) offLine;

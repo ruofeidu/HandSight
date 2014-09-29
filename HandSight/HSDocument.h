@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "HSUtils.h"
+#import "HSState.h"
+#import "NSMutableArray+QueueAdditions.h"
+#import "HSString.h"
+#import "HSDictionary.h"
 
 @interface HSDocument : NSObject {
 @protected
@@ -18,7 +21,7 @@
 @property (nonatomic) BOOL hasTitle, isLoaded;
 @property (nonatomic) int numCols, numImages, numPara, numPicParas, lineSymImg, firstColumnCharacters, textEndID;
 @property (nonatomic) NSMutableDictionary *dictParaLine;
-@property (nonatomic) NSMutableArray *arrImg, *arrWord, *arrWordStartIndex, *arrWordDict;
+@property (nonatomic) NSMutableArray *arrImg, *arrWord, *arrWordStartIndex, *arrWordDict, *lineWidth;
 
 + (HSDocument*) sharedInstance;
 - (void) reset;

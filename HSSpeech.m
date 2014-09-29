@@ -43,7 +43,6 @@ static uint MIN_SPOKEN_LENGTH = 3;
         [m_dict setValue:@"Doctor" forKey:@"Dr."];
         [m_dict setValue:@"Leave" forKey:@"live"];
         
-        
         NSLog(@"[SP] Inited");
     }
     
@@ -120,6 +119,10 @@ static uint MIN_SPOKEN_LENGTH = 3;
 
 - (void)speakText: (NSString *)s {
     //NSLog(@"[SP] speakText %@", s);
+    
+    if (State.feedbackStepByStep != Step0 && State.feedbackStepByStep != StepAll) return;
+    
+    
     m_lastSpoken = s;
     AVSpeechUtterance *utt = [AVSpeechUtterance speechUtteranceWithString:s];
 

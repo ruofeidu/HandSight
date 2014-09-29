@@ -28,7 +28,11 @@
     NSMutableString* m_data;
     NSMutableString* m_json;
     NSMutableString* m_txt;
+
+    NSString* m_instruction; 
     
+    CGFloat m_startTime;
+    CGFloat m_time; 
     int m_numOfLogs;
     
     HSFile* File;

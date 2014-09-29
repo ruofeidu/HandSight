@@ -56,6 +56,7 @@
     [self lineBreak];
     
     lblFeedbackTrain    =   [self allocLabel:lblFeedbackTrain withText:@"Feedback:"];
+    segFeedbackStep    =   [self allocSegmentation:segPlainDoc arr:[NSArray arrayWithObjects:@"Feedback Training Step by Step", nil] select:[State feedbackTrainType] action: @selector(segFeedbackStepChanged:)]; [self addSpace]; [self addSpace];
     segFeedbackTrain    =   [self allocSegmentation:segPlainDoc arr:[NSArray arrayWithObjects:@"Feedback Training Document", nil] select:[State feedbackTrainType] action: @selector(segFeedbackTrainChanged:)]; [self addSpace];
     [self lineBreak];
     
@@ -68,7 +69,7 @@
     segMagDoc           =   [self allocSegmentation:segMagDoc arr:[NSArray arrayWithObjects:@"1", @"2", nil] select:[State magDocType] action: @selector(segMagDocChanged:)]; [self addSpace];
     [self lineBreak];
 
-    m_render = NO;
+    //m_render = NO;
     y += m_inset;
     lblSpeedTest        =   [self allocTitle:lblAdvanced withText:@"Speed Test"];
     [self lineBreak];
@@ -79,7 +80,6 @@
     swcSpeech           =   [self allocSwitch:swcSpeech isOn:State.speechOn action:@selector(swcSpeechChanged:)];
     
     [self lineBreak];
-    m_render = YES;
     
     y += m_inset;
     m_render = YES;
@@ -96,10 +96,11 @@
     segMode             =   [self allocSegmentation:segMode arr:[NSArray arrayWithObjects:@"Exploration", @"Reading", @"Sighted", nil] select:[State mode] action:@selector(modeChanged:)];
     [self lineBreak];
     
+    m_render = NO;
     lblInsTTS           =   [self allocLabel:lblInsTTS withText:@"Ins/Read TTS:"];
     segInsTTS           =   [self allocSegmentation:segInsTTS arr:[NSArray arrayWithObjects:@"Male", @"Female", nil] select:[State instructionGender] action: @selector(segInsTTSChanged:)]; [self addSpace];
-    segDocument         =   [self allocSegmentation:segDocument arr:[NSArray arrayWithObjects:@"Male", @"Female", nil] select:[State readingGender] action: @selector(segReadingTTSChanged:)];
     [self lineBreak];
+    m_render = YES;
     
     lblDebug            =   [self allocLabel:lblDebug withText:@"Debug:"];
     swcShowDebug        =   [self allocSwitch:swcShowDebug isOn:State.debugMode action:@selector(swcShowDebugChanged:)];
@@ -273,6 +274,7 @@
     [self updateDocuments];
 }
 
+
 - (void)segPlainDocChanged: (id)sender {
     State.plainDocType = (enum PlainDocType) ([segPlainDoc selectedSegmentIndex] + 1);
     State.documentType = (enum DocumentType) ([segPlainDoc selectedSegmentIndex] + 1);
@@ -293,7 +295,17 @@
     State.documentType = DT_D;
     State.categoryType = CT_PLAIN;
     State.mode = MD_READING;
+     State.feedbackStepByStep = Step0;
     [self updateDocuments];
+}
+
+- (void) segFeedbackStepChanged:(id)sender {
+    State.documentType = DT_D;
+    State.categoryType = CT_PLAIN;
+    State.mode = MD_READING;
+    State.feedbackStepByStep = StepVertical;
+    [self updateDocuments];
+    State.feedbackStepByStep = StepVertical;
 }
 
 - (void)btnExpTextDown: (id)sender
@@ -390,7 +402,6 @@
 
 - (UILabel*) allocTitle: (UILabel*)label withText:(NSString*) text{
     if (label != nil) return label;
-    [Log recordSoftwareStart];
     label = ({
         UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(x, y, m_titleWidth, m_titleHeight)];
         x += m_textWidth;
@@ -579,7 +590,13 @@
     [segSpeed setSelectedSegmentIndex: State.speedType];
     [segFeedbackTrain setSelectedSegmentIndex: State.feedbackTrainType];
     
+    
     if (State.feedbackTrainType == FTT_NONE) [segFeedbackTrain setSelectedSegmentIndex: UISegmentedControlNoSegment];
+    
+    if (State.feedbackStepByStep == Step0) [segFeedbackStep setSelectedSegmentIndex: UISegmentedControlNoSegment]; else {
+        [segFeedbackStep setSelectedSegmentIndex: 0];
+        [segFeedbackTrain setSelectedSegmentIndex: UISegmentedControlNoSegment];
+    }
     if (State.expDocType == ED_NONE) [segExpDoc setSelectedSegmentIndex: UISegmentedControlNoSegment];
     if (State.magDocType == MD_NONE) [segMagDoc setSelectedSegmentIndex: UISegmentedControlNoSegment];
     if (State.plainDocType == PD_NONE) [segPlainDoc setSelectedSegmentIndex: UISegmentedControlNoSegment];
@@ -588,6 +605,7 @@
     [segDocument setSelectedSegmentIndex:State.documentType];
     [segMode setSelectedSegmentIndex:State.mode];
     
+    State.feedbackType = Step0;
 }
 
 - (void)switchView

@@ -10,7 +10,7 @@
 #import "HSTextView.h"
 
 @interface TextController : CommonTextController {
-    
+    NSTimer* m_timer; 
 }
 
 @end

@@ -12,6 +12,7 @@
 
 @interface CommonTextController : CommonController {
     UIButton* m_btnBack;
+    UISegmentedControl* m_seg; 
     HSMultiView *m_text;
     HSViz *m_viz;
 }

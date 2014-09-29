@@ -38,13 +38,7 @@
     self = [super init];
     
     if (self) {
-        /*
-         enlarge 
-         
-        m_textSize += 4;
-        m_titleSize += 4;
-        m_lineSpacing += 4;
-        */
+        //[self enlargeTextFont];
         NSLog(@"[MV] Inited");
     }
     
@@ -63,6 +57,12 @@
     [self clearViews];
     NSLog(@"[MV] PlainView Load Document");
     [[self textStorage] setAttributedString:[self getAttributedString]];
+}
+
+- (void)enlargeTextFont {
+    m_textSize += 4;
+    m_titleSize += 4;
+    m_lineSpacing += 4;
 }
 
 @end

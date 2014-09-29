@@ -24,7 +24,7 @@ enum BlueToothState { BT_OFF, BT_CONNECTING, BT_ON  };
 enum TouchType { TT_DOWN, TT_MOVE, TT_UP  };
 enum SpeedType { ST_TRAIN, ST_1, ST_2, ST_3, ST_4, ST_NONE };
 enum FeedbackTrainType { FTT_TRAIN, FTT_NONE };
-
+enum FeedbackStepByStep { Step0, StepVertical, StepLine, StepParagraph, StepAll };
 
 @interface HSState : NSObject {
 
@@ -49,13 +49,15 @@ enum FeedbackTrainType { FTT_TRAIN, FTT_NONE };
 @property (nonatomic) enum MagazineDocType magDocType;
 @property (nonatomic) enum SpeedType speedType;
 @property (nonatomic) enum FeedbackTrainType feedbackTrainType;
+@property (nonatomic) enum FeedbackStepByStep feedbackStepByStep;
+
 
 @property (nonatomic) NSString *insStartPlain, *insStartPlainExplore, *insStartMag, *insExploreMode, *insReadingMode,
                                 *insStartMagExplore, *insStartSighted, *insEndPlain, *insTitle, *insParagraph, *insPicture, *insText, *insEOC;
 @property (nonatomic) NSMutableArray *arrInstruction;
 
 @property (nonatomic) BOOL taskStarted, taskEnded, lockTaskStarted, softwareStarted, audioPitch, audioVolume;
-@property (nonatomic) BOOL waitLineBegin, waitLineEnd, waitParaEnd, waitTaskEnd, waitColumnEnd, sightedSpeaking, readingPitch, audioVolumeChange, hasEndColume, debugMode, showLog, showStat, thisLineHasAtLeastOneWordSpoken, speechOn;
+@property (nonatomic) BOOL waitLineBegin, waitLineEnd, waitParaEnd, waitTaskEnd, waitColumnEnd, sightedSpeaking, readingPitch, audioVolumeChange, hasEndColume, debugMode, showLog, showStat, thisLineHasAtLeastOneWordSpoken, speechOn, guided, automaticMode, automaticExploration;
 
 @property (nonatomic) int currentWordID, lastWordID, nextWordID, paraID, lineID, numWords;
 @property (nonatomic) CGFloat readingSpeed, maxVibration, maxVolume, lineHeight, fieldOfView;
