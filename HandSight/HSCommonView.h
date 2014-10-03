@@ -17,7 +17,7 @@
     
     NSMutableArray *m_arrImg, *m_arrLblPara, *m_arrBlanks, *m_arrControls;
     
-    UILabel* lblLeft, *lblStart, *lblCurrent, *lblNext, *lblLast, *lblTitle, *lblColumn, *lblRight, *lblTop, *lblBottom, *lblLineEnd, *lblLineBegin;
+    UILabel* lblLeft, *lblStart, *lblCurrent, *lblNext, *lblLast, *lblTitle, *lblColumn, *lblRight, *lblTop, *lblBottom, *lblLineEnd, *lblLineBegin, *lblTrain, *lblTrainBG;
     
     NSString* m_textFontName; 
     

@@ -15,7 +15,6 @@
 
 @interface HSFeedback : NSObject {
     BOOL m_verticalOn;
-    
     HSState* State;
     HSAudio* Audio;
     HSBluetooth* Bluetooth;

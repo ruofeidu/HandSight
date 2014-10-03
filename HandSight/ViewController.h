@@ -9,13 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "CommonController.h"
 #import "CommonTextController.h"
+#import "HSFeedback.h"
 
 @interface ViewController : CommonController {
     UILabel *lblTitle, *lblAdvanced, *lblFeedbackType, *lblDocument, *lblAudioType, *lblAudioPitch, *lblMaxVolume, *lblHapticType, *lblExpCues, *lblSighted, *lblExplorationStudy, *lblReadingStudy,
             *lblMaxVibration, *lblLineHeight, *lblHapticThres, *lblInsTTS, *lblReadTTS, *lblReadSpeed, *lblReadPitch, *lblAboveLine, *lblBelowLine, *lblSpeed, *lblSpeedTest, *lblSpeech,
             *lblLineSpacing, *lblAudioThreshold, *lblVisualization, *lblDebug, *lblLog, *lblDemo, *lblSightedReading, *lblAudioVolume, *lblBluetooth, *lblExpDemo, *lblExpDoc, *lblPlainDoc, *lblMagDoc, *lblFeedbackTrain;
     
-    UILabel *numHapticThres, *numLineHeights, *numMaxVolume, *numReadingSpeed, *numMaxVibration;
+    UILabel *numHapticThres, *numLineHeights, *numMaxVolume, *numReadingSpeed, *numMaxVibration, *lblAutomatic;
     
     UIButton *btnReset, *btnResume, *btnStart,
              *btnTaskStart, *btnLineBegin, *btnLineEnd, *btnParaEnd, *btnTextEnd, *btnAboveLine, *btnBelowLine, *btnExpText, *btnExpPicture, *btnExpSpacing;
@@ -23,7 +24,7 @@
     UISegmentedControl *segFeedback, *segDocument, *segAudioType, *segHapticType, *segLineHeight, *segInsTTS, *segReadingTTS, *segSpeed,
                        *segReadingPitch, *segGuidance, *segDebug, *segVisualization, *segLeftResion, *segLog, *segCategory, *segMode, *segBluetoothState, *segExpDemo, *segExpDoc, *segPlainDoc, *segMagDoc, *segFeedbackTrain, *segFeedbackStep;
     
-    UISwitch *swcAudioPitch, *swcAudioVolume, *swcReadPitch, *swcGuidance, *swcShowDebug, *swcShowLog, *swcLeftRegion, *swcVisualization, *swcShowStat, *swcSightedReading, *swcSpeech;
+    UISwitch *swcAudioPitch, *swcAudioVolume, *swcReadPitch, *swcGuidance, *swcShowDebug, *swcShowLog, *swcLeftRegion, *swcVisualization, *swcShowStat, *swcSightedReading, *swcSpeech, *swcAutomaticMode;
     
     UISlider *sldMaxVolume, *sldMaxVibration, *sldReadingSpeed, *sldLineHeight, *sldHapticThres, *sldLineSpacing, *sldAudioThreshold,
              *sldAboveLine, *sldBelowLine;

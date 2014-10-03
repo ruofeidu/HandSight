@@ -117,7 +117,7 @@
             break;
     }
     
-    CGFloat delay = State.mode == MD_SIGHTED ? 0.01 : 2.0;
+    CGFloat delay = State.mode == MD_SIGHTED ? 0.01 : 0.1;
     [NSTimer scheduledTimerWithTimeInterval:delay target:self selector:@selector(setTaskStart:) userInfo:nil repeats:NO];
     
     [Log recordTaskBegin];
@@ -202,7 +202,7 @@
 - (void) lineBegin {
     if (State.automaticMode) [self overSpacing];
     
-    if (State.feedbackStepByStep == StepVertical) return;
+    if (State.feedbackStepByStep == StepVertical || State.feedbackStepByStep == StepVerticalText) return;
         
     State.thisLineHasAtLeastOneWordSpoken = false;
     [Log recordBeginLine: State.lineID];
@@ -224,7 +224,7 @@
 - (void) lineEnd {
     [Log recordEndLine: State.lineID];
     
-    if (State.feedbackStepByStep == StepVertical) return;
+    if (State.feedbackStepByStep == StepVertical || State.feedbackStepByStep == StepVerticalText) return;
     
     NSLog(@"%d, %d, %d", [State feedbackType], FT_AUDIO, [State feedbackType] == FT_AUDIO);
     
@@ -245,7 +245,7 @@
 
 - (void) paraEnd {
     [Log recordEndParagraph: State.paraID];
-    if (State.feedbackStepByStep == StepVertical || State.feedbackStepByStep == StepLine) return;
+    if (State.feedbackStepByStep == StepVertical || State.feedbackStepByStep == StepVerticalText) return;
     
     if ([State isAudioOn] || [State isHaptio]) {
         [Audio playAudio:AU_PARA_END];

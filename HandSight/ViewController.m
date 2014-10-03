@@ -14,11 +14,26 @@
 
 @implementation ViewController
 
+- (void)stop
+{
+    [[HSFeedback sharedInstance] verticalStop];
+}
+
 - (void)addControls
 {
+    State.feedbackStepByStep = Step0;
+    
+    [self stop];
+    [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(stop) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(stop) userInfo:nil repeats:NO];
+
     x = m_inset, y = m_inset; m_render = YES;
     
     lblExplorationStudy =   [self allocTitle:lblExplorationStudy withText:@"HandSight Exploration Study"];
+    [self addSpace];
+
+    segBluetoothState   =   [self allocSegmentation:segBluetoothState arr:[NSArray arrayWithObjects:@"BT Off", @"Connecting", @"BT On", nil] select:[State bluetoothState] action:nil];
+    
     [self lineBreak];
     
     lblExpCues          =   [self allocLabel:lblExpCues withText:@"Cues:"];
@@ -36,7 +51,8 @@
     
     lblFeedbackType     =   [self allocLabel:lblFeedbackType withText:@"Feedback Type: "];
     segFeedback         =   [self allocSegmentation:segFeedback arr:[NSArray arrayWithObjects:@"Audio", @"Haptio", nil] select:[State feedbackType] action: @selector(segFeedbackChanged:)]; [self addSpace];
-    segBluetoothState   =   [self allocSegmentation:segBluetoothState arr:[NSArray arrayWithObjects:@"BT Off", @"Connecting", @"BT On", nil] select:[State bluetoothState] action:nil];
+    lblAutomatic          =   [self allocLabel:lblAutomatic withText:@"Automatic:"];
+    swcAutomaticMode          =   [self allocSwitch:swcAutomaticMode isOn:State.automaticMode action:@selector(swcAutomaticChanged:)];
     [self lineBreak];
     
     [self allocLabel:lblDemo withText:@"Cues:"];
@@ -57,6 +73,7 @@
     
     lblFeedbackTrain    =   [self allocLabel:lblFeedbackTrain withText:@"Feedback:"];
     segFeedbackStep    =   [self allocSegmentation:segPlainDoc arr:[NSArray arrayWithObjects:@"Feedback Training Step by Step", nil] select:[State feedbackTrainType] action: @selector(segFeedbackStepChanged:)]; [self addSpace]; [self addSpace];
+    [segFeedbackStep setSelectedSegmentIndex: UISegmentedControlNoSegment]; 
     segFeedbackTrain    =   [self allocSegmentation:segPlainDoc arr:[NSArray arrayWithObjects:@"Feedback Training Document", nil] select:[State feedbackTrainType] action: @selector(segFeedbackTrainChanged:)]; [self addSpace];
     [self lineBreak];
     
@@ -124,34 +141,70 @@
 
 - (void)btnTaskStartTouched
 {
+    //int tmp = State.
+    
+    int last = State.feedbackStepByStep;
+    State.feedbackStepByStep = Step0;
+    
     [Speech speakText: [State insStartPlain]];
+    
+    State.feedbackStepByStep = last;
 }
 
 - (void)btnLineBeginTouched
 {
+    int last = State.feedbackStepByStep;
+    State.feedbackStepByStep = Step0;
+    
     [Feedback lineBegin];
+    
+    State.feedbackStepByStep = last;
 }
 
 - (void)btnLineEndTouched
 {
+    int last = State.feedbackStepByStep;
+    State.feedbackStepByStep = Step0;
+    
     State.thisLineHasAtLeastOneWordSpoken = true;
     [Feedback lineEnd];
+    
+    State.feedbackStepByStep = last;
 }
 
 - (void)btnParagraphEndTouched
 {
+    
+    int last = State.feedbackStepByStep;
+    State.feedbackStepByStep = Step0;
+    
     [Feedback paraEnd];
+    
+    
+    State.feedbackStepByStep = last;
 }
 
 - (void)btnTextEndTouched
 {
+    
+    int last = State.feedbackStepByStep;
+    State.feedbackStepByStep = Step0;
+    
     [Speech speakText: [State insEndPlain]];
     
+    
+    State.feedbackStepByStep = last;
 }
 
 - (void)sldAboveLineTouched
 {
+    
+    int last = State.feedbackStepByStep;
+    State.feedbackStepByStep = Step0;
+    
     [Feedback verticalFeedback: [sldAboveLine value]];
+    
+    State.feedbackStepByStep = last;
 }
 
 - (void)sldAboveLineTouchCanceled
@@ -161,7 +214,12 @@
 
 - (void)sldBelowLineTouched
 {
+    
+    int last = State.feedbackStepByStep;
+    State.feedbackStepByStep = Step0;
     [Feedback verticalFeedback: -[sldBelowLine value]];
+    
+    State.feedbackStepByStep = last;
 }
 
 - (void)sldBelowLineTouchCanceled
@@ -292,7 +350,7 @@
 }
 
 - (void)segFeedbackTrainChanged: (id)sender {
-    State.documentType = DT_D;
+    State.documentType = DT_F;
     State.categoryType = CT_PLAIN;
     State.mode = MD_READING;
      State.feedbackStepByStep = Step0;
@@ -355,6 +413,11 @@
     State.speechOn = [swcSpeech isOn];
 }
 
+- (void)swcAutomaticChanged: (id) sender
+{
+    State.automaticMode = [swcAutomaticMode isOn];
+}
+
 - (void)swcShowDebugChanged: (id)sender
 {
     State.debugMode = [swcShowDebug isOn];
@@ -403,8 +466,8 @@
 - (UILabel*) allocTitle: (UILabel*)label withText:(NSString*) text{
     if (label != nil) return label;
     label = ({
-        UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(x, y, m_titleWidth, m_titleHeight)];
-        x += m_textWidth;
+        UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(x, y, m_titleWidth + m_segWidth, m_titleHeight)];
+        x += m_titleWidth - m_textWidth + m_segWidth;
         [l setText: text];
         [l setTextColor: [UIColor blackColor]];
         [l setFont: [UIFont fontWithName:m_titleFontName size:m_titleFontSize]];
@@ -551,7 +614,7 @@
             State.expDocType = ED_NONE;
             
             if (State.categoryType == CT_PLAIN) {
-                if (State.documentType == DT_D) {
+                if (State.documentType == DT_F) {
                     State.feedbackTrainType = FTT_TRAIN;
                     State.plainDocType = PD_NONE;
                 } else {
@@ -573,7 +636,7 @@
             State.plainDocType = PD_NONE;
             State.magDocType = MD_NONE;
             State.categoryType = CT_PLAIN;
-            if (State.documentType == DT_D) {
+            if (State.documentType == DT_F) {
                 State.speedType = ST_TRAIN;
             } else {
                 State.speedType = (enum SpeedType) (State.documentType + 1);
@@ -605,7 +668,8 @@
     [segDocument setSelectedSegmentIndex:State.documentType];
     [segMode setSelectedSegmentIndex:State.mode];
     
-    State.feedbackType = Step0;
+    State.feedbackStepByStep = Step0;
+    [Feedback verticalStop];
 }
 
 - (void)switchView

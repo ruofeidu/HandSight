@@ -31,4 +31,7 @@
 - (void) layoutSubviews;
 - (NSAttributedString*) getAttributedString;
 - (void) clearViews;
+- (void) getStartedQuick;
+- (void)handleSingleTouch:(CGPoint) point;
+
 @end

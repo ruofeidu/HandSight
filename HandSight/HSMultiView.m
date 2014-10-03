@@ -62,8 +62,39 @@
     [self addControls];
 }
 
+- (void) getStartedQuick {
+    
+    if (![State taskStarted]) {
+        if (State.feedbackStepByStep != Step0) {
+            [self taskStart];
+            if (State.feedbackStepByStep == StepVertical) {
+                [lblTrain setHidden: NO];
+            }
+            State.taskStarted = true;
+            State.waitLineBegin = false;
+            
+        }
+    }
+}
+
 - (void)drawRect:(CGRect)rect {
     NSLog(@"[MV] Draw Rects");
+    
+    if (State.feedbackStepByStep != Step0) {
+        [lblStart setHidden: YES];
+        [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(getStartedQuick) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(calcDocument) userInfo:nil repeats:NO];
+        
+        if (State.categoryType == CT_MAGAZINE) {
+            [self taskStart];
+            State.taskStarted = true;
+            State.waitLineBegin = false;
+            State.waitLineEnd = false;
+            [lblStart setHidden: YES];
+            [lblLineBegin setHidden: YES];
+        }
+    }
 
     for (NSUInteger i = 0; i < [Doc numCols]; i++) {
         NSTextContainer *container = self.layoutManager.textContainers[i];
@@ -78,6 +109,13 @@
 }
 
 - (void)converMode: (UITapGestureRecognizer *)recognizer {
+    
+    
+    if (State.categoryType == CT_MAGAZINE) {
+         CGPoint location = [recognizer locationInView:recognizer.view];
+        
+    }
+    
     NSLog(@"[MV] Mode converted.");
     [Feedback convertMode];
 }
@@ -115,6 +153,7 @@
     // the view bound
     m_left          =       120;
     m_top           =       70;
+        
     m_bottom        =       70;
     m_right         =       100;
     m_width         =       1024;
@@ -182,7 +221,7 @@
 }
 
 - (NSAttributedString*) getAttributedString {
-    int c = [State sightedReading] ? 2 : [State categoryType]; 
+    int c = [State sightedReading] ? 2 : [State categoryType];
     NSString* textContent = [File readTxt: [NSString stringWithFormat:@"%d%d", c, [State documentType]]];
     NSString* text = [textContent stringByReplacingOccurrencesOfString:@"\n" withString:@" \n "];
     
@@ -195,6 +234,7 @@
     
     bool lineBreak = false;
     bool isTitle = false;
+    
     
     for (int i = 0; i < [Doc numWords]; ++i) {
         NSString *strData = [NSString stringWithFormat:@"%@ ", Doc.arrWord[i]];
@@ -331,6 +371,8 @@
     CGPoint point = [self getTheBestPoint: touches];
     [Viz touchDown: point];
     [self handleSingleTouch: point];
+    
+    
     
     [Log recordTouchDown:point.x withY:point.y withLineIndex:State.lineID withWordIndex:State.currentWordID withWordText:[Doc getKeyFromWordIndex:State.currentWordID]];
 }
@@ -659,15 +701,13 @@
     }
     
     for (NSNumber *num in Doc.lineWidth) {
-        NSLog(@"LineWidth: %.1f", [num floatValue]);
+        //NSLog(@"LineWidth: %.1f", [num floatValue]);
     }
-    NSLog(@"How many lines in total: %d", [Doc.lineWidth count]);
+    //NSLog(@"How many lines in total: %d", [Doc.lineWidth count]);
     
     NSLog(@"========= Add attributes end =============");
     State.numWords = (int)[Doc numActualWords];
-    State.softwareStarted = true;
 }
-
 
 - (void) setupLineEndRegion {
     if ([self isLeftColumn]) {
@@ -754,12 +794,9 @@
     return delta;
 }
 
-/**
- * Task Start
- * 1. Calculate the attributes of each word
- * 2. Setup next word region = 0
- */
-- (void) taskStart {
+- (void) calcDocument {
+    if (State.softwareStarted) return;
+    
     [self addAttributes];
     State.lastWordID = -1; //195; //108;
     
@@ -780,11 +817,25 @@
             case DT_D:
                 State.lastWordID = 65;
         }
+        State.waitLineBegin = false; 
     }
+    
     State.currentWordID = State.lastWordID;
     State.nextWordID = State.currentWordID + 1;
+    
+    State.softwareStarted = true;
+}
+
+/**
+ * Task Start
+ * 1. Calculate the attributes of each word
+ * 2. Setup next word region = 0
+ */
+- (void) taskStart {
+    [self calcDocument];
     [lblStart setHidden: YES];
     [self setupNextWordRegion];
+    
 }
 
 - (void) setupCurrentWordRect: (CGPoint) point {
@@ -855,7 +906,6 @@
     return;
 }
 
-
 /**
  * Handle Single Touch
  *
@@ -873,6 +923,12 @@
  *    6. whenever reached the end of line / para, wait line end.
  */
 - (void)handleSingleTouch:(CGPoint) point {
+    State.lastPoint = point;
+    
+    if (State.categoryType == CT_MAGAZINE && [self getColumnFromPoint:point] == 0 && [Doc getColFromWordIndex:State.currentWordID] == 1) {
+        return;
+    }
+    
     if ([State isExplorationTextMode] || (State.automaticMode && State.automaticExploration)) {
 
         if ((State.automaticMode && State.automaticExploration)) {
@@ -905,16 +961,48 @@
         return; 
     }
     
+    if (State.feedbackStepByStep != Step0) State.mode = MD_READING;
+    
     if ([State taskEnded]) return;
+    
+    if (State.feedbackStepByStep == Step0)
     if (![State taskStarted]) {
+        
+        if (State.feedbackStepByStep != Step0) {
+            [self taskStart];
+            return [Feedback taskStart];
+        }
+        
         if ([lblStart contains:point] || [State sightedReading]) {
             [self taskStart];
             return [Feedback taskStart];
         }
+        
         return;
     }
     
     if (![State softwareStarted]) return;
+    
+    if (State.feedbackStepByStep == StepVertical) {
+        [lblTrain setHidden: NO];
+        
+        CGFloat y = point.y;
+        CGFloat center = lblTrain.frame.origin.y + m_lineHeight / 2;
+        CGFloat delta = center - y;
+        
+        if (fabs(delta) <= m_lineHeight / 2) delta = 0;
+        if (delta > State.maxFeedbackValue) delta = State.maxFeedbackValue; else if (delta < State.minFeedbackValue) delta = State.minFeedbackValue;
+
+        if (delta == 0) {
+            [Feedback verticalStop];
+        } else {
+            [Feedback verticalFeedback: delta];
+        }
+        return;
+    } else {
+        [lblTrain setHidden: YES];
+    }
+    
     
     if (!State.hasEndColume) {
         if (point.x < m_left - 10) return;

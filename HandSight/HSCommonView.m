@@ -76,6 +76,7 @@
                     y = 539; 
             }
         }
+        
         y += 70;
         UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(m_lblStartX, y, m_left, h)];
         [l setText:@"Start Region"];
@@ -101,6 +102,19 @@
         [self addSubview:l];
         if (!State.debugMode) [l setHidden:YES];
         [m_arrControls addObject:l];
+        l;
+    });
+    
+    lblTrain = ({
+        UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(m_left, 350, m_width - m_left - m_right, m_lineHeight)];
+        [l setText:@"The Text"];
+        [l setTextColor:[UIColor blackColor]];
+        [l setTextAlignment:NSTextAlignmentCenter];
+        [l setBackgroundColor:[UIColor yellowColor]];
+        [l setFont: [UIFont fontWithName:m_textFontName size:m_textSize / 2]];
+        [self addSubview:l];
+        [m_arrControls addObject:l];
+        [l setHidden: YES]; 
         l;
     });
     
