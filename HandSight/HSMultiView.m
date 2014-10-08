@@ -67,12 +67,9 @@
     if (![State taskStarted]) {
         if (State.feedbackStepByStep != Step0) {
             [self taskStart];
-            if (State.feedbackStepByStep == StepVertical) {
-                [lblTrain setHidden: NO];
-            }
+            [self trainVerticalBox];
             State.taskStarted = true;
             State.waitLineBegin = false;
-            
         }
     }
 }
@@ -81,19 +78,21 @@
     NSLog(@"[MV] Draw Rects");
     
     if (State.feedbackStepByStep != Step0) {
-        [lblStart setHidden: YES];
+        [self trainVerticalBox];
         [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(getStartedQuick) userInfo:nil repeats:NO];
     } else {
         [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(calcDocument) userInfo:nil repeats:NO];
         
-        if (State.categoryType == CT_MAGAZINE) {
+        //if (State.categoryType == CT_MAGAZINE) {
             [self taskStart];
             State.taskStarted = true;
             State.waitLineBegin = false;
             State.waitLineEnd = false;
             [lblStart setHidden: YES];
             [lblLineBegin setHidden: YES];
-        }
+        //}
+        
+        [lblTrainBG setHidden: YES]; 
     }
 
     for (NSUInteger i = 0; i < [Doc numCols]; i++) {
@@ -109,15 +108,13 @@
 }
 
 - (void)converMode: (UITapGestureRecognizer *)recognizer {
-    
-    
-    if (State.categoryType == CT_MAGAZINE) {
-         CGPoint location = [recognizer locationInView:recognizer.view];
-        
-    }
-    
     NSLog(@"[MV] Mode converted.");
     [Feedback convertMode];
+}
+
+- (void)hold: (UITapGestureRecognizer *)recognizer {
+    CGPoint location = [recognizer locationInView:recognizer.view];
+    [self handleSingleTouch: location];
 }
 
 - (void)layoutSubviews {
@@ -194,8 +191,12 @@
     DEFAULT_RECT    =       CGRectMake(1, 1, 1, 1);
     
     m_doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(converMode:)];
+    m_hold = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hold:)];
+
     m_doubleTap.numberOfTapsRequired = 2;
     m_doubleTap.numberOfTouchesRequired = 2;
+    
+    m_hold.numberOfTouchesRequired = 1;
     
     m_titleStyle = [[NSMutableParagraphStyle alloc] init];
     m_titleStyle.headIndent = 0;
@@ -340,65 +341,125 @@
     return ans;
 }
 
-- (CGPoint) getTheBestPoint: (NSSet *)touches {
-    CGPoint point = [[touches anyObject] locationInView: self];
-    BOOL multiTouch = [touches count] > 1;
+- (CGPoint) getTheBestPoint {
+    if ([State.activeTouches count] == 0) return CGPointMake(0, 0);
+    CGPoint point = [[State.activeTouches objectAtIndex:0] locationInView: self];
+    NSString *key = [NSString stringWithFormat:@"%lu", (unsigned long)[[State.activeTouches objectAtIndex:0] hash]];
+    int hand = [[State.touchDict objectForKey:key] intValue];
     
-    CGFloat leftBoundary = State.hasEndColume ? m_left + m_columnWidth + m_columnSpacing - 10 : m_left - 10;
+
+    BOOL multiTouch = [State.activeTouches count] > 1;
     
     if (multiTouch) {
-        for (UITouch *aTouch in touches) {
-            CGPoint aPoint = [aTouch locationInView: self];
+        point.x = -1; 
+        hand = 2;
+        for (UITouch *aTouch in State.activeTouches) {
+            NSString *key = [NSString stringWithFormat:@"%lu", (unsigned long)[aTouch hash]];
+            int hand = [[State.touchDict objectForKey:key] intValue];
+            if (hand == TH_LEFT || hand == TH_EXTRA) continue;
             
-            if (aPoint.x > leftBoundary) {
+            if (hand == TH_UNKNOWN) {
+                [State.touchDict setValue:[NSNumber numberWithInt: TH_LEFT] forKey:key];
+            }
+
+            CGPoint aPoint = [aTouch locationInView: self];
+            if (aPoint.x > point.x) {
                 point = aPoint;
             }
-            NSLog(@"Multitouch: %@", NSStringFromCGPoint(aPoint));
         }
         
-        for (UITouch *aTouch in touches) {
+        for (UITouch *aTouch in State.activeTouches) {
             CGPoint aPoint = [aTouch locationInView: self];
-            if (aPoint.x > point.x && aPoint.x > leftBoundary) {
-                point = aPoint;
+            if (aPoint.x == point.x) {
+                NSString *key = [NSString stringWithFormat:@"%lu", (unsigned long)[aTouch hash]];
+                
+                [State.touchDict setValue:[NSNumber numberWithInt:TH_RIGHT] forKey:key];
+                
+                break;
             }
+
         }
     }
+    
+    if (hand == 1) return CGPointMake(0, 0);
+    
+    
     return point;
 }
 
-
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    CGPoint point = [self getTheBestPoint: touches];
+    for (UITouch *touch in touches) {
+        if (![State.activeTouches containsObject:touch]) {
+            [State.activeTouches addObject:touch];
+            NSString *key = [NSString stringWithFormat:@"%lu", (unsigned long)[touch hash]];
+            
+            //[State.touchDict setValue:[NSNumber numberWithInt:TH_UNKNOWN] forKey:key];
+            
+            if ([State.activeTouches count] > 2) {
+                [State.touchDict setValue:[NSNumber numberWithInt:TH_EXTRA] forKey:key];
+            } else {
+                [State.touchDict setValue:[NSNumber numberWithInt:TH_UNKNOWN] forKey:key];
+            }
+        
+        }
+    }
+    CGPoint point = [self getTheBestPoint];
+    
+    
     [Viz touchDown: point];
     [self handleSingleTouch: point];
     
-    
-    
     [Log recordTouchDown:point.x withY:point.y withLineIndex:State.lineID withWordIndex:State.currentWordID withWordText:[Doc getKeyFromWordIndex:State.currentWordID]];
+    
+    [self updateTouchLog];
+    
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    CGPoint point = [self getTheBestPoint: touches];
+    CGPoint point = [self getTheBestPoint];
     [Viz touchMove: point];
     [self handleSingleTouch: point];
     
     [Log recordTouchMove:point.x withY:point.y withLineIndex:State.lineID withWordIndex:State.currentWordID withWordText:[Doc getKeyFromWordIndex:State.currentWordID]];
+    
+    [self updateTouchLog];
+    
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
-    CGPoint point = [self getTheBestPoint: touches];
+    for (UITouch *touch in touches) {
+        [State.activeTouches removeObject:touch];
+        
+        NSString *key = [NSString stringWithFormat:@"%lu", (unsigned long)[touch hash]];
+        [State.touchDict removeObjectForKey:key];
+    }
+    CGPoint point = [self getTheBestPoint];
     [Viz touchUp: point];
     
-    [self handleSingleTouch: point];
-    
     [Log recordTouchUp:point.x withY:point.y withLineIndex:State.lineID withWordIndex:State.currentWordID withWordText:[Doc getKeyFromWordIndex:State.currentWordID]];
-    
     if (State.mode == MD_EXPLORATION_TEXT || (State.automaticMode && State.automaticExploration)) [Feedback overSpacing];
+    [lblCurrent setHidden: YES];
     [Feedback verticalStop];
+    
+    [self updateTouchLog];
+    
 }
 
 - (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self touchesCancelled:touches withEvent:event];
+    for (UITouch *touch in touches) {
+        [State.activeTouches removeObject:touch];
+    }
+    CGPoint point = [self getTheBestPoint];
+    [Viz touchUp: point];
+    [self handleSingleTouch: point];
+    
+    [Log recordTouchUp:point.x withY:point.y withLineIndex:State.lineID withWordIndex:State.currentWordID withWordText:[Doc getKeyFromWordIndex:State.currentWordID]];
+    if (State.mode == MD_EXPLORATION_TEXT || (State.automaticMode && State.automaticExploration)) [Feedback overSpacing];
+    [lblCurrent setHidden: YES];
+    [Feedback verticalStop];
+    
+    [self updateTouchLog];
+    
 }
 
 - (void) setLabelVisibility: (BOOL) visibility {
@@ -449,11 +510,14 @@
 }
 
 - (BOOL) enterLineBeginRegion: (CGPoint) point {
+    return [lblLineBegin contains: point];
+    /*
     if ([self isRightColumn]) {
         return point.x <= m_left + m_columnWidth + m_columnSpacing && point.x >= m_left + m_columnWidth + m_columnSpacing - 20;
     } else {
         return point.x <= m_left && point.x >= m_left - 20;
     }
+     */
 }
 
 /**
@@ -720,9 +784,9 @@
 
 - (void) setupLineBeginRegion {
     if ([self isRightColumn]) {
-        [lblLineBegin setFrame: CGRectMake(m_left + m_columnWidth + m_columnSpacing - 20, 0, 20, m_height)];
+        [lblLineBegin setFrame: CGRectMake(m_left + m_columnWidth + m_columnSpacing - 40, 0, 60, m_height)];
     } else {
-        [lblLineBegin setFrame: CGRectMake(m_left - 20, 0, 20, m_height)];
+        [lblLineBegin setFrame: CGRectMake(m_left - 40, 0, 60, m_height)];
     }
     [lblLineBegin setHidden: NO];
 }
@@ -816,6 +880,9 @@
                 break;
             case DT_D:
                 State.lastWordID = 65;
+                break;
+            default:
+                break;
         }
         State.waitLineBegin = false; 
     }
@@ -906,6 +973,63 @@
     return;
 }
 
+- (void) trainVerticalBox {
+    if (State.feedbackStepByStep == StepVertical) {
+        [lblTrainBG setHidden: NO];
+        [lblTrain setHidden: NO];
+        [lblCurrent setHidden: YES];
+        [lblNext setHidden: YES];
+        [lblStart setHidden: YES];
+        State.mode = MD_READING;
+    }
+}
+
+- (void) trainElse {
+    if (State.isTrainingMode) {
+        [lblStart setHidden: YES];
+        [lblTrainBG setHidden: YES];
+        [lblTrain setHidden: YES];
+        [lblCurrent setHidden: YES];
+        [lblNext setHidden: NO];
+        State.mode = MD_READING;
+    }
+}
+
+- (void) gotoBeginning {
+    
+}
+
+- (void) gotoNextLine {
+    
+}
+
+- (void) exploreText: (CGPoint) point {
+    if ((State.automaticMode && State.automaticExploration)) {
+        if ([self enterLineBeginRegion:point]) {
+            [self cancelWaitLineBegin];
+            return [Feedback lineBegin];
+        }
+    }
+    
+    if (Doc.hasTitle && [lblTitle contains:point]) {
+        return [Feedback overTitle];
+    }
+    
+    for (int i = (Doc.hasTitle ? 1 : 0); i < [m_arrLblPara count]; ++i) {
+        if ([ [m_arrLblPara objectAtIndex:i] contains: point ] ) {
+            return [Feedback overParagraph: (Doc.hasTitle ? i : i+1) ];
+        }
+    }
+    
+    for (UIImageView* v in m_arrImg) {
+        if ([v contains:point]) {
+            return [Feedback overPicture];
+        }
+    }
+    
+    return [Feedback overSpacing];
+}
+
 /**
  * Handle Single Touch
  *
@@ -923,61 +1047,20 @@
  *    6. whenever reached the end of line / para, wait line end.
  */
 - (void)handleSingleTouch:(CGPoint) point {
-    State.lastPoint = point;
+    if ([State isTrainingMode]) State.mode = MD_READING;
+    if (point.x == 0 && point.y == 0) return;
     
-    if (State.categoryType == CT_MAGAZINE && [self getColumnFromPoint:point] == 0 && [Doc getColFromWordIndex:State.currentWordID] == 1) {
-        return;
+    if ([State isExplorationTextMode]) {
+        return [self exploreText: point];
     }
-    
-    if ([State isExplorationTextMode] || (State.automaticMode && State.automaticExploration)) {
-
-        if ((State.automaticMode && State.automaticExploration)) {
-            if ([self enterLineBeginRegion:point]) {
-                [self cancelWaitLineBegin];
-                return [Feedback lineBegin];
-            }
-        }
-        
-        if (Doc.hasTitle && [lblTitle contains:point]) {
-            return [Feedback overTitle];
-        }
-        
-        for (int i = (Doc.hasTitle ? 1 : 0); i < [m_arrLblPara count]; ++i) {
-            if ([ [m_arrLblPara objectAtIndex:i] contains: point ] ) {
-                return [Feedback overParagraph: (Doc.hasTitle ? i : i+1) ];
-            }
-        }
-        
-        for (UIImageView* v in m_arrImg) {
-            if ([v contains:point]) {
-                return [Feedback overPicture];
-            }
-        }
-        
-        return [Feedback overSpacing];
-    }
-    
-    if (State.hasEndColume && point.x < m_left + m_columnWidth) {
-        return; 
-    }
-    
-    if (State.feedbackStepByStep != Step0) State.mode = MD_READING;
     
     if ([State taskEnded]) return;
     
-    if (State.feedbackStepByStep == Step0)
-    if (![State taskStarted]) {
-        
-        if (State.feedbackStepByStep != Step0) {
-            [self taskStart];
-            return [Feedback taskStart];
-        }
-        
+    if (![State isTrainingMode] && ![State taskStarted]) {
         if ([lblStart contains:point] || [State sightedReading]) {
             [self taskStart];
             return [Feedback taskStart];
         }
-        
         return;
     }
     
@@ -1003,12 +1086,13 @@
         [lblTrain setHidden: YES];
     }
     
-    
+    /*
     if (!State.hasEndColume) {
         if (point.x < m_left - 10) return;
     } else {
         if (point.x < m_left + m_columnWidth + m_columnSpacing - 10) return;
     }
+     */
     
     if ([State sightedReading]) return [self sightedReading: point];
     
@@ -1020,10 +1104,11 @@
         return;
     }
     
-    
+    /*
     if (point.x < m_lblLineBeginX) {
         return; 
     }
+     */
     
     if ([State waitParaEnd]) {
         if ([self enterParaEndRegion:point]) {
@@ -1148,6 +1233,27 @@
 - (void) clearViews {
     [super clearViews];
 }
+
+
+- (void) updateTouchLog {
+    
+    NSString *res = [NSString stringWithFormat:@"%lu touches:", (unsigned long)[State.activeTouches count] ];
+    for (UITouch *touch in State.activeTouches) {
+        
+        NSString *key = [NSString stringWithFormat:@"%lu", (unsigned long)[touch hash]];
+        int hand = [[State.touchDict objectForKey:key] intValue];
+        NSString *type = @"[Single";
+        if (hand == 1) type = @"[Left"; else if (hand==2) type=@"[Right"; else if (hand==3) type=@"[Extra";
+        
+        NSValue *touchValue = [NSValue valueWithPointer:(__bridge const void *)(touch)];
+        NSString *touchID = [NSString stringWithFormat:@"%@", touchValue];
+        
+        res = [NSString stringWithFormat:@"%@\t%@-%@]%@", res, type, touchID, NSStringFromCGPoint([touch locationInView:self])];
+    }
+    [lblPointLog setText:res];
+}
+
+
 
 
 @end

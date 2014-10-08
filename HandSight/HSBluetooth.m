@@ -87,6 +87,7 @@
     {
         [ble connectPeripheral:[ble.peripherals objectAtIndex:0]];
         State.bluetoothState = BT_ON;
+        [self verticalStop]; 
     }
     else
     {

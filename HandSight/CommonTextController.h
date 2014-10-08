@@ -17,5 +17,6 @@
     HSViz *m_viz;
 }
 - (void)addControls;
+- (void)switchView;
 
 @end

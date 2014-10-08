@@ -54,7 +54,7 @@
         
         id resultData=[NSString stringWithContentsOfFile:appFile encoding:NSUTF8StringEncoding error:&error];
         
-        if (error == NULL) return resultData; else NSLog(@"[FI] Error reading %@", fileName);
+        if (error != NULL) return resultData; else NSLog(@"[FI] Error reading %@", fileName);
     }
     return NULL;
 }
@@ -73,11 +73,12 @@
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *appFile = [documentsDirectory stringByAppendingPathComponent:fileName];
-    NSError *error=NULL;
+    NSError *error = NULL;
     
     
     [data writeToFile:appFile atomically:YES encoding:NSUTF8StringEncoding error:&error];
-    if (error == NULL)
+    
+    if (error != NULL)
     {
         NSLog(@"[FI] Error writing to file %@", fileName);
     }
@@ -87,7 +88,7 @@
 - (void)write:(NSString *)fileName dataArray:(NSArray *)data
 {
     NSMutableString *dataString=[NSMutableString stringWithString:@""];
-    for (int i=0; i < [data count]; i++)
+    for (int i = 0; i < [data count]; i++)
     {
         if (i == [data count]-1)
         {

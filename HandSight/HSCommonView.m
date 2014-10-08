@@ -105,9 +105,22 @@
         l;
     });
     
+    lblTrainBG = ({
+        UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(m_left, 0, m_width - m_left - m_right, m_height)];
+        [l setText:@""];
+        [l setTextColor:[UIColor blackColor]];
+        [l setTextAlignment:NSTextAlignmentCenter];
+        [l setBackgroundColor:[UIColor whiteColor]];
+        [l setFont: [UIFont fontWithName:m_textFontName size:m_textSize / 2]];
+        [self addSubview:l];
+        [m_arrControls addObject:l];
+        [l setHidden: NO];
+        l;
+    });
+    
     lblTrain = ({
         UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(m_left, 350, m_width - m_left - m_right, m_lineHeight)];
-        [l setText:@"The Text"];
+        [l setText:@"Training Session Step 1: Training the user for vertical feedback"];
         [l setTextColor:[UIColor blackColor]];
         [l setTextAlignment:NSTextAlignmentCenter];
         [l setBackgroundColor:[UIColor yellowColor]];
@@ -117,6 +130,18 @@
         [l setHidden: YES]; 
         l;
     });
+    
+    lblPointLog = ({
+        UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(m_left, 20, m_width - m_left - m_right, m_lineHeight)];
+        [l setText:@"Point Log"];
+        [l setTextColor:[UIColor blackColor]];
+        [l setTextAlignment:NSTextAlignmentLeft];
+        [l setFont: [UIFont fontWithName:m_textFontName size:m_textSize / 2]];
+        [self addSubview:l];
+        [m_arrControls addObject:l];
+        l;
+    });
+    
     
     lblTop = ({
         UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(m_left, 0, m_width - m_left, m_top)];
@@ -331,6 +356,22 @@
 - (void) hideLineLabels {
     [lblLineBegin setHidden:YES];
     [lblLineEnd setHidden:YES];
+}
+
+- (void) trainVerticalBox {
+    
+}
+
+- (void) trainElse {
+
+}
+
+- (void) gotoBeginning {
+    
+}
+
+- (void) gotoNextLine {
+    
 }
 
 

@@ -99,13 +99,13 @@
 }
 
 - (void) distance: (CGFloat) x withY: (CGFloat) y; {
-    NSLog(@"%d", [aad count]);
+    //NSLog(@"%d", [aad count]);
     
     float lastX = [aad last];
     
     // absolute distance
     [aad add: fabs(y)];
-    NSLog(@"count %d", [aad count]);
+    //NSLog(@"count %d", [aad count]);
     if (y > 0) [mda add: y]; else [mdb add: -y];
     
     // # of exits
@@ -165,8 +165,10 @@
 }
 
 - (NSString*) dumpRealtime {
-    return [NSString stringWithFormat:@" [AAD]%.2f [MDA]%.2f [MDB]%.2f [NEA]%.0f [NEB]%.0f [T]%.3f [TO1]%.3f [TO2]%.3f [TN]%.2f [SK]%.2f", [aad avg], [mda max], [mdb max], [nea sum], [neb sum], CACurrentMediaTime() - m_lineStartTime, [TO1 timeCount], [TO2 timeCount], [self getTN], [sk sum]];
-
+    return @"";
+    
+    //return [NSString stringWithFormat:@" [AAD]%.2f [MDA]%.2f [MDB]%.2f [NEA]%.0f [NEB]%.0f [T]%.3f [TO1]%.3f [TO2]%.3f [TN]%.2f [SK]%.2f", [aad avg], [mda max], [mdb max], [nea sum], [neb sum], CACurrentMediaTime() - m_lineStartTime, [TO1 timeCount], [TO2 timeCount], [self getTN], [sk sum]];
+    
     //return [NSString stringWithFormat:@" [AAD]%.2f [MDA]%.2f [MDB]%.2f [NEA]%.0f [NEB]%.0f [NRH]%.0f [NRV]%.0f [NRHOL]%.2f [NRVOL]%.2f [T]%.2f [TO1]%.2f [TO2]%.2f [TN]%.2f [NTL]%.2f [SK]%.2f", [aad avg], [mda max], [mdb max], [nea sum], [neb sum], [nrh avg], [nrv avg], [nrhol avg], [nrvol avg], CACurrentMediaTime() - m_lineStartTime, [TO1 timeCount], [TO2 timeCount], [self getTN], [ntl avg], [sk sum]];
 }
 

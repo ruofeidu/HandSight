@@ -17,7 +17,7 @@
     
     NSMutableArray *m_arrImg, *m_arrLblPara, *m_arrBlanks, *m_arrControls;
     
-    UILabel* lblLeft, *lblStart, *lblCurrent, *lblNext, *lblLast, *lblTitle, *lblColumn, *lblRight, *lblTop, *lblBottom, *lblLineEnd, *lblLineBegin, *lblTrain, *lblTrainBG;
+    UILabel* lblLeft, *lblStart, *lblCurrent, *lblNext, *lblLast, *lblTitle, *lblColumn, *lblRight, *lblTop, *lblBottom, *lblLineEnd, *lblLineBegin, *lblTrain, *lblTrainBG, *lblPointLog;
     
     NSString* m_textFontName; 
     
@@ -34,7 +34,7 @@
     HSViz *Viz;
     HSStat *Stat; 
     
-    UITapGestureRecognizer *m_doubleTap, *m_tripleTap;
+    UITapGestureRecognizer *m_doubleTap, *m_tripleTap, *m_hold;
 }
 
 
@@ -43,5 +43,10 @@
 - (void) addControls;
 - (void) clearViews;
 - (void) hideLineLabels;
+
+- (void) trainVerticalBox;
+- (void) trainElse;
+- (void) gotoBeginning;
+- (void) gotoNextLine;
 
 @end

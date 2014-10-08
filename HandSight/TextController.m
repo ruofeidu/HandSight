@@ -54,7 +54,7 @@
         [s setSelectedSegmentIndex: State.feedbackStepByStep - 1];
         [self.view addSubview:s];
         [s addTarget:self action: @selector(segChanged:) forControlEvents: UIControlEventValueChanged];
-
+        [s setEnabled: NO]; 
         s;
     });
     
@@ -63,8 +63,8 @@
     } else {
         [m_seg setHidden: NO];
         [m_label setHidden: YES];
-        [self sendData: 1]; // Make the "Training Session" set to "Vertical Box" state by default.
-        m_timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(getData:) userInfo:nil repeats:YES];
+        //[self sendData: 1]; // Make the "Training Session" set to "Vertical Box" state by default.
+        //m_timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(getData:) userInfo:nil repeats:YES];
     }
 
     [super addControls];
@@ -74,17 +74,20 @@
 {
     enum FeedbackStepByStep shouldChange = [m_seg selectedSegmentIndex] + 1;
     
-    if (shouldChange != State.feedbackStepByStep) {
-        [Feedback verticalStop];
-        State.feedbackStepByStep = shouldChange;
-        [m_text handleSingleTouch: State.lastPoint];
+    if ([State isTrainingMode]) {
+        if (shouldChange == StepVertical) {
+            State.feedbackStepByStep = shouldChange;
+            [m_text trainVerticalBox];
+            [m_seg setSelectedSegmentIndex: State.feedbackStepByStep - 1];
+        } else {
+            State.feedbackStepByStep = shouldChange;
+            [m_text trainElse];
+            [m_seg setSelectedSegmentIndex: State.feedbackStepByStep - 1];
+        }
     }
-    
-    [self sendData: State.feedbackStepByStep];
 }
 
-
-
+/*
 - (void)getData :(NSTimer *)timer {
     if (State.feedbackStepByStep == Step0) return;
     
@@ -154,6 +157,9 @@
     
     [operation start];
 }
+*/
+
+
 
 
 @end

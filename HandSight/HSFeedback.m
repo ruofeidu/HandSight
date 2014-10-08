@@ -167,12 +167,14 @@
 - (void) taskEnd {
     [Log recordTaskEnd];
     
-    CGFloat delay = State.mode == MD_SIGHTED ? 0.01 : 2.0;
+    CGFloat delay = State.mode == MD_SIGHTED ? 0.01 : 1.0;
     [NSTimer scheduledTimerWithTimeInterval:delay target:self selector:@selector(setTaskEnd:) userInfo:nil repeats:NO];
 }
 
 - (void) setTaskEnd: (NSTimer*) timer {
-    [Speech queueText: [State insEndPlain]];
+    [Speech speakText: [State insEndPlain]];
+    [Speech speakText: [State insEndPlain]];
+
     [Log saveToFile];
 }
 

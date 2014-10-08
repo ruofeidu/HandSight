@@ -22,6 +22,7 @@ enum SpeechGender { SG_MALE, SG_FEMALE };
 enum ModeType { MD_EXPLORATION_TEXT, MD_READING, MD_SIGHTED };
 enum BlueToothState { BT_OFF, BT_CONNECTING, BT_ON  };
 enum TouchType { TT_DOWN, TT_MOVE, TT_UP  };
+enum TouchHand { TH_UNKNOWN, TH_LEFT, TH_RIGHT, TH_EXTRA  };
 enum SpeedType { ST_TRAIN, ST_1, ST_2, ST_3, ST_4, ST_NONE };
 enum FeedbackTrainType { FTT_TRAIN, FTT_NONE };
 enum FeedbackStepByStep { Step0, StepVertical, StepVerticalText, StepLine, StepAll };
@@ -56,14 +57,15 @@ enum FeedbackStepByStep { Step0, StepVertical, StepVerticalText, StepLine, StepA
 
 @property (nonatomic) NSString *insStartPlain, *insStartPlainExplore, *insStartMag, *insExploreMode, *insReadingMode,
                                 *insStartMagExplore, *insStartSighted, *insEndPlain, *insTitle, *insParagraph, *insPicture, *insText, *insEOC;
-@property (nonatomic) NSMutableArray *arrInstruction;
+@property (nonatomic) NSMutableArray *arrInstruction, *activeTouches;
+@property (nonatomic) NSMutableDictionary *touchDict;
+
 
 @property (nonatomic) BOOL taskStarted, taskEnded, lockTaskStarted, softwareStarted, audioPitch, audioVolume;
 @property (nonatomic) BOOL waitLineBegin, waitLineEnd, waitParaEnd, waitTaskEnd, waitColumnEnd, sightedSpeaking, readingPitch, audioVolumeChange, hasEndColume, debugMode, showLog, showStat, thisLineHasAtLeastOneWordSpoken, speechOn, guided, automaticMode, automaticExploration;
 
 @property (nonatomic) int currentWordID, lastWordID, nextWordID, paraID, lineID, numWords, numFinger;
 @property (nonatomic) CGFloat readingSpeed, maxVibration, maxVolume, lineHeight, fieldOfView;
-@property (nonatomic) CGPoint lastPoint;
 
 
 + (HSState*) sharedInstance;
@@ -76,6 +78,7 @@ enum FeedbackStepByStep { Step0, StepVertical, StepVerticalText, StepLine, StepA
 - (bool) isReadingMode;
 - (void) toggleMode; 
 - (BOOL) sightedReading;
+- (BOOL) isTrainingMode; 
 
 @end
 

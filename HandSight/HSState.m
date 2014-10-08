@@ -58,7 +58,7 @@
         self.bluetoothState         =       BT_OFF;
         self.speedType              =       ST_TRAIN;
         
-        self.automaticMode          =       YES;
+        self.automaticMode          =       NO;
         
         self.debugMode              =       NO;
         self.audioMiddleValue       =       400.0f;
@@ -101,6 +101,8 @@
         self.insText                =       @"Text";
         self.insTitle               =       @"Title";
         self.arrInstruction         =       [[NSMutableArray alloc] init];
+        self.activeTouches          =       [[NSMutableArray alloc] init];
+        self.touchDict              =       [[NSMutableDictionary alloc] init]; 
         
         self.insReadingMode         =       @"Reading Mode";
         self.insExploreMode         =       @"Exploration Mode";
@@ -125,6 +127,10 @@
     return self;
 }
 
+- (BOOL) isTrainingMode {
+    return self.feedbackStepByStep != Step0;
+}
+
 - (int) numLinesInPara: (int) i {
     return 0; 
 }
@@ -147,7 +153,7 @@
 }
 
 - (bool) isExplorationTextMode {
-    return self.mode == MD_EXPLORATION_TEXT;
+    return (self.mode == MD_EXPLORATION_TEXT) || (self.automaticMode && self.automaticExploration);
 }
 
 - (bool) isReadingMode {

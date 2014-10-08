@@ -21,8 +21,6 @@
 
 - (void)addControls
 {
-    State.feedbackStepByStep = Step0;
-    
     [self stop];
     [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(stop) userInfo:nil repeats:NO];
     [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(stop) userInfo:nil repeats:NO];
@@ -141,59 +139,32 @@
 
 - (void)btnTaskStartTouched
 {
-    //int tmp = State.
-    
-    int last = State.feedbackStepByStep;
-    State.feedbackStepByStep = Step0;
-    
     [Speech speakText: [State insStartPlain]];
-    
-    State.feedbackStepByStep = last;
+    [segFeedbackStep setSelectedSegmentIndex: UISegmentedControlNoSegment];
 }
 
 - (void)btnLineBeginTouched
 {
-    int last = State.feedbackStepByStep;
-    State.feedbackStepByStep = Step0;
-    
     [Feedback lineBegin];
-    
-    State.feedbackStepByStep = last;
+    [segFeedbackStep setSelectedSegmentIndex: UISegmentedControlNoSegment];
 }
 
 - (void)btnLineEndTouched
 {
-    int last = State.feedbackStepByStep;
-    State.feedbackStepByStep = Step0;
-    
-    State.thisLineHasAtLeastOneWordSpoken = true;
     [Feedback lineEnd];
-    
-    State.feedbackStepByStep = last;
+    [segFeedbackStep setSelectedSegmentIndex: UISegmentedControlNoSegment];
 }
 
 - (void)btnParagraphEndTouched
 {
-    
-    int last = State.feedbackStepByStep;
-    State.feedbackStepByStep = Step0;
-    
     [Feedback paraEnd];
-    
-    
-    State.feedbackStepByStep = last;
+    [segFeedbackStep setSelectedSegmentIndex: UISegmentedControlNoSegment];
 }
 
 - (void)btnTextEndTouched
 {
-    
-    int last = State.feedbackStepByStep;
-    State.feedbackStepByStep = Step0;
-    
     [Speech speakText: [State insEndPlain]];
-    
-    
-    State.feedbackStepByStep = last;
+    [segFeedbackStep setSelectedSegmentIndex: UISegmentedControlNoSegment];
 }
 
 - (void)sldAboveLineTouched
@@ -293,6 +264,9 @@
 
 - (void)segCateboryChanged: (id)sender
 {
+    [segFeedbackTrain setSelectedSegmentIndex: UISegmentedControlNoSegment];
+    State.feedbackStepByStep = Step0;
+    
     State.categoryType = (enum CategoryType) [segCategory selectedSegmentIndex];
     [self updateDocuments];
 }
@@ -310,12 +284,16 @@
 
 - (void)segDocumentChanged: (id)sender
 {
+    [segFeedbackTrain setSelectedSegmentIndex: UISegmentedControlNoSegment];
+    State.feedbackStepByStep = Step0;
     State.documentType = (enum DocumentType) [segDocument selectedSegmentIndex];
     [self updateDocuments];
 }
 
 - (void)segExpDocChanged: (id)sender
 {
+    [segFeedbackTrain setSelectedSegmentIndex: UISegmentedControlNoSegment];
+    State.feedbackStepByStep = Step0;
     State.mode = MD_EXPLORATION_TEXT;
     State.expDocType =  (enum ExpDocType) [segExpDoc selectedSegmentIndex];
     
@@ -334,6 +312,8 @@
 
 
 - (void)segPlainDocChanged: (id)sender {
+    [segFeedbackTrain setSelectedSegmentIndex: UISegmentedControlNoSegment];
+    State.feedbackStepByStep = Step0;
     State.plainDocType = (enum PlainDocType) ([segPlainDoc selectedSegmentIndex] + 1);
     State.documentType = (enum DocumentType) ([segPlainDoc selectedSegmentIndex] + 1);
     State.categoryType = CT_PLAIN;
@@ -342,6 +322,8 @@
 }
 
 - (void)segMagDocChanged: (id)sender {
+    [segFeedbackTrain setSelectedSegmentIndex: UISegmentedControlNoSegment];
+    State.feedbackStepByStep = Step0;
     State.magDocType = (enum MagazineDocType) ([segMagDoc selectedSegmentIndex] + 1);
     State.documentType = (enum DocumentType) ([segMagDoc selectedSegmentIndex] + 1);
     State.categoryType = CT_MAGAZINE;
@@ -350,6 +332,8 @@
 }
 
 - (void)segFeedbackTrainChanged: (id)sender {
+    [segFeedbackTrain setSelectedSegmentIndex: UISegmentedControlNoSegment];
+    State.feedbackStepByStep = Step0;
     State.documentType = DT_F;
     State.categoryType = CT_PLAIN;
     State.mode = MD_READING;
@@ -647,6 +631,13 @@
             break;
     }
     
+    if (State.isTrainingMode) {
+        [segFeedbackStep setSelectedSegmentIndex: 0];
+        [segFeedbackTrain setSelectedSegmentIndex: UISegmentedControlNoSegment];
+    } else {
+        [segFeedbackStep setSelectedSegmentIndex: UISegmentedControlNoSegment];
+    }
+    
     [segExpDoc setSelectedSegmentIndex: State.expDocType];
     [segMagDoc setSelectedSegmentIndex: State.magDocType - 1];
     [segPlainDoc setSelectedSegmentIndex: State.plainDocType - 1];
@@ -654,12 +645,10 @@
     [segFeedbackTrain setSelectedSegmentIndex: State.feedbackTrainType];
     
     
-    if (State.feedbackTrainType == FTT_NONE) [segFeedbackTrain setSelectedSegmentIndex: UISegmentedControlNoSegment];
-    
-    if (State.feedbackStepByStep == Step0) [segFeedbackStep setSelectedSegmentIndex: UISegmentedControlNoSegment]; else {
-        [segFeedbackStep setSelectedSegmentIndex: 0];
+    if (State.feedbackTrainType == FTT_NONE) {
         [segFeedbackTrain setSelectedSegmentIndex: UISegmentedControlNoSegment];
     }
+
     if (State.expDocType == ED_NONE) [segExpDoc setSelectedSegmentIndex: UISegmentedControlNoSegment];
     if (State.magDocType == MD_NONE) [segMagDoc setSelectedSegmentIndex: UISegmentedControlNoSegment];
     if (State.plainDocType == PD_NONE) [segPlainDoc setSelectedSegmentIndex: UISegmentedControlNoSegment];
@@ -668,7 +657,7 @@
     [segDocument setSelectedSegmentIndex:State.documentType];
     [segMode setSelectedSegmentIndex:State.mode];
     
-    State.feedbackStepByStep = Step0;
+    
     [Feedback verticalStop];
 }
 
