@@ -47,6 +47,14 @@
 - (void) lineEnd;
 - (void) paraEnd;
 
+- (void) lineBeginOnly;
+- (void) lineEndOnly;
+- (void) paraEndOnly;
+
+
+- (void) handsightPanel;
+- (void) handsightText;
+
 /**
  * Exploration Feedback
  */

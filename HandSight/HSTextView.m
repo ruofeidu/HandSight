@@ -53,7 +53,10 @@
 - (void)loadDocument {
     Doc.numCols = 1;
     [Doc reset];
-    [Log recordDocumentLoaded]; 
+    //Log = [HSLog sharedInstance];
+    //[[HSLog sharedInstance] recordDocumentLoaded];
+    [Log recordDocumentLoaded];
+    
     [self clearViews];
     NSLog(@"[MV] PlainView Load Document");
     [[self textStorage] setAttributedString:[self getAttributedString]];

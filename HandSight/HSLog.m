@@ -79,6 +79,45 @@
     [m_txt appendFormat:@"%.4f | Task-begin:    Feedback- %d    Cat- %d Doc- %d\n", time - m_startTime, State.feedbackType, State.categoryType, State.documentType];
 }
 
+-(void) recordTrain {
+    ++m_numOfLogs;
+    CGFloat time = CACurrentMediaTime();
+    [Stat reset: time];
+    [m_data appendFormat:@"%d\t%.3f\n", TRAINING , time];
+    [m_json appendFormat:@"\"Training\": {\n\t\"T\": %.3f\n}\n\n", time];
+    [m_txt appendFormat:@"%.4f | Training:    Feedback- %d    Cat- %d Doc- %d\n", time - m_startTime, State.feedbackType, State.categoryType, State.documentType];
+}
+
+-(void) recordTrainStepChange:(int)stepID {
+    ++m_numOfLogs;
+    CGFloat time = CACurrentMediaTime();
+    [Stat reset: time];
+    [m_data appendFormat:@"%d\t%.3f\n", TRAIN_STEP_CHANGE , time];
+    [m_json appendFormat:@"\"Training\": {\n\t\"T\": %.3f\n}\n\n", time];
+    [m_txt appendFormat:@"%.4f | Training:    Step- %d    Cat- %d Doc- %d\n", time - m_startTime, stepID, State.categoryType, State.documentType];
+}
+
+-(void) recordDocumentLoaded {
+    ++m_numOfLogs;
+    CGFloat time = CACurrentMediaTime();
+    [Stat reset: time];
+    [m_data appendFormat:@"%d\t%.3f\n", DOCUMENT_LOADED , time];
+    [m_json appendFormat:@"\"Document-Loaded\": {\n\t\"T\": %.3f\n}\n\n", time];
+    [m_txt appendFormat:@"%.4f | Document-Loaded:    Feedback- %d    Cat- %d Doc- %d\n", time - m_startTime, State.feedbackType, State.categoryType, State.documentType];
+}
+
+
+-(void) recordControlPanel {
+    ++m_numOfLogs;
+    CGFloat time = CACurrentMediaTime();
+    [Stat reset: time];
+    [m_data appendFormat:@"%d\t%.3f\n", CONTROL_PANEL , time];
+    [m_json appendFormat:@"\"Control-panel\": {\n\t\"T\": %.3f\n}\n\n", time];
+    [m_txt appendFormat:@"%.4f | Control-Panel \n", time - m_startTime];
+}
+
+
+
 -(void) recordReset {
     ++m_numOfLogs;
     CGFloat time = CACurrentMediaTime();
@@ -95,13 +134,6 @@
     [m_txt appendFormat:@"%.4f | Feedback-reversed  %d\n", time - m_startTime, State.guided];
 }
 
--(void) recordDocumentLoaded {
-    ++m_numOfLogs;
-    CGFloat time = CACurrentMediaTime();
-    [m_data appendFormat:@"%d\t%.3f\t%d\t%d\n", DOCUMENT_LOADED, time, State.documentType, State.categoryType];
-    [m_json appendFormat:@"\"Document-loaded\": {\n\t\"T\": %.3f,\n\t\"Document-ID\": %d\n\t\"Category-ID\": %d\n}\n\n", time, State.documentType, State.categoryType];
-    [m_txt appendFormat:@"%.4f | Document-loaded:    Feedback- %d    Cat- %d Doc- %d\n", time - m_startTime, State.feedbackType, State.categoryType, State.documentType];
-}
 
 -(void) recordFeedbackTypeChanged {
     ++m_numOfLogs;

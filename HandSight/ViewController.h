@@ -27,7 +27,7 @@
     UISwitch *swcAudioPitch, *swcAudioVolume, *swcReadPitch, *swcGuidance, *swcShowDebug, *swcShowLog, *swcLeftRegion, *swcVisualization, *swcShowStat, *swcSightedReading, *swcSpeech, *swcAutomaticMode;
     
     UISlider *sldMaxVolume, *sldMaxVibration, *sldReadingSpeed, *sldLineHeight, *sldHapticThres, *sldLineSpacing, *sldAudioThreshold,
-             *sldAboveLine, *sldBelowLine;
+             *sldAboveLine, *sldBelowLine, *sldReadingVolume;
     
     UITextView *txtLog, *txtStat;
     
@@ -49,6 +49,7 @@
 - (void)segInsTTSChanged: (id)sender;
 - (void)swcReadPitchChanged: (id)sender;
 - (void)sldFeedbackThresChanged: (id)sender;
+- (void)sldReadingVolumeChanged: (id)sender;
 - (void)segHapticTypeChanged: (id)sender;
 - (void)segReadingTTSChanged: (id)sender;
 - (void)sldReadingSpeedChanged: (id)sender;

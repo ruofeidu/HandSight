@@ -64,6 +64,7 @@
     if ([State isAudioOn]) {
         [Audio updateAudioFrequency:y];
         [Audio play];
+        [Audio stopMusic];
     }
     if ([State isHapticOn] || [State isHaptio]) {
         [Bluetooth verticalFeedback: y];
@@ -80,6 +81,7 @@
     
     if ([State isAudioOn]) {
         [Audio stop];
+        [Audio stopMusic];
     }
     if ([State isHapticOn] || [State isHaptio]) {
         [Bluetooth verticalStop];
@@ -143,7 +145,7 @@
  */
 - (void) overText {
     [Audio playFlute];
-    [Bluetooth verticalFeedback: 10];
+    //[Bluetooth verticalFeedback: 10];
 }
 
 /**
@@ -166,14 +168,14 @@
  */
 - (void) taskEnd {
     [Log recordTaskEnd];
-    
-    CGFloat delay = State.mode == MD_SIGHTED ? 0.01 : 1.0;
+
+    CGFloat delay = State.mode == MD_SIGHTED ? 0.01 : 0.5;
     [NSTimer scheduledTimerWithTimeInterval:delay target:self selector:@selector(setTaskEnd:) userInfo:nil repeats:NO];
 }
 
 - (void) setTaskEnd: (NSTimer*) timer {
     [Speech speakText: [State insEndPlain]];
-    [Speech speakText: [State insEndPlain]];
+    //[Speech speakText: [State insEndPlain]];
 
     [Log saveToFile];
 }
@@ -194,7 +196,7 @@
         [Speech queueText: [State insReadingMode]];
     }
     
-    if ([State isAudioOn]) {
+    if ([State isAudioOn] || [State isHaptio]) {
         [Audio stopMusic]; 
     }
     
@@ -245,6 +247,19 @@
     }
 }
 
+
+- (void) lineBeginOnly {
+    [Audio playAudio:AU_LINE_BEGIN];
+}
+
+- (void) lineEndOnly {
+    [Audio playAudio:AU_LINE_END];
+}
+
+- (void) paraEndOnly {
+    [Audio playAudio:AU_PARA_END];
+}
+
 - (void) paraEnd {
     [Log recordEndParagraph: State.paraID];
     if (State.feedbackStepByStep == StepVertical || State.feedbackStepByStep == StepVerticalText) return;
@@ -276,4 +291,14 @@
     }
     [Log recordFeedbackTypeChanged];
 }
+
+
+- (void) handsightPanel {
+    //[Speech speakText: State.insHandSightPanel];
+}
+
+- (void) handsightText {
+    //[Speech speakText: State.insHandSightText];
+}
+
 @end

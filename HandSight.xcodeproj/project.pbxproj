@@ -99,6 +99,8 @@
 		64CAC0A019772BC000A6E3F1 /* NSMutableArray+QueueAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 64CAC09F19772BC000A6E3F1 /* NSMutableArray+QueueAdditions.m */; };
 		64CAC0A31977575400A6E3F1 /* CommonController.m in Sources */ = {isa = PBXBuildFile; fileRef = 64CAC0A21977575400A6E3F1 /* CommonController.m */; };
 		64CAC0A7197870A000A6E3F1 /* MagController.m in Sources */ = {isa = PBXBuildFile; fileRef = 64CAC0A6197870A000A6E3F1 /* MagController.m */; };
+		64E0F84719E84D0600A64302 /* chimpanzee.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 64E0F84619E84D0600A64302 /* chimpanzee.jpg */; };
+		64E0F84919E84EE100A64302 /* seafloor.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 64E0F84819E84EE100A64302 /* seafloor.jpg */; };
 		64E7A072199A2D18007EE4A3 /* HSMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 64E7A071199A2D18007EE4A3 /* HSMenuView.m */; };
 		64E7A075199A31DD007EE4A3 /* CommonTextController.m in Sources */ = {isa = PBXBuildFile; fileRef = 64E7A074199A31DD007EE4A3 /* CommonTextController.m */; };
 		BC6F209E16474B4DB630AB89 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 83E54E18DB6F441A81A205B6 /* libPods.a */; };
@@ -244,6 +246,8 @@
 		64CAC0A5197870A000A6E3F1 /* MagController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagController.h; sourceTree = "<group>"; };
 		64CAC0A6197870A000A6E3F1 /* MagController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagController.m; sourceTree = "<group>"; };
 		64CAC0A919788A2800A6E3F1 /* DesignPattern.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DesignPattern.h; sourceTree = "<group>"; };
+		64E0F84619E84D0600A64302 /* chimpanzee.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = chimpanzee.jpg; path = Resource/Pic/chimpanzee.jpg; sourceTree = SOURCE_ROOT; };
+		64E0F84819E84EE100A64302 /* seafloor.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = seafloor.jpg; path = Resource/Pic/seafloor.jpg; sourceTree = SOURCE_ROOT; };
 		64E7A070199A2D18007EE4A3 /* HSMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSMenuView.h; sourceTree = "<group>"; };
 		64E7A071199A2D18007EE4A3 /* HSMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSMenuView.m; sourceTree = "<group>"; };
 		64E7A073199A31DD007EE4A3 /* CommonTextController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonTextController.h; sourceTree = "<group>"; };
@@ -540,6 +544,8 @@
 		646869081979B68E00C2E50D /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				64E0F84819E84EE100A64302 /* seafloor.jpg */,
+				64E0F84619E84D0600A64302 /* chimpanzee.jpg */,
 				6407DA8B19B0D4EC00A19C53 /* pizza.jpg */,
 				64751FF819916F3500B75D4A /* 200.jpg */,
 				64751FF919916F3500B75D4A /* 300.jpg */,
@@ -748,6 +754,7 @@
 				6407DA7A19AE786600A19C53 /* 25.txt in Resources */,
 				64751FFC19916F3500B75D4A /* 200.jpg in Resources */,
 				6440A9941981A3FF00E5BEC3 /* 10.txt in Resources */,
+				64E0F84919E84EE100A64302 /* seafloor.jpg in Resources */,
 				6407DA8519AEBF8800A19C53 /* tips.jpg in Resources */,
 				64751FFD19916F3500B75D4A /* 300.jpg in Resources */,
 				646869111979B6AE00C2E50D /* OOL_Rain.mp3 in Resources */,
@@ -772,6 +779,7 @@
 				6407DA6C19AE6DA100A19C53 /* 22.txt in Resources */,
 				6407DA6819AE6D9200A19C53 /* 20.txt in Resources */,
 				647FAF4C19A398B300534068 /* 14.txt in Resources */,
+				64E0F84719E84D0600A64302 /* chimpanzee.jpg in Resources */,
 				6407DA8C19B0D4EC00A19C53 /* pizza.jpg in Resources */,
 				6468690F1979B6AE00C2E50D /* EOP_Dang.mp3 in Resources */,
 				6407DA6A19AE6D9A00A19C53 /* 21.txt in Resources */,

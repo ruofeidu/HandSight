@@ -90,6 +90,7 @@
             State.waitLineEnd = false;
             [lblStart setHidden: YES];
             [lblLineBegin setHidden: YES];
+        [self waitLineBegin]; 
         //}
         
         [lblTrainBG setHidden: YES]; 
@@ -104,12 +105,17 @@
         [self.layoutManager drawGlyphsForGlyphRange:glyphRange atPoint:origin];
     }
     
-    [self addGestureRecognizer:m_doubleTap];
+    if ([State debugMode]) {
+        [self addGestureRecognizer:m_doubleTap];
+    }
 }
 
 - (void)converMode: (UITapGestureRecognizer *)recognizer {
-    NSLog(@"[MV] Mode converted.");
-    [Feedback convertMode];
+    if (State.debugMode) {
+        [Feedback convertMode];
+    } else {
+        [lblNext setHidden: YES];
+    }
 }
 
 - (void)hold: (UITapGestureRecognizer *)recognizer {
@@ -222,12 +228,13 @@
 }
 
 - (NSAttributedString*) getAttributedString {
+    [Feedback handsightText]; 
     int c = [State sightedReading] ? 2 : [State categoryType];
     NSString* textContent = [File readTxt: [NSString stringWithFormat:@"%d%d", c, [State documentType]]];
     NSString* text = [textContent stringByReplacingOccurrencesOfString:@"\n" withString:@" \n "];
     
     Doc.arrWord = [[text componentsSeparatedByString:@" "] mutableCopy];
-    
+    [m_arrImg removeAllObjects]; 
     [Doc clear];
     
     NSMutableAttributedString *ans = [[NSMutableAttributedString alloc] initWithString:@"" attributes:@{NSFontAttributeName:[UIFont fontWithName:m_titleFontName size:m_titleSize]}];
@@ -356,7 +363,7 @@
         for (UITouch *aTouch in State.activeTouches) {
             NSString *key = [NSString stringWithFormat:@"%lu", (unsigned long)[aTouch hash]];
             int hand = [[State.touchDict objectForKey:key] intValue];
-            if (hand == TH_LEFT || hand == TH_EXTRA) continue;
+            if ((State.mode == MD_READING && hand == TH_LEFT) || hand == TH_EXTRA) continue;
             
             if (hand == TH_UNKNOWN) {
                 [State.touchDict setValue:[NSNumber numberWithInt: TH_LEFT] forKey:key];
@@ -381,7 +388,7 @@
         }
     }
     
-    if (hand == 1) return CGPointMake(0, 0);
+    if (hand == 1 && State.mode == MD_READING) return CGPointMake(0, 0);
     
     
     return point;
@@ -731,7 +738,7 @@
                 col = 1;
             }
             
-            if ((State.documentType == DT_C) && State.categoryType == CT_MAGAZINE) {
+            if ((State.documentType == DT_B) && State.categoryType == CT_MAGAZINE) {
                 if (totalLines > 13) {
                     col = 1;
                 }
@@ -867,16 +874,16 @@
     if ([State categoryType] == CT_MAGAZINE) {
         switch ([State documentType]) {
             case DT_TRAIN:
-                State.lastWordID = 28-1;
+                State.lastWordID = 28+13+1+4+4+4+2+2-1-1;
                 break;
             case DT_A:
-                State.lastWordID = 66-1;
+                State.lastWordID = 74;
                 break;
             case DT_B:
-                State.lastWordID = 51-1;
+                State.lastWordID = 51-15-1+6;
                 break;
             case DT_C:
-                State.lastWordID = 65;
+                State.lastWordID = 65-1;
                 break;
             case DT_D:
                 State.lastWordID = 65;
@@ -1154,6 +1161,18 @@
             return [self waitTaskEnd];
         }
         
+        
+        if (State.documentType == DT_B && State.categoryType == CT_MAGAZINE) {
+            if (State.nextWordID >= 200) {
+                lblNext.frame = INVISIBLE_RECT;
+                [Feedback paraEnd];
+                [Feedback taskEnd];
+                State.taskEnded = YES;
+                return;
+            }
+        }
+        
+        
         [self setupNextWordRegion];
         
         // setup line state
@@ -1250,7 +1269,10 @@
         
         res = [NSString stringWithFormat:@"%@\t%@-%@]%@", res, type, touchID, NSStringFromCGPoint([touch locationInView:self])];
     }
-    [lblPointLog setText:res];
+    
+    if (State.debugMode) {
+        [lblPointLog setText:res];
+    }
 }
 
 

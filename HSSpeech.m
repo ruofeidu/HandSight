@@ -124,17 +124,25 @@ static uint MIN_SPOKEN_LENGTH = 3;
     AVSpeechUtterance *utt = [AVSpeechUtterance speechUtteranceWithString:s];
 
     if ([self isInstruction: s]) {
+        
+        AVSpeechUtterance *bugWorkaroundUtterance = [AVSpeechUtterance speechUtteranceWithString:@" "];
+        bugWorkaroundUtterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"en-GB"];
+        bugWorkaroundUtterance.rate = AVSpeechUtteranceMaximumSpeechRate;
+        [m_speechSynthesizer speakUtterance:bugWorkaroundUtterance];
+        
         if ([State instructionGender] == SG_MALE) {
             utt.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"en-GB"];
         }
-        utt.rate = 0.6;
+        
+        utt.rate = 0.5;
         m_pause += 3;
     } else {
         if (!State.speechOn) return;
         if ([State readingGender] == SG_MALE) {
             utt.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"en-GB"];
         }
-        utt.rate = 0.4 + ([s length] * 0.08) / 10;  //larger means faster speech
+        utt.rate = State.readingSpeed + ([s length] * 0.08) / 10;  //larger means faster speech
+        utt.volume = State.readingVolume;
     }
     
     [Log recordSpeakWord:s withSpeed:utt.rate]; 
@@ -159,5 +167,6 @@ static uint MIN_SPOKEN_LENGTH = 3;
     BOOL b = !([s isEqual: State.insExploreMode] || [s isEqual: State.insReadingMode]);
     return a && b;
 }
+
 
 @end

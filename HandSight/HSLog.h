@@ -21,7 +21,11 @@
     
     OVERVIEW_ON, OVERVIEW_OFF,
     FEEDBACK_TYPE,
-    CONVERT_MODE, VERTICAL_STOP, OVER_TEXT
+    CONVERT_MODE, VERTICAL_STOP, OVER_TEXT,
+        
+    TRAINING, CONTROL_PANEL,
+        
+        TRAIN_STEP_CHANGE,
 
     };
     
@@ -46,6 +50,9 @@
 - (void) recordSoftwareStart;
 - (void) recordTaskEnd;
 - (void) recordTaskBegin;
+- (void) recordTrain;
+- (void) recordTrainStepChange: (int)stepID; 
+- (void) recordControlPanel;
 - (void) recordReset;
 - (void) recordReverse;
 - (void) recordDocumentLoaded;
@@ -54,7 +61,7 @@
 - (void) recordTouchUp: (float)x withY: (float)y withLineIndex: (int)lineIndex withWordIndex:(int)wordIndex withWordText: (NSString*)wordText;
 - (void) recordTouchMove: (float)x withY: (float)y withLineIndex: (int)lineIndex withWordIndex:(int)wordIndex withWordText: (NSString*)wordText;
 - (void) recordBeginLine: (int)lineID;
--(void) recordConvertMode;
+- (void) recordConvertMode;
 
 - (void) recordEndLine: (int)lineID;
 - (void) recordEndParagraph: (int)paraID;

@@ -25,7 +25,7 @@
     NSLog(@"[ST] State Reset");
     
     if (self.mode != MD_SIGHTED)
-    self.mode               =       MD_EXPLORATION_TEXT;
+        self.mode               =       MD_READING; //MD_EXPLORATION_TEXT;
     
     if (self.documentType == DT_D && self.categoryType == CT_PLAIN)
     self.mode               =       MD_READING;
@@ -69,6 +69,8 @@
         self.maxVolume              =       75.0f;
         self.lineHeight             =       16.0f;
         self.minFeedbackValue       =       -127.0f;
+        self.readingSpeed           =       0.4;
+        self.readingVolume          =       0.7;    //0 to 1
         
         self.fieldOfView            =       4;
         
@@ -100,6 +102,8 @@
         self.insPicture             =       @"Picture";
         self.insText                =       @"Text";
         self.insTitle               =       @"Title";
+        self.insHandSightPanel      =       @"Hand Sight Panel";
+        self.insHandSightText       =       @"Hand Sight Text";
         self.arrInstruction         =       [[NSMutableArray alloc] init];
         self.activeTouches          =       [[NSMutableArray alloc] init];
         self.touchDict              =       [[NSMutableDictionary alloc] init]; 
@@ -120,6 +124,8 @@
         [self.arrInstruction addObject:self.insPicture];
         [self.arrInstruction addObject:self.insExploreMode];
         [self.arrInstruction addObject:self.insReadingMode];
+        [self.arrInstruction addObject:self.insHandSightText];
+        [self.arrInstruction addObject:self.insHandSightPanel];
         
         NSLog(@"[ST] Inited");
     }
@@ -144,7 +150,7 @@
 }
 
 - (bool) isAudioOn {
-    return ([self feedbackType] == FT_AUDIO) || ([self feedbackType] == FT_HYBRID);
+    return ([self feedbackType] == FT_AUDIO) || ([self feedbackType] == FT_HYBRID) ;
 }
 
 - (bool) isHapticOn {

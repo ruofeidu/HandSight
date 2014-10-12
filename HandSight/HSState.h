@@ -55,7 +55,7 @@ enum FeedbackStepByStep { Step0, StepVertical, StepVerticalText, StepLine, StepA
 @property (nonatomic) enum FeedbackStepByStep feedbackStepByStep;
 
 
-@property (nonatomic) NSString *insStartPlain, *insStartPlainExplore, *insStartMag, *insExploreMode, *insReadingMode,
+@property (nonatomic) NSString *insStartPlain, *insStartPlainExplore, *insStartMag, *insExploreMode, *insReadingMode, *insHandSightPanel, *insHandSightText,
                                 *insStartMagExplore, *insStartSighted, *insEndPlain, *insTitle, *insParagraph, *insPicture, *insText, *insEOC;
 @property (nonatomic) NSMutableArray *arrInstruction, *activeTouches;
 @property (nonatomic) NSMutableDictionary *touchDict;
@@ -65,7 +65,7 @@ enum FeedbackStepByStep { Step0, StepVertical, StepVerticalText, StepLine, StepA
 @property (nonatomic) BOOL waitLineBegin, waitLineEnd, waitParaEnd, waitTaskEnd, waitColumnEnd, sightedSpeaking, readingPitch, audioVolumeChange, hasEndColume, debugMode, showLog, showStat, thisLineHasAtLeastOneWordSpoken, speechOn, guided, automaticMode, automaticExploration;
 
 @property (nonatomic) int currentWordID, lastWordID, nextWordID, paraID, lineID, numWords, numFinger;
-@property (nonatomic) CGFloat readingSpeed, maxVibration, maxVolume, lineHeight, fieldOfView;
+@property (nonatomic) CGFloat readingSpeed, readingVolume, maxVibration, maxVolume, lineHeight, fieldOfView;
 
 
 + (HSState*) sharedInstance;

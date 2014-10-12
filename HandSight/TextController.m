@@ -61,6 +61,8 @@
     if (State.feedbackStepByStep == Step0) {
         [m_seg setHidden: YES];
     } else {
+        Log = [HSLog sharedInstance];
+        [Log recordTrainStepChange: State.feedbackStepByStep]; 
         [m_seg setHidden: NO];
         [m_label setHidden: YES];
         //[self sendData: 1]; // Make the "Training Session" set to "Vertical Box" state by default.

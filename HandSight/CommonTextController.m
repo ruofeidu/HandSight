@@ -157,15 +157,15 @@
 }
 
 - (void) left: (UIKeyCommand *) keyCommand {
-    [Feedback lineBegin];
+    [Feedback lineBeginOnly];
 }
 
 - (void) down: (UIKeyCommand *) keyCommand {
-    [Feedback paraEnd];
+    [Feedback paraEndOnly];
 }
 
 - (void) right: (UIKeyCommand *) keyCommand {
-    [Feedback lineEnd];
+    [Feedback lineEndOnly];
 }
 
 

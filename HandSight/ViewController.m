@@ -21,6 +21,9 @@
 
 - (void)addControls
 {
+    Log = [HSLog sharedInstance];
+    [Log recordControlPanel];
+    
     [self stop];
     [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(stop) userInfo:nil repeats:NO];
     [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(stop) userInfo:nil repeats:NO];
@@ -78,10 +81,17 @@
     
     lblPlainDoc         =   [self allocLabel:lblPlainDoc withText:@"Plain:"];
     segPlainDoc         =   [self allocSegmentation:segPlainDoc arr:[NSArray arrayWithObjects:@"1", @"2", nil] select:[State plainDocType] action: @selector(segPlainDocChanged:)]; [self addSpace];
+    lblReadSpeed        =   [self allocLabel:lblReadSpeed withText:@"Read Speed:"]; [self addSpace];
+    sldReadingSpeed     =   [self allocSlider:sldReadingSpeed min:0.0 max:1.0 down:@selector(sldReadingSpeedChanged:) up:@selector(sldReadingSpeedChangedUp:)];
+    [sldReadingSpeed setValue:State.readingSpeed];
     [self lineBreak];
     
     lblMagDoc           =   [self allocLabel:lblMagDoc withText:@"Magazine:"];
     segMagDoc           =   [self allocSegmentation:segMagDoc arr:[NSArray arrayWithObjects:@"1", @"2", nil] select:[State magDocType] action: @selector(segMagDocChanged:)]; [self addSpace];
+    lblReadPitch        =   [self allocLabel:lblReadPitch withText:@"Read Volume:"]; [self addSpace];
+    sldReadingVolume     =   [self allocSlider:sldReadingVolume min:0.0 max:1.0 down:@selector(sldReadingVolumeChanged:) up:@selector(sldReadingVolumeChangedUp:)];
+    [sldReadingVolume setValue:State.readingVolume];
+
     [self lineBreak];
 
     //m_render = NO;
@@ -135,6 +145,8 @@
     [btnStart setFrame: CGRectMake(m_btnLeft + m_textWidth / 2 + m_inset * 2, m_btnTop, m_textWidth, m_textHeight)];
     
     [self updateDocuments];
+    //[self btnTaskStartTouched];
+    [Feedback handsightPanel]; 
 }
 
 - (void)btnTaskStartTouched
@@ -383,6 +395,13 @@
 - (void)sldReadingSpeedChanged: (id)sender
 {
     State.readingSpeed = [sldReadingSpeed value];
+}
+
+- (void)sldReadingSpeedChangedUp: (id)sender
+{
+    [self sldReadingSpeedChanged: sender];
+    [Speech speakText:@"Welcome to HandSight!"];
+    
 }
 
 - (void)swcShowLogChanged: (id)sender
@@ -682,5 +701,18 @@
     
     [self presentViewController:viewController animated:YES completion:nil];
 }
+
+- (void)sldReadingVolumeChanged: (id)sender
+
+{
+    State.readingVolume = sldReadingVolume.value;
+}
+
+- (void)sldReadingVolumeChangedUp: (id)sender
+{
+    [self sldReadingVolumeChanged: sender];
+    [Speech speakText:@"Welcome to HandSight!"];
+}
+
 
 @end

@@ -133,7 +133,7 @@
     
     lblPointLog = ({
         UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(m_left, 20, m_width - m_left - m_right, m_lineHeight)];
-        [l setText:@"Point Log"];
+        [l setText:@""];
         [l setTextColor:[UIColor blackColor]];
         [l setTextAlignment:NSTextAlignmentLeft];
         [l setFont: [UIFont fontWithName:m_textFontName size:m_textSize / 2]];

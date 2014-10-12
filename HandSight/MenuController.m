@@ -52,10 +52,12 @@
 
 - (void)switchView
 {
-    NSLog(@"[CP] Switch View");
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    MenuController *viewController = (MenuController *)[storyboard instantiateViewControllerWithIdentifier:@"MenuController"];
-    [self presentViewController:viewController animated:YES completion:nil];
+    if (State.debugMode) {
+        NSLog(@"[CP] Switch View");
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        MenuController *viewController = (MenuController *)[storyboard instantiateViewControllerWithIdentifier:@"MenuController"];
+        [self presentViewController:viewController animated:YES completion:nil];
+    }
 }
 
 
