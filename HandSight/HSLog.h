@@ -23,25 +23,29 @@
     FEEDBACK_TYPE,
     CONVERT_MODE, VERTICAL_STOP, OVER_TEXT,
         
-    TRAINING, CONTROL_PANEL,
-        
-        TRAIN_STEP_CHANGE,
+    TRAINING, CONTROL_PANEL, TRAIN_STEP_CHANGE, SKIP_WORD
 
     };
     
     NSMutableString* m_data;
     NSMutableString* m_json;
     NSMutableString* m_txt;
+    
+    NSMutableArray* m_queue, *m_appendQueue;
+    NSMutableArray* m_event; 
 
     NSString* m_instruction; 
     
     CGFloat m_startTime;
     CGFloat m_time; 
     int m_numOfLogs;
+    bool m_writeLock;
+    
     
     HSFile* File;
     HSState* State;
     HSStat* Stat;
+    
 }
 
 
@@ -60,14 +64,20 @@
 - (void) recordTouchDown: (float)x withY: (float)y withLineIndex: (int)lineIndex withWordIndex:(int)wordIndex withWordText: (NSString*)wordText;
 - (void) recordTouchUp: (float)x withY: (float)y withLineIndex: (int)lineIndex withWordIndex:(int)wordIndex withWordText: (NSString*)wordText;
 - (void) recordTouchMove: (float)x withY: (float)y withLineIndex: (int)lineIndex withWordIndex:(int)wordIndex withWordText: (NSString*)wordText;
-- (void) recordBeginLine: (int)lineID;
+- (void) recordBeginLine: (int)lineID withWidth: (float)lineWidth withCenterY: (float)lineCenterY;
 - (void) recordConvertMode;
-
-- (void) recordEndLine: (int)lineID;
-- (void) recordEndParagraph: (int)paraID;
+- (void) recordEndLine: (int)lineID withWidth: (float)lineWidth withCenterY: (float)lineCenterY;
+- (void) recordEndParagraph: (int)paraID withWidth: (float)lineWidth withCenterY: (float)lineCenterY;
 - (void) recordSpeakWord: (NSString*)word withSpeed: (float)speed;
+- (void) recordSkipWord: (int)num;
 - (void) recordVerticalFeedback: (int)vibrationCommand withVibrationDistance: (float)power withAudioFrequency:(float)freq;
 - (void) recordVerticalStop;
 - (void) saveToFile;
 
+- (void) recordTouchLog: (NSString*) string withNumTouches: (int)touches;
+- (void) recordExplorationFeedback: (NSString*) string;
+
+- (void) appendToFile;
+
+- (void) convert; 
 @end

@@ -25,7 +25,7 @@
     NSLog(@"[ST] State Reset");
     
     if (self.mode != MD_SIGHTED)
-        self.mode               =       MD_READING; //MD_EXPLORATION_TEXT;
+        self.mode               =       MD_EXPLORATION_TEXT;
     
     if (self.documentType == DT_D && self.categoryType == CT_PLAIN)
     self.mode               =       MD_READING;

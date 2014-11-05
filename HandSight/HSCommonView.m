@@ -73,7 +73,10 @@
                     y = 539;
                     break;
                 case DT_D:
-                    y = 539; 
+                    y = 539;
+                    break;
+                default:
+                    break;
             }
         }
         

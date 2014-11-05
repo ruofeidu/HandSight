@@ -53,7 +53,8 @@
 
 - (void)loadDocument {
     Doc.numCols = 2;
-    [self clearViews]; 
+    [self clearViews];
+    [Log recordDocumentLoaded];
     NSLog(@"[MV] MagView Load Document");
     Doc.isLoaded = false;
     [[self textStorage] setAttributedString:[self getAttributedString]];

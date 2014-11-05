@@ -105,15 +105,21 @@
         [self.layoutManager drawGlyphsForGlyphRange:glyphRange atPoint:origin];
     }
     
-    if ([State debugMode]) {
+    //if ([State debugMode]) {
         [self addGestureRecognizer:m_doubleTap];
-    }
+    //}
 }
 
 - (void)converMode: (UITapGestureRecognizer *)recognizer {
     if (State.debugMode) {
         [Feedback convertMode];
     } else {
+        if (m_isSpeaking) {
+            [Speech stopSpeaking];
+        } else {
+            [Speech speakText: m_text];
+        }
+        m_isSpeaking = !m_isSpeaking; 
         [lblNext setHidden: YES];
     }
 }
@@ -153,6 +159,8 @@
 {
     [super reset]; 
     [Doc reset];
+    m_isSpeaking    =       false; 
+    //[Log recordDocumentView];
     // the view bound
     m_left          =       120;
     m_top           =       70;
@@ -182,7 +190,6 @@
     m_pictureInset  =       10.0f;
     m_titleHeight   =       m_titleSize + 2;
     m_textHeight    =       m_textSize + 2;
-    
     
     m_labelTextSize =       m_textSize / 2; 
     m_titleSymbol   =       @"*";
@@ -233,6 +240,30 @@
     NSString* textContent = [File readTxt: [NSString stringWithFormat:@"%d%d", c, [State documentType]]];
     NSString* text = [textContent stringByReplacingOccurrencesOfString:@"\n" withString:@" \n "];
     
+    if (State.documentType == DT_A && State.categoryType == CT_PLAIN) {
+        
+        m_text = @"People have used coins as a means of exchange for thousands of years. Valued for their craftsmanship and purchasing power, coins have been collected in great numbers throughout history and buried for safekeeping. Because stores of coins gathered and hidden in this manner lie untouched for many years, they can reveal a great deal about a given culture. Coins are useful in revealing many aspects of a culture. They can provide clues about when a given civilization was wealthy and when it was experiencing a depression. Wealthy nations tend to produce a greater number of coins made from richer materials. The distribution of coins can also reflect the boundaries of an empire and the trade relationships within it. Roman imperial gold coins found in India, indicate the Romans purchased goods from the East. The way the coins themselves are decorated sometimes provides key information about a culture. Many coins are stamped with a wealth of useful historical evidence, including portraits of political leaders, important buildings and sculptures, mythological and religious figures, and useful dates. Some coins, such as many from ancient Greece, can be considered works of art themselves and reflect the artistic achievement of the civilization as a whole. Information gathered from old coins by historians is most useful when placed alongside other historical documents, such as written accounts or data from archeological digs. Combined with these other pieces of information, coins can help historians reconstruct the details of lost civilizations.";
+        
+    } else
+        if (State.documentType == DT_B && State.categoryType == CT_PLAIN) {
+            
+            
+            m_text = @"Born in Spanish Harlem in the late 1950s, Raphael Sanchez learned at an early age to listen to the many voices of the city. It was as a boy in Harlem that he developed the powers of observation that would later make his writing truly great. In the 1970s, Raphael went to Columbia University, where he was exposed to a literary tradition. While his university education gave his writing new depth, the raw energy of the streets has always served as the primary fuel for his writing. This is what gives his works passion and power. Raphael once told me that in order to escape from life he turns to books, and in order to escape from books he turns to life. It is this balance of the sights, sounds, and smells of the street with the perspective gained from his formal education that has made Raphael popular with both critics and regular readers alike. For those of us who have read and admired his work, it seems natural that Raphael has won so many awards. He deserves them, and his humility in accepting them has been refreshing. When he received the Writer’s Quill Award two weeks ago, for example, he told the audience, This award is not really mine. It belongs to all the million things that have inspired me. That is the kind of man I am introducing to you this evening. He is a man who has been inspired by a million things, and he is a man who has provided inspiration to a million people. Ladies and gentlemen, it is my great honor to present to you, Raphael Sanchez. ";
+            
+        } else
+            if (State.documentType == DT_A && State.categoryType == CT_MAGAZINE) {
+                
+                
+                m_text = @"Despite the stubborn, widespread opinion that animals don’t feel emotions in the same way that humans do, many animals have been observed to demonstrate a capacity for joy. People have often seen animals evincing behavior that can only be taken to mean they are pleased with what life has brought them in that particular moment. A chimpanzee named Nim was raised by a human family for the first year and a half of his life. After that time, Nim was separated from them for two and a half years. On the day that Nim was reunited with his human family, he smiled, shrieked, pounded the ground, and looked from one member of the family to the next. Still smiling and shrieking, Nim went around hugging each member of the family. He played with and groomed each member of the family for almost an hour before the family had to leave. People who were familiar with Nim’s behavior said they had never seen him smile for such a long period of time.";
+                
+            } else
+                if (State.documentType == DT_B && State.categoryType == CT_MAGAZINE) {
+                    
+                    
+                    m_text = @"In the 1800s, most geologists thought the sea floor was a lifeless expanse of mud, sediment, and the decaying remains of dead organisms. They thought that, with the exception of some volcanic islands, the bottom of the sea had no major geographic features, such as peaks or valleys. In the mid-nineteenth century, ships depth- sounding the ocean floor with sonar for a transatlantic telegraph cable made some interesting discoveries. To geologists’ surprise, the ocean floor was found to be made up of long mountain ranges and deep valleys and troughs. Another surprise finding in the Atlantic was the existence of basalt, a volcanic rock thought only to exist in the Pacific Ocean. The presence of basalt in the Atlantic was a clue that volcanic activity occurs at the bottom of the sea. This and other discoveries, many of them accidental in the beginning, were signals to geologists that their knowledge of the sea floor was very limited.";
+                    
+                }
+                 
     Doc.arrWord = [[text componentsSeparatedByString:@" "] mutableCopy];
     [m_arrImg removeAllObjects]; 
     [Doc clear];
@@ -360,6 +391,30 @@
     if (multiTouch) {
         point.x = -1; 
         hand = 2;
+        
+        /**
+         Whenever there are exactly two touch locations, set the rightmost touch location as the right finger and the leftmost touch location as the left finger
+         This could occasionally result in the fingers being swapped, if for example the right finger moves past the left when searching for the start of the line. However, it should automatically correct itself in this case, since the right finger will move rightwards along the line and the left will stay in place.
+         **/
+        
+        if ([State.activeTouches count] == 2) {
+            CGPoint p1 = [[State.activeTouches objectAtIndex:0] locationInView: self];
+            NSString *k1 = [NSString stringWithFormat:@"%lu", (unsigned long)[[State.activeTouches objectAtIndex:0] hash]];
+            
+            CGPoint p2 = [[State.activeTouches objectAtIndex:1] locationInView: self];
+            NSString *k2 = [NSString stringWithFormat:@"%lu", (unsigned long)[[State.activeTouches objectAtIndex:1] hash]];
+            
+            if (p1.x > p2.x) {
+                [State.touchDict setValue:[NSNumber numberWithInt: TH_LEFT] forKey:k2];
+                [State.touchDict setValue:[NSNumber numberWithInt: TH_RIGHT] forKey:k1];
+                return p1;
+            } else {
+                [State.touchDict setValue:[NSNumber numberWithInt: TH_RIGHT] forKey:k2];
+                [State.touchDict setValue:[NSNumber numberWithInt: TH_LEFT] forKey:k1];
+                return p2;
+            }
+        }
+        
         for (UITouch *aTouch in State.activeTouches) {
             NSString *key = [NSString stringWithFormat:@"%lu", (unsigned long)[aTouch hash]];
             int hand = [[State.touchDict objectForKey:key] intValue];
@@ -388,19 +443,18 @@
         }
     }
     
-    if (hand == 1 && State.mode == MD_READING) return CGPointMake(0, 0);
+    if (hand == TH_LEFT && State.mode == MD_READING) return CGPointMake(0, 0);
     
     
     return point;
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    
     for (UITouch *touch in touches) {
         if (![State.activeTouches containsObject:touch]) {
             [State.activeTouches addObject:touch];
             NSString *key = [NSString stringWithFormat:@"%lu", (unsigned long)[touch hash]];
-            
-            //[State.touchDict setValue:[NSNumber numberWithInt:TH_UNKNOWN] forKey:key];
             
             if ([State.activeTouches count] > 2) {
                 [State.touchDict setValue:[NSNumber numberWithInt:TH_EXTRA] forKey:key];
@@ -410,12 +464,26 @@
         
         }
     }
+    
+    
+    int count = [event.allTouches count];
+    if (count != [State.activeTouches count]) {
+        NSLog(@"Touch Missync");
+        [State.activeTouches removeAllObjects];
+        for (UITouch *touch in event.allTouches) {
+            if (![State.activeTouches containsObject:touch]) {
+                [State.activeTouches addObject:touch];
+            }
+        }
+    }
+    
     CGPoint point = [self getTheBestPoint];
     
     
-    [Viz touchDown: point];
+    //[Viz touchDown: point];
     [self handleSingleTouch: point];
     
+    if (point.x != 0)
     [Log recordTouchDown:point.x withY:point.y withLineIndex:State.lineID withWordIndex:State.currentWordID withWordText:[Doc getKeyFromWordIndex:State.currentWordID]];
     
     [self updateTouchLog];
@@ -424,9 +492,10 @@
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     CGPoint point = [self getTheBestPoint];
-    [Viz touchMove: point];
+    //[Viz touchMove: point];
     [self handleSingleTouch: point];
     
+    if (point.x != 0)
     [Log recordTouchMove:point.x withY:point.y withLineIndex:State.lineID withWordIndex:State.currentWordID withWordText:[Doc getKeyFromWordIndex:State.currentWordID]];
     
     [self updateTouchLog];
@@ -441,9 +510,11 @@
         [State.touchDict removeObjectForKey:key];
     }
     CGPoint point = [self getTheBestPoint];
-    [Viz touchUp: point];
+    //[Viz touchUp: point];
     
+    if (point.x != 0)
     [Log recordTouchUp:point.x withY:point.y withLineIndex:State.lineID withWordIndex:State.currentWordID withWordText:[Doc getKeyFromWordIndex:State.currentWordID]];
+    
     if (State.mode == MD_EXPLORATION_TEXT || (State.automaticMode && State.automaticExploration)) [Feedback overSpacing];
     [lblCurrent setHidden: YES];
     [Feedback verticalStop];
@@ -455,7 +526,11 @@
 - (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     for (UITouch *touch in touches) {
         [State.activeTouches removeObject:touch];
+        
+        NSString *key = [NSString stringWithFormat:@"%lu", (unsigned long)[touch hash]];
+        [State.touchDict removeObjectForKey:key];
     }
+    
     CGPoint point = [self getTheBestPoint];
     [Viz touchUp: point];
     [self handleSingleTouch: point];
@@ -536,6 +611,10 @@
     int i = [Doc getTheLastWordIDInTheSameLine];
     CGRect rect = [self getWordRect: i];
     
+    if (point.x > rect.origin.x + rect.size.width && i - [State lastWordID] > 0) {
+        [Log recordSkipWord: i - [State lastWordID]];
+    }
+    
     return point.x > rect.origin.x + rect.size.width;
 }
 
@@ -562,6 +641,10 @@
     
     if (point.x >= parabd && [Doc getColFromWordIndex:k] != [Doc getColFromWordIndex:i]) {
         State.hasEndColume = YES;
+    }
+    
+    if (point.x >= parabd && i - [State lastWordID] > 0) {
+        [Log recordSkipWord: i - [State lastWordID]];
     }
     
     return point.x >= parabd;
@@ -697,6 +780,11 @@
     NSMutableDictionary* a = [Doc getWordDict: State.lastWordID];
     NSMutableDictionary* b = [Doc getWordDict: State.currentWordID];
     
+    /*
+    if ([a getLine] == [b getLine] && [a getColumn] == [b getColumn] && [a getPara] == [b getPara]) {
+        NSLog(@"Skip words");
+    }
+     */
     return [a getLine] == [b getLine] && [a getColumn] == [b getColumn] && [a getPara] == [b getPara];
 }
 
@@ -718,21 +806,43 @@
     CGRect rect = [self getWordRect:0];
     CGRect lastRect = rect; 
     int para = 0;
-    int line = 1;
+    int line = 0;
     int totalLines = 1;
     int col = 0;
     
-    
+    for (int i = 0; i < Doc.textEndID; ++i) {
+        dict = [Doc getWordDict:i];
+        [dict setLine: -1];
+        [dict setPara: -1];
+        [dict setColumn: 0];
+        
+    }
+    [Doc.lineWidth removeAllObjects];
+    [Doc.lineCenterY removeAllObjects];
     
     while (i < Doc.textEndID) {
         
         lastID = i;
         i = [Doc getNextWordID:i];
-        if (i >= [Doc.arrWordDict count] - 1) break; // No next word though
+        if (i >= [Doc.arrWordDict count] - 1) {
+            
+            if (col == 0) {
+                [Doc.lineWidth addObject: [NSNumber numberWithFloat:rect.origin.x + rect.size.width - m_left]];
+                [Doc.lineCenterY addObject: [NSNumber numberWithInt: rect.origin.y + rect.size.height / 2 ] ];
+            } else
+                if (col == 1) {
+                    [Doc.lineWidth addObject: [NSNumber numberWithFloat:rect.origin.x + rect.size.width - m_left - m_columnWidth - m_columnSpacing]];
+                    [Doc.lineCenterY addObject: [NSNumber numberWithInt: rect.origin.y + rect.size.height / 2 ] ];
+                }
+            break; // No next word though
+        }
 
+        int previousCol = col;
+        
         if (i != lastID + 1) {
             ++para;
-            line = 1;
+            ++line;
+            //line = 1;
             ++totalLines;
             if (totalLines > 20) {
                 col = 1;
@@ -744,6 +854,7 @@
                 }
             }
         }
+        
         lastRect = rect;
         dict = [Doc getWordDict:i];
         [dict setColumn: col];
@@ -755,9 +866,17 @@
         lblCurrent.frame = rect;
         
         
-        if ([self inTwoLines:lastRect aboveOn:rect])
+        if ([self inTwoLines:lastRect aboveOn:rect] || (previousCol == 0 && col == 1))
         {
-            [Doc.lineWidth addObject: [NSNumber numberWithFloat:lastRect.origin.x + lastRect.size.width - m_left]];
+            if (previousCol == 0) {
+                [Doc.lineWidth addObject: [NSNumber numberWithFloat:lastRect.origin.x + lastRect.size.width - m_left]];
+                [Doc.lineCenterY addObject: [NSNumber numberWithInt: lastRect.origin.y + lastRect.size.height / 2 ] ];
+            } else
+            if (previousCol == 1) {
+                [Doc.lineWidth addObject: [NSNumber numberWithFloat:lastRect.origin.x + lastRect.size.width - m_left - m_columnWidth - m_columnSpacing]];
+                [Doc.lineCenterY addObject: [NSNumber numberWithInt: lastRect.origin.y + lastRect.size.height / 2 ] ];
+            }
+            
             ++line;
             ++totalLines;
         }
@@ -766,16 +885,19 @@
         [dict setPara: para];
         
         // print every line
-        NSLog(@"%d|%@:\t%d,%d,%d; %@, %@", i, [dict getKey], [dict getLine], [dict getPara], [dict getColumn], NSStringFromCGRect(lastRect), NSStringFromCGRect(rect) );
-        
+        //NSLog(@"%d|%@:\t%d,%d,%d; %@, %@", i, [dict getKey], [dict getLine], [dict getPara], [dict getColumn], NSStringFromCGRect(lastRect), NSStringFromCGRect(rect) );
+        NSLog(@"\"%d\", \"%@\", \"%d\", \"%d\" , \"%d\"", [dict getID], [dict getKey], [dict getLine], [dict getPara], [dict getColumn] );
         //NSLog(@"How many lines in total: %d", [Doc.lineWidth count]);}
     }
     
+    int lid = 0;
     for (NSNumber *num in Doc.lineWidth) {
-        //NSLog(@"LineWidth: %.1f", [num floatValue]);
+        NSLog(@"%d | LineWidth: %.1f", lid++, [num floatValue]);
     }
     //NSLog(@"How many lines in total: %d", [Doc.lineWidth count]);
-    
+    //NSLog(@"Linewidth: %@", Doc.lineWidth);
+    NSLog(@"LineCenterY: %@", Doc.lineCenterY);
+
     NSLog(@"========= Add attributes end =============");
     State.numWords = (int)[Doc numActualWords];
 }
@@ -796,6 +918,8 @@
         [lblLineBegin setFrame: CGRectMake(m_left - 40, 0, 60, m_height)];
     }
     [lblLineBegin setHidden: NO];
+    
+
 }
 
 - (void) moveToBeginningOfNextLine {
@@ -877,7 +1001,7 @@
                 State.lastWordID = 28+13+1+4+4+4+2+2-1-1;
                 break;
             case DT_A:
-                State.lastWordID = 74;
+                State.lastWordID = 74-2;
                 break;
             case DT_B:
                 State.lastWordID = 51-15-1+6;
@@ -914,7 +1038,6 @@
 
 - (void) setupCurrentWordRect: (CGPoint) point {
     State.currentWordID = [self getWordIDFromPoint: point];
-    State.lineID = [Doc getLineFromWordIndex: State.currentWordID];
     State.paraID = [Doc getParaFromWordIndex: State.currentWordID];
     
     [lblCurrent setFrame: [self getWordRect: State.currentWordID] ];
@@ -1106,6 +1229,14 @@
     if ([State waitLineBegin]) {
         if ([self enterLineBeginRegion:point]) {
             [self cancelWaitLineBegin];
+            
+            
+            State.lineID = [Doc getLineFromWordIndex: State.nextWordID];
+            if (State.lineID < [Doc.lineWidth count]) {
+                State.lineWidth = [[Doc.lineWidth objectAtIndex:State.lineID] intValue];
+            }
+            State.lineCenterY = lblNext.frame.origin.y + lblNext.frame.size.height / 2;
+            
             return [Feedback lineBegin];
         }
         return;
@@ -1149,6 +1280,12 @@
         State.lastWordID = State.nextWordID;
         lblLast.frame = lblNext.frame;
         
+        State.lineID = [Doc getLineFromWordIndex: State.lastWordID];
+        if (State.lineID < [Doc.lineWidth count]) {
+            State.lineWidth = [[Doc.lineWidth objectAtIndex:State.lineID] intValue];
+        }
+        State.lineCenterY = lblLast.frame.origin.y + lblLast.frame.size.height / 2;
+        
         [self speakWord: State.lastWordID];
 
         //setup next word id
@@ -1161,7 +1298,6 @@
             return [self waitTaskEnd];
         }
         
-        
         if (State.documentType == DT_B && State.categoryType == CT_MAGAZINE) {
             if (State.nextWordID >= 200) {
                 lblNext.frame = INVISIBLE_RECT;
@@ -1171,7 +1307,6 @@
                 return;
             }
         }
-        
         
         [self setupNextWordRegion];
         
@@ -1212,7 +1347,14 @@
     if ([self skipNextWord:point]) {
         NSLog(@"Skip next word! State currentword %d lastWordID %d, nextWordID %d", [State currentWordID], [State lastWordID], [State nextWordID]);
         [Stat skipWord: [State currentWordID] - [State lastWordID] - 1];
+        [Log recordSkipWord: [State currentWordID] - [State lastWordID] - 1];
         [self speakCurrentWord];
+        
+        State.lineID = [Doc getLineFromWordIndex: State.currentWordID];
+        if (State.lineID < [Doc.lineWidth count]) {
+            State.lineWidth = [[Doc.lineWidth objectAtIndex:State.lineID] intValue];
+        }
+        State.lineCenterY = lblCurrent.frame.origin.y + lblCurrent.frame.size.height / 2;
         
         [self setupNextWordID];
         if (State.nextWordID >= [Doc.arrWordDict count] - 1) {
@@ -1257,22 +1399,25 @@
 - (void) updateTouchLog {
     
     NSString *res = [NSString stringWithFormat:@"%lu touches:", (unsigned long)[State.activeTouches count] ];
+    NSString *log = @"";
     for (UITouch *touch in State.activeTouches) {
         
         NSString *key = [NSString stringWithFormat:@"%lu", (unsigned long)[touch hash]];
         int hand = [[State.touchDict objectForKey:key] intValue];
-        NSString *type = @"[Single";
-        if (hand == 1) type = @"[Left"; else if (hand==2) type=@"[Right"; else if (hand==3) type=@"[Extra";
+        NSString *type = @"Single";
+        if (hand == 1) type = @"Left"; else if (hand==2) type=@"Right"; else if (hand==3) type=@"Extra";
         
         NSValue *touchValue = [NSValue valueWithPointer:(__bridge const void *)(touch)];
         NSString *touchID = [NSString stringWithFormat:@"%@", touchValue];
         
-        res = [NSString stringWithFormat:@"%@\t%@-%@]%@", res, type, touchID, NSStringFromCGPoint([touch locationInView:self])];
+        res = [NSString stringWithFormat:@"%@\t[%@-%@]%@", res, type, touchID, NSStringFromCGPoint([touch locationInView:self])];
+        log = [NSString stringWithFormat:@"%@\t%@\t%@\t%@", log, type, touchID, NSStringFromCGPoint([touch locationInView:self])];
     }
     
     if (State.debugMode) {
         [lblPointLog setText:res];
     }
+    [Log recordTouchLog: log withNumTouches: [State.activeTouches count]];
 }
 
 

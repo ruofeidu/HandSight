@@ -18,6 +18,7 @@
 - (NSString *)readTxt: (NSString *)fileName; 
 - (void) write:(NSString *)fileName data:(id)data;
 - (void)write:(NSString *)fileName dataArray:(NSArray *)data;
+-(void) append:(NSString *)fileName data:(NSString*) savedString;
 
 - (NSString*) fileName;
 - (NSString*) userID;

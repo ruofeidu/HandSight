@@ -64,8 +64,8 @@ enum FeedbackStepByStep { Step0, StepVertical, StepVerticalText, StepLine, StepA
 @property (nonatomic) BOOL taskStarted, taskEnded, lockTaskStarted, softwareStarted, audioPitch, audioVolume;
 @property (nonatomic) BOOL waitLineBegin, waitLineEnd, waitParaEnd, waitTaskEnd, waitColumnEnd, sightedSpeaking, readingPitch, audioVolumeChange, hasEndColume, debugMode, showLog, showStat, thisLineHasAtLeastOneWordSpoken, speechOn, guided, automaticMode, automaticExploration;
 
-@property (nonatomic) int currentWordID, lastWordID, nextWordID, paraID, lineID, numWords, numFinger;
-@property (nonatomic) CGFloat readingSpeed, readingVolume, maxVibration, maxVolume, lineHeight, fieldOfView;
+@property (nonatomic) int currentWordID, lastWordID, nextWordID, paraID, lineID, numWords, numFinger, lineWidth;
+@property (nonatomic) CGFloat readingSpeed, readingVolume, maxVibration, maxVolume, lineHeight, fieldOfView, lineCenterY;
 
 
 + (HSState*) sharedInstance;

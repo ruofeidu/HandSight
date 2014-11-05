@@ -21,7 +21,7 @@
 @property (nonatomic) BOOL hasTitle, isLoaded;
 @property (nonatomic) int numCols, numImages, numPara, numPicParas, lineSymImg, firstColumnCharacters, textEndID;
 @property (nonatomic) NSMutableDictionary *dictParaLine;
-@property (nonatomic) NSMutableArray *arrImg, *arrWord, *arrWordStartIndex, *arrWordDict, *lineWidth;
+@property (nonatomic) NSMutableArray *arrImg, *arrWord, *arrWordStartIndex, *arrWordDict, *lineWidth, *lineCenterY;
 
 + (HSDocument*) sharedInstance;
 - (void) reset;

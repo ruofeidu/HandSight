@@ -120,6 +120,8 @@
         [m_text trainVerticalBox];
         [m_seg setSelectedSegmentIndex: State.feedbackStepByStep - 1];
     }
+    
+    [Log recordTrainStepChange: State.feedbackStepByStep];
 }
 
 - (void) k2: (UIKeyCommand *) keyCommand {
@@ -130,6 +132,8 @@
         State.feedbackStepByStep = StepVerticalText;
         [m_seg setSelectedSegmentIndex: State.feedbackStepByStep - 1];
     }
+    
+    [Log recordTrainStepChange: State.feedbackStepByStep];
 }
 
 - (void) k3: (UIKeyCommand *) keyCommand {
@@ -140,6 +144,8 @@
         State.feedbackStepByStep = StepLine;
         [m_seg setSelectedSegmentIndex: State.feedbackStepByStep - 1];
     }
+    
+    [Log recordTrainStepChange: State.feedbackStepByStep];
 }
 
 
@@ -150,6 +156,8 @@
         State.feedbackStepByStep = StepAll;
         [m_seg setSelectedSegmentIndex: State.feedbackStepByStep - 1];
     }
+    
+    [Log recordTrainStepChange: State.feedbackStepByStep];
 }
 
 - (void) kenter: (UIKeyCommand *) keyCommand {

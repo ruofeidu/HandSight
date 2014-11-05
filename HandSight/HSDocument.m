@@ -45,7 +45,7 @@
     self.arrWordStartIndex  =           [[NSMutableArray alloc] init];
     self.arrWordDict        =           [[NSMutableArray alloc] init];
     self.lineWidth          =           [[NSMutableArray alloc] init];
-    
+    self.lineCenterY        =           [[NSMutableArray alloc] init];
     self.dictParaLine       =           [[NSMutableDictionary alloc] init];
 }
 

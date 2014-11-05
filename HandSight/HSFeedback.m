@@ -77,6 +77,10 @@
  * Feedback for vertical stop
  */
 - (void) verticalStop {
+    if (m_verticalOn) {
+        [Log recordVerticalStop];
+    }
+    
     m_verticalOn = NO;
     
     if ([State isAudioOn]) {
@@ -86,7 +90,6 @@
     if ([State isHapticOn] || [State isHaptio]) {
         [Bluetooth verticalStop];
     }
-    [Log recordVerticalStop];
 }
 
 /**
@@ -144,6 +147,7 @@
  * Feedback for over text
  */
 - (void) overText {
+    [Log recordExplorationFeedback:@"Text"];
     [Audio playFlute];
     //[Bluetooth verticalFeedback: 10];
 }
@@ -159,6 +163,7 @@
  * Feedback for over picture
  */
 - (void) overPicture {
+    [Log recordExplorationFeedback:@"Picture"];
     [Audio playViolin];
     [Bluetooth verticalStop];
 }
@@ -174,10 +179,10 @@
 }
 
 - (void) setTaskEnd: (NSTimer*) timer {
-    [Speech speakText: [State insEndPlain]];
+    [Speech queueText: [State insEndPlain]];
     //[Speech speakText: [State insEndPlain]];
 
-    [Log saveToFile];
+    //[Log saveToFile];
 }
 
 - (void) stopFeedback {
@@ -197,6 +202,7 @@
     }
     
     if ([State isAudioOn] || [State isHaptio]) {
+        [Log recordExplorationFeedback:@"Stop"];
         [Audio stopMusic]; 
     }
     
@@ -209,7 +215,7 @@
     if (State.feedbackStepByStep == StepVertical || State.feedbackStepByStep == StepVerticalText) return;
         
     State.thisLineHasAtLeastOneWordSpoken = false;
-    [Log recordBeginLine: State.lineID];
+    [Log recordBeginLine: State.lineID withWidth:State.lineWidth withCenterY:State.lineCenterY];
     
     if ([State isAudioOn] || [State isHaptio]) {
         [Audio playAudio:AU_LINE_BEGIN];
@@ -226,7 +232,7 @@
 }
 
 - (void) lineEnd {
-    [Log recordEndLine: State.lineID];
+    [Log recordEndLine: State.lineID withWidth:State.lineWidth withCenterY:State.lineCenterY];
     
     if (State.feedbackStepByStep == StepVertical || State.feedbackStepByStep == StepVerticalText) return;
     
@@ -261,7 +267,7 @@
 }
 
 - (void) paraEnd {
-    [Log recordEndParagraph: State.paraID];
+    [Log recordEndParagraph: State.paraID withWidth:State.lineWidth withCenterY:State.lineCenterY];
     if (State.feedbackStepByStep == StepVertical || State.feedbackStepByStep == StepVerticalText) return;
     
     if ([State isAudioOn] || [State isHaptio]) {
@@ -276,6 +282,8 @@
 - (void) overSpacing {
     [Audio stopMusic];
     [Bluetooth verticalStop];
+    
+    [Log recordExplorationFeedback:@"Stop"];
 }
 
 - (void)speekCurrentWord: (NSString*) s {

@@ -22,6 +22,7 @@
 		6407DA8E19B0E23100A19C53 /* NewCello.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6407DA8D19B0E23100A19C53 /* NewCello.wav */; };
 		640A21A619D9DCBE005DC844 /* 06.txt in Resources */ = {isa = PBXBuildFile; fileRef = 640A21A419D9DCBE005DC844 /* 06.txt */; };
 		640A21A719D9DCBE005DC844 /* TemplateIcon2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 640A21A519D9DCBE005DC844 /* TemplateIcon2x.png */; };
+		640A34C919F04ADE005E17A6 /* 1009_122403_log.data in Resources */ = {isa = PBXBuildFile; fileRef = 640A34C819F04ADE005E17A6 /* 1009_122403_log.data */; };
 		642DCEAC19702DC80021A307 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 642DCEAB19702DC80021A307 /* Accelerate.framework */; };
 		642DCEAE19702DCE0021A307 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 642DCEAD19702DCE0021A307 /* CoreMedia.framework */; };
 		642DCEB019702DD30021A307 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 642DCEAF19702DD30021A307 /* MediaPlayer.framework */; };
@@ -103,6 +104,8 @@
 		64E0F84919E84EE100A64302 /* seafloor.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 64E0F84819E84EE100A64302 /* seafloor.jpg */; };
 		64E7A072199A2D18007EE4A3 /* HSMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 64E7A071199A2D18007EE4A3 /* HSMenuView.m */; };
 		64E7A075199A31DD007EE4A3 /* CommonTextController.m in Sources */ = {isa = PBXBuildFile; fileRef = 64E7A074199A31DD007EE4A3 /* CommonTextController.m */; };
+		64F9421F19F1776D00B354DD /* 1013_133924_log.data in Resources */ = {isa = PBXBuildFile; fileRef = 64F9421E19F1776D00B354DD /* 1013_133924_log.data */; };
+		64F9422119F1777200B354DD /* 1014_111801_log.data in Resources */ = {isa = PBXBuildFile; fileRef = 64F9422019F1777200B354DD /* 1014_111801_log.data */; };
 		BC6F209E16474B4DB630AB89 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 83E54E18DB6F441A81A205B6 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -134,6 +137,7 @@
 		6407DA8D19B0E23100A19C53 /* NewCello.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = NewCello.wav; path = Resource/Audio/NewCello.wav; sourceTree = SOURCE_ROOT; };
 		640A21A419D9DCBE005DC844 /* 06.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 06.txt; sourceTree = "<group>"; };
 		640A21A519D9DCBE005DC844 /* TemplateIcon2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TemplateIcon2x.png; sourceTree = "<group>"; };
+		640A34C819F04ADE005E17A6 /* 1009_122403_log.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1009_122403_log.data; sourceTree = "<group>"; };
 		642DCEAB19702DC80021A307 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		642DCEAD19702DCE0021A307 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		642DCEAF19702DD30021A307 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
@@ -252,6 +256,8 @@
 		64E7A071199A2D18007EE4A3 /* HSMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSMenuView.m; sourceTree = "<group>"; };
 		64E7A073199A31DD007EE4A3 /* CommonTextController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonTextController.h; sourceTree = "<group>"; };
 		64E7A074199A31DD007EE4A3 /* CommonTextController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonTextController.m; sourceTree = "<group>"; };
+		64F9421E19F1776D00B354DD /* 1013_133924_log.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1013_133924_log.data; sourceTree = "<group>"; };
+		64F9422019F1777200B354DD /* 1014_111801_log.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1014_111801_log.data; sourceTree = "<group>"; };
 		83E54E18DB6F441A81A205B6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8F659B6DDA9441A89F8EC94 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -567,6 +573,9 @@
 		646869141979B6B700C2E50D /* Text */ = {
 			isa = PBXGroup;
 			children = (
+				64F9422019F1777200B354DD /* 1014_111801_log.data */,
+				64F9421E19F1776D00B354DD /* 1013_133924_log.data */,
+				640A34C819F04ADE005E17A6 /* 1009_122403_log.data */,
 				6407DA6619AE6D8300A19C53 /* Sighted */,
 				6440A9951981A40800E5BEC3 /* Plain */,
 				6440A9961981A40F00E5BEC3 /* Magazine */,
@@ -747,12 +756,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64F9421F19F1776D00B354DD /* 1013_133924_log.data in Resources */,
 				6440A9AB19881E1300E5BEC3 /* 11.txt in Resources */,
 				6407DA8E19B0E23100A19C53 /* NewCello.wav in Resources */,
 				6468690E1979B6AE00C2E50D /* EOP_AirDong.mp3 in Resources */,
 				6440A9AF19881E2300E5BEC3 /* 13.txt in Resources */,
 				6407DA7A19AE786600A19C53 /* 25.txt in Resources */,
 				64751FFC19916F3500B75D4A /* 200.jpg in Resources */,
+				640A34C919F04ADE005E17A6 /* 1009_122403_log.data in Resources */,
 				6440A9941981A3FF00E5BEC3 /* 10.txt in Resources */,
 				64E0F84919E84EE100A64302 /* seafloor.jpg in Resources */,
 				6407DA8519AEBF8800A19C53 /* tips.jpg in Resources */,
@@ -783,6 +794,7 @@
 				6407DA8C19B0D4EC00A19C53 /* pizza.jpg in Resources */,
 				6468690F1979B6AE00C2E50D /* EOP_Dang.mp3 in Resources */,
 				6407DA6A19AE6D9A00A19C53 /* 21.txt in Resources */,
+				64F9422119F1777200B354DD /* 1014_111801_log.data in Resources */,
 				6440A9921981A3F600E5BEC3 /* 00.txt in Resources */,
 				647FAF3C19A262B100534068 /* Flute.wav in Resources */,
 				6407DA6E19AE6DA900A19C53 /* 23.txt in Resources */,

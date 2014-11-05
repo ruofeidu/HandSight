@@ -21,6 +21,7 @@
 
 - (void)addControls
 {
+    [Speech stopSpeaking]; 
     Log = [HSLog sharedInstance];
     [Log recordControlPanel];
     
@@ -103,6 +104,7 @@
     segSpeed            =   [self allocSegmentation:segSpeed arr:[NSArray arrayWithObjects:@"Train", @"1", @"2", @"3", @"4", nil] select:[State speedType] action: @selector(segSpeedChanged:)];  [self addSpace];
     lblSpeech           =   [self allocLabel:lblSpeech withText:@"Speech:"];
     swcSpeech           =   [self allocSwitch:swcSpeech isOn:State.speechOn action:@selector(swcSpeechChanged:)];
+    btnSave             =   [self allocButton:btnSave text:@"Save Backup Log" action:@selector(saveFile)];
     
     [self lineBreak];
     
@@ -351,6 +353,8 @@
     State.mode = MD_READING;
      State.feedbackStepByStep = Step0;
     [self updateDocuments];
+    
+    [Log recordTrainStepChange: State.feedbackStepByStep];
 }
 
 - (void) segFeedbackStepChanged:(id)sender {
@@ -360,6 +364,7 @@
     State.feedbackStepByStep = StepVertical;
     [self updateDocuments];
     State.feedbackStepByStep = StepVertical;
+    [Log recordTrainStepChange: State.feedbackStepByStep];
 }
 
 - (void)btnExpTextDown: (id)sender
@@ -439,7 +444,10 @@
 
 - (void)swcShowStatChanged: (id)sender
 {
-    [txtStat setText: [Stat dumpCSV]];
+    [Log convert];
+    //[txtStat setText: [Stat dumpCSV]];
+    [txtStat setText: [Log dumpJson]];
+    
     [txtStat setHidden: ![swcShowStat isOn]];
 }
 
@@ -579,8 +587,8 @@
     view = ({
         UITextView *v = [[UITextView alloc] initWithFrame:rect];
         [v setHidden: YES];
-        [v setEditable: NO];
-        [v setSelectable: NO];
+        //[v setEditable: NO];
+        //[v setSelectable: NO];
         [self addView: v];
         v;
     });
@@ -678,6 +686,11 @@
     
     
     [Feedback verticalStop];
+}
+
+- (void)saveFile {
+    [Log appendToFile];
+    [Log saveToFile];
 }
 
 - (void)switchView

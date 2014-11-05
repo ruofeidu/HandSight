@@ -18,6 +18,8 @@
     NSMutableParagraphStyle *m_titleStyle, *m_textStyle;
     
     bool m_controlAdded;
+    bool m_isSpeaking;
+    NSString* m_text; 
 }
 
 @property (copy, nonatomic) NSTextStorage *textStorage;

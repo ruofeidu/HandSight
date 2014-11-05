@@ -45,7 +45,7 @@
     self.alpha          =           1.0f;
     
     State               =           [HSState sharedInstance];
-    
+    return;
     [self setHidden: YES]; 
     
     UIGraphicsBeginImageContext(self.frame.size);
@@ -57,21 +57,25 @@
 }
 
 - (void) touchDown: (CGPoint) point {
+    return;
     m_prevPoint = point;
     [self render: point];
 }
 
 - (void) touchUp: (CGPoint) point {
+    return;
     [self render: point];
     m_prevPoint = point;
 }
 
 - (void) touchMove: (CGPoint) point {
+    return;
     [self render: point];
     m_prevPoint = point;
 }
 
 - (void) render: (CGPoint) point {
+    return;
     if ([State waitLineBegin] || [State waitLineEnd] || [State waitParaEnd]) return;
     
     UIGraphicsBeginImageContext(self.frame.size);

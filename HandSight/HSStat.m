@@ -61,13 +61,13 @@
 
 - (void) saveToFile {
     NSArray *array = [NSArray arrayWithObjects:m_csv, nil];
-    [File write:[NSString stringWithFormat:@"%@_Stat.csv", [File userID]] dataArray:array];
+    //[File write:[NSString stringWithFormat:@"%@_Stat.csv", [File userID]] dataArray:array];
     
     array = [NSArray arrayWithObjects:m_data, nil];
-    [File write:[NSString stringWithFormat:@"%@_StatData.txt", [File userID]] dataArray:array];
+    [File write:[NSString stringWithFormat:@"%@_Summary.txt", [File userID]] dataArray:array];
     
     array = [NSArray arrayWithObjects:m_data, nil];
-    [File write:[NSString stringWithFormat:@"%@_StatReadme.txt", [File userID]] dataArray:array];
+    //[File write:[NSString stringWithFormat:@"%@_StatReadme.txt", [File userID]] dataArray:array];
 }
 
 - (void) reset: (CGFloat) startTime {
@@ -101,7 +101,7 @@
 - (void) distance: (CGFloat) x withY: (CGFloat) y; {
     //NSLog(@"%d", [aad count]);
     
-    float lastX = [aad last];
+    //float lastX = [aad last];
     
     // absolute distance
     [aad add: fabs(y)];
@@ -171,5 +171,6 @@
     
     //return [NSString stringWithFormat:@" [AAD]%.2f [MDA]%.2f [MDB]%.2f [NEA]%.0f [NEB]%.0f [NRH]%.0f [NRV]%.0f [NRHOL]%.2f [NRVOL]%.2f [T]%.2f [TO1]%.2f [TO2]%.2f [TN]%.2f [NTL]%.2f [SK]%.2f", [aad avg], [mda max], [mdb max], [nea sum], [neb sum], [nrh avg], [nrv avg], [nrhol avg], [nrvol avg], CACurrentMediaTime() - m_lineStartTime, [TO1 timeCount], [TO2 timeCount], [self getTN], [ntl avg], [sk sum]];
 }
+
 
 @end

@@ -141,7 +141,8 @@ static uint MIN_SPOKEN_LENGTH = 3;
         if ([State readingGender] == SG_MALE) {
             utt.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"en-GB"];
         }
-        utt.rate = State.readingSpeed + ([s length] * 0.08) / 10;  //larger means faster speech
+        //utt.rate = State.readingSpeed + ([s length] * 0.08) / 10;  //larger means faster speech
+        
         utt.volume = State.readingVolume;
     }
     

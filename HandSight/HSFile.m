@@ -43,10 +43,10 @@
 
 - (NSString *)read:(NSString *)fileName
 {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *appFile = [documentsDirectory stringByAppendingPathComponent:fileName];
-    NSFileManager *fileManager=[NSFileManager defaultManager];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
     
     if ([fileManager fileExistsAtPath:appFile])
     {
@@ -112,6 +112,7 @@
     NSFileHandle *myHandle = [NSFileHandle fileHandleForWritingAtPath:appFile];
     [myHandle seekToEndOfFile];
     [myHandle writeData:[savedString dataUsingEncoding:NSUTF8StringEncoding]];
+    [myHandle closeFile];
 }
 
 @end
