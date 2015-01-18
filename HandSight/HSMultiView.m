@@ -164,9 +164,13 @@
     // the view bound
     m_left          =       120;
     m_top           =       70;
-        
+    
+    m_columnSpacing =       40;
+    
     m_bottom        =       70;
     m_right         =       100;
+    
+    
     m_width         =       1024;
     m_height        =       768;
     
@@ -184,7 +188,6 @@
     m_lineSpacing   =       6;
     m_lineHeight    =       m_textSize + m_lineSpacing;
 
-    m_columnSpacing =       40;
     m_textSize      =       21.0f;
     m_titleSize     =       26.0f;
     m_pictureInset  =       10.0f;
