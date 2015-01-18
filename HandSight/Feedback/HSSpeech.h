@@ -2,6 +2,9 @@
 //  HSSpeech.h
 //  HandSight
 //
+//  The text-to-speech module support reading text on the go via iOS Speech SDK
+//  The main idea is to implement a queue and a timer to read aloud the queued text using different speed regarding the length of cached words in the queue.
+//
 //  Created by Ruofei Du on 7/16/14.
 //  Copyright (c) 2014 Ruofei Du. All rights reserved.
 //

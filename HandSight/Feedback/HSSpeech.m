@@ -14,7 +14,6 @@
 static uint MIN_SPOKEN_LENGTH = 3;
 //CGFloat delay[10] = {0.6, 0.9, 1.0, 1.5, 2.2, 2.9, 2.9, 2.9, 3.0, 3.0};
 
-
 + (HSSpeech*) sharedInstance
 {
     static  HSSpeech* sharedInstance = nil ;

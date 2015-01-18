@@ -2,6 +2,8 @@
 //  HSFeedback.m
 //  HandSight
 //
+//  The feedback is designed for reading (Text-to-speech), indicator of tasks and structural (line begin, line end)
+//
 //  Created by Ruofei Du on 7/11/14.
 //  Copyright (c) 2014 Ruofei Du. All rights reserved.
 //

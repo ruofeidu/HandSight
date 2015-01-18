@@ -2,6 +2,10 @@
 //  HSBluetooth.h
 //  HandSight
 //
+//  The bluetooth module supports on / off of bluetooth LTE using redbear bluetooth module
+//  Redbear Bluetoothshield: http://redbearlab.com/bleshield/
+//  Some code is edited from the SDK for their BLE device: https://github.com/RedBearLab
+//
 //  Created by Ruofei Du on 7/16/14.
 //  Copyright (c) 2014 Ruofei Du. All rights reserved.
 //
