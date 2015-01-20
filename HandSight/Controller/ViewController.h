@@ -2,6 +2,9 @@
 //  ViewController.h
 //  HandSight
 //
+//  This class dynamically generate all the controls for the interface programmatically
+//  so that we have full control of the UI.
+//
 //  Created by Ruofei Du on 7/9/14.
 //  Copyright (c) 2014 Ruofei Du. All rights reserved.
 //

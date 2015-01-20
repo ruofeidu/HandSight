@@ -24,7 +24,7 @@
 }
 
 /**
- * After creating columns, we add controls
+ * After creating columns, add controls
  */
 - (void)createColumns {
     // Remove any existing text containers, since we will recreate them.
@@ -248,24 +248,15 @@
         m_text = @"People have used coins as a means of exchange for thousands of years. Valued for their craftsmanship and purchasing power, coins have been collected in great numbers throughout history and buried for safekeeping. Because stores of coins gathered and hidden in this manner lie untouched for many years, they can reveal a great deal about a given culture. Coins are useful in revealing many aspects of a culture. They can provide clues about when a given civilization was wealthy and when it was experiencing a depression. Wealthy nations tend to produce a greater number of coins made from richer materials. The distribution of coins can also reflect the boundaries of an empire and the trade relationships within it. Roman imperial gold coins found in India, indicate the Romans purchased goods from the East. The way the coins themselves are decorated sometimes provides key information about a culture. Many coins are stamped with a wealth of useful historical evidence, including portraits of political leaders, important buildings and sculptures, mythological and religious figures, and useful dates. Some coins, such as many from ancient Greece, can be considered works of art themselves and reflect the artistic achievement of the civilization as a whole. Information gathered from old coins by historians is most useful when placed alongside other historical documents, such as written accounts or data from archeological digs. Combined with these other pieces of information, coins can help historians reconstruct the details of lost civilizations.";
         
     } else
-        if (State.documentType == DT_B && State.categoryType == CT_PLAIN) {
-            
-            
-            m_text = @"Born in Spanish Harlem in the late 1950s, Raphael Sanchez learned at an early age to listen to the many voices of the city. It was as a boy in Harlem that he developed the powers of observation that would later make his writing truly great. In the 1970s, Raphael went to Columbia University, where he was exposed to a literary tradition. While his university education gave his writing new depth, the raw energy of the streets has always served as the primary fuel for his writing. This is what gives his works passion and power. Raphael once told me that in order to escape from life he turns to books, and in order to escape from books he turns to life. It is this balance of the sights, sounds, and smells of the street with the perspective gained from his formal education that has made Raphael popular with both critics and regular readers alike. For those of us who have read and admired his work, it seems natural that Raphael has won so many awards. He deserves them, and his humility in accepting them has been refreshing. When he received the Writer’s Quill Award two weeks ago, for example, he told the audience, This award is not really mine. It belongs to all the million things that have inspired me. That is the kind of man I am introducing to you this evening. He is a man who has been inspired by a million things, and he is a man who has provided inspiration to a million people. Ladies and gentlemen, it is my great honor to present to you, Raphael Sanchez. ";
-            
-        } else
-            if (State.documentType == DT_A && State.categoryType == CT_MAGAZINE) {
-                
-                
-                m_text = @"Despite the stubborn, widespread opinion that animals don’t feel emotions in the same way that humans do, many animals have been observed to demonstrate a capacity for joy. People have often seen animals evincing behavior that can only be taken to mean they are pleased with what life has brought them in that particular moment. A chimpanzee named Nim was raised by a human family for the first year and a half of his life. After that time, Nim was separated from them for two and a half years. On the day that Nim was reunited with his human family, he smiled, shrieked, pounded the ground, and looked from one member of the family to the next. Still smiling and shrieking, Nim went around hugging each member of the family. He played with and groomed each member of the family for almost an hour before the family had to leave. People who were familiar with Nim’s behavior said they had never seen him smile for such a long period of time.";
-                
-            } else
-                if (State.documentType == DT_B && State.categoryType == CT_MAGAZINE) {
-                    
-                    
-                    m_text = @"In the 1800s, most geologists thought the sea floor was a lifeless expanse of mud, sediment, and the decaying remains of dead organisms. They thought that, with the exception of some volcanic islands, the bottom of the sea had no major geographic features, such as peaks or valleys. In the mid-nineteenth century, ships depth- sounding the ocean floor with sonar for a transatlantic telegraph cable made some interesting discoveries. To geologists’ surprise, the ocean floor was found to be made up of long mountain ranges and deep valleys and troughs. Another surprise finding in the Atlantic was the existence of basalt, a volcanic rock thought only to exist in the Pacific Ocean. The presence of basalt in the Atlantic was a clue that volcanic activity occurs at the bottom of the sea. This and other discoveries, many of them accidental in the beginning, were signals to geologists that their knowledge of the sea floor was very limited.";
-                    
-                }
+    if (State.documentType == DT_B && State.categoryType == CT_PLAIN) {
+        m_text = @"Born in Spanish Harlem in the late 1950s, Raphael Sanchez learned at an early age to listen to the many voices of the city. It was as a boy in Harlem that he developed the powers of observation that would later make his writing truly great. In the 1970s, Raphael went to Columbia University, where he was exposed to a literary tradition. While his university education gave his writing new depth, the raw energy of the streets has always served as the primary fuel for his writing. This is what gives his works passion and power. Raphael once told me that in order to escape from life he turns to books, and in order to escape from books he turns to life. It is this balance of the sights, sounds, and smells of the street with the perspective gained from his formal education that has made Raphael popular with both critics and regular readers alike. For those of us who have read and admired his work, it seems natural that Raphael has won so many awards. He deserves them, and his humility in accepting them has been refreshing. When he received the Writer’s Quill Award two weeks ago, for example, he told the audience, This award is not really mine. It belongs to all the million things that have inspired me. That is the kind of man I am introducing to you this evening. He is a man who has been inspired by a million things, and he is a man who has provided inspiration to a million people. Ladies and gentlemen, it is my great honor to present to you, Raphael Sanchez. ";
+    } else
+    if (State.documentType == DT_A && State.categoryType == CT_MAGAZINE) {
+        m_text = @"Despite the stubborn, widespread opinion that animals don’t feel emotions in the same way that humans do, many animals have been observed to demonstrate a capacity for joy. People have often seen animals evincing behavior that can only be taken to mean they are pleased with what life has brought them in that particular moment. A chimpanzee named Nim was raised by a human family for the first year and a half of his life. After that time, Nim was separated from them for two and a half years. On the day that Nim was reunited with his human family, he smiled, shrieked, pounded the ground, and looked from one member of the family to the next. Still smiling and shrieking, Nim went around hugging each member of the family. He played with and groomed each member of the family for almost an hour before the family had to leave. People who were familiar with Nim’s behavior said they had never seen him smile for such a long period of time.";
+    } else
+    if (State.documentType == DT_B && State.categoryType == CT_MAGAZINE) {
+        m_text = @"In the 1800s, most geologists thought the sea floor was a lifeless expanse of mud, sediment, and the decaying remains of dead organisms. They thought that, with the exception of some volcanic islands, the bottom of the sea had no major geographic features, such as peaks or valleys. In the mid-nineteenth century, ships depth- sounding the ocean floor with sonar for a transatlantic telegraph cable made some interesting discoveries. To geologists’ surprise, the ocean floor was found to be made up of long mountain ranges and deep valleys and troughs. Another surprise finding in the Atlantic was the existence of basalt, a volcanic rock thought only to exist in the Pacific Ocean. The presence of basalt in the Atlantic was a clue that volcanic activity occurs at the bottom of the sea. This and other discoveries, many of them accidental in the beginning, were signals to geologists that their knowledge of the sea floor was very limited.";
+    }
                  
     Doc.arrWord = [[text componentsSeparatedByString:@" "] mutableCopy];
     [m_arrImg removeAllObjects]; 
@@ -1378,13 +1369,15 @@
     }
 }
 
+/*
+ * Show or hide cue rectangles for current, next words
+ */
 - (void) setupRectVisibility {
     [lblNext setHidden: NO];
     
     if ([State debugMode]) {
         [lblLast setHidden: NO];
         [lblCurrent setHidden: NO];
-        
         // clear the rest frames if overlaped
         if (lblNext.frame.origin.x == lblLast.frame.origin.x) [lblLast setHidden:YES];
         if (lblNext.frame.origin.x == lblCurrent.frame.origin.x) [lblCurrent setHidden:YES];
@@ -1398,9 +1391,10 @@
     [super clearViews];
 }
 
-
+/*
+ * Update touch log with active touches
+ */
 - (void) updateTouchLog {
-    
     NSString *res = [NSString stringWithFormat:@"%lu touches:", (unsigned long)[State.activeTouches count] ];
     NSString *log = @"";
     for (UITouch *touch in State.activeTouches) {
