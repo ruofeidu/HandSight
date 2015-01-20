@@ -46,8 +46,8 @@ License
 
 Contact
 ----
-Ruofei Du 
-me (at) duruofei (dot) com
+  - Ruofei Du 
+  - me (at) duruofei (dot) com
 
 **Free Software, Hell Yeah!**
 
