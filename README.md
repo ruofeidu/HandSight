@@ -52,7 +52,7 @@ Contact
 **Free Software, Hell Yeah!**
 
 
-[1]:http://www.cs.umd.edu/~jonf/publications/Stearns_TheDesignAndPreliminaryEvaluationOfAFingerMountedCameraAndFeedbackSystemToEnableReadingForTheBlind_ACVR2014.pdf
+[1]:http://www.duruofei.com/Public/papers/ruofei_eccv2014.pdf
 [BLEMini]:https://github.com/RedBearLab/BLEMini
 [SoundManager]:https://github.com/nicklockwood/SoundManager
 [MIT License]:http://en.wikipedia.org/wiki/MIT_License
