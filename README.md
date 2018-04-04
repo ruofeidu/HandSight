@@ -1,6 +1,10 @@
 # HandSight
 
-In this project, we designed an iPad prototype for evaluating using finger-mouted camera with vibration & feedback system to enable reading of printed text for the blind. The corresponding paper(s) are published in [ECCV Workshop on Assistive Computer Vision and Robotics (ACVR). 2014] [1]. 
+In this project, we designed an iPad prototype for evaluating using finger-mouted camera with vibration & feedback system to enable reading of printed text for the blind. The corresponding papers are published in [ECCV Workshop on Assistive Computer Vision and Robotics (ACVR). 2014] [1] and [ACM Transaction on Accessibility] [2]. To cite the papers, please include the following:
+
+> Stearns, L., Du, R., Oh, U., Jou, C., Findlater, L., Ross, D., & Froehlich, J. (2016) Evaluating Haptic and Auditory Directional Guidance to Assist Blind People in Reading Printed Text Using Finger-Mounted Cameras. ACM Transactions on Accessible Computing (TACCESS) 2016, 1:1-1:38. 10.1145/2914793
+
+> Stearns, L., Du, R., Oh, U., Wang, Y., Chellappa, R., Findlater, L., & Froehlich, J. (2014) The Design and Preliminary Evaluation of a Finger-Mounted Camera and Feedback System to Enable Reading of Printed Text for the Blind. Proceedings of ECCV Workshop on Assistive Computer Vision and Robotics, 2014.
 
 As P3 reports in our user study for ACVR 2014:
 
@@ -53,6 +57,7 @@ Contact
 
 
 [1]:http://www.duruofei.com/Public/papers/ruofei_eccv2014.pdf
+[2]:https://www.cs.umd.edu/~jonf/publications/Stearns_EvaluatingHapticAndAuditoryDirectionalGuidanceToAssistBlindPeopleInReadingPrintedTextUsingFingerMountedCameras_ACMTACCESS2016.pdf
 [BLEMini]:https://github.com/RedBearLab/BLEMini
 [SoundManager]:https://github.com/nicklockwood/SoundManager
 [MIT License]:http://en.wikipedia.org/wiki/MIT_License
